@@ -1,19 +1,10 @@
-# New Next Project
+# Dagobert Budgeting App
 
-### Local Development
 
-To work locally, please install the dependencies using `npm i` first.
 
-Run `npm run dev` to start a development server and open the displayed URL in a browser.
+### Information Architecture
+https://www.figma.com/board/8w34Qwdo6jIkd0eUdqIdw9/dagobert?node-id=1%3A2&t=MfJug7azi3LIIISB-1
 
-Use `npm run test` to run the tests.
+### Wireframes
+https://www.figma.com/design/s2XRDryAXqqMPZbQHfWWK0/budgeting-app?node-id=0%3A1&t=67nuwRhHFm9qHLxM-1
 
-### Scripts
-
-You can use the following commands:
-
-- `npm run dev` to start a development server
-- `npm run build` to build the project
-- `npm run start` to start a production server
-- `npm run test` to run the tests
-- `npm run lint` to run the linter

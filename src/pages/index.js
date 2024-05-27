@@ -1,7 +1,12 @@
-export default function HomePage() {
+import React from 'react';
+import TransactionList from "@/src/components/TransactionList/TransactionList";
+
+const Home = () => {
   return (
     <div>
-      <h1>Hello from Next.js</h1>
+      <TransactionList />
     </div>
   );
-}
+};
+
+export default Home;

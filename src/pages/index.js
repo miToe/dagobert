@@ -12,7 +12,7 @@ function TransactionList() {
           <li key={transaction.id}>
             <h3>{transaction.category}</h3>
             <div>{new Date(transaction.date).toLocaleDateString('de-DE')}</div>
-            <div>{transaction.amount} {transaction.currency}</div>
+            <div>{transaction.amount.toFixed(2)} {transaction.currency}</div>
           </li>
         ))}
       </ul>

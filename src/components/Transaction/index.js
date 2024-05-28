@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
-import transactions from '../data/transactions.json';
+import transactions from '../../data/transactions.json';
 import Link from "next/link";
-import ArrowBack from "../icons/arrow_back.svg";
+import ArrowBack from "../../icons/arrow_back.svg";
 
 export default function Transaction() {
   const router = useRouter();

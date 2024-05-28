@@ -1,4 +1,4 @@
-import Transaction from '../../components/Transaction.js';
+import Transaction from '../../components/Transaction';
 
 export default function TransactionDetails() {
   return <Transaction />;

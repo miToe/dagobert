@@ -2,7 +2,7 @@
   {
     "id": 1,
     "date": "2024-05-01",
-    "amount": 50.00,
+    "amount": 50.45,
     "currency": "USD",
     "category": "Groceries",
     "description": "Weekly grocery shopping",
@@ -11,7 +11,7 @@
   {
     "id": 2,
     "date": "2024-05-02",
-    "amount": 25.00,
+    "amount": 25.10,
     "currency": "USD",
     "category": "Transportation",
     "description": "Gas for car",
@@ -29,7 +29,7 @@
   {
     "id": 4,
     "date": "2024-05-04",
-    "amount": 200.00,
+    "amount": 200.20,
     "currency": "USD",
     "category": "Rent",
     "description": "Monthly apartment rent",
@@ -38,7 +38,7 @@
   {
     "id": 5,
     "date": "2024-05-05",
-    "amount": 15.00,
+    "amount": 15.09,
     "currency": "USD",
     "category": "Dining",
     "description": "Lunch at a cafe",

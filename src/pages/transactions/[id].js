@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import transactions from '../../data/transactions.json';
 import Link from "next/link";
-import ArrowBack from "../../icons/arrow_back.svg";
+import ChevronLeft from "@/src/assets/icons/chevron_left.svg";
 
 export default function Transaction() {
   const router = useRouter();
@@ -16,7 +16,7 @@ export default function Transaction() {
   return (
     <div>
       <div>
-        <Link href={"/"}><ArrowBack/> Back</Link>
+        <Link href={"/"}><ChevronLeft/> Back</Link>
         <h1>{transaction.category}</h1>
       </div>
       <div>

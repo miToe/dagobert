@@ -3,7 +3,7 @@ import transactions from '../../data/transactions.json';
 import Link from "next/link";
 import ChevronLeft from "@/src/assets/icons/chevron_left.svg";
 
-export default function Transaction() {
+export default function TransactionDetails() {
   const router = useRouter();
   const { id } = router.query;
   // Find transaction by its ID

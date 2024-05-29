@@ -9,7 +9,7 @@ export default function App({ Component, pageProps }) {
 
   const handleDelete = (id) => {
     setTransactions((prevItems) => prevItems.filter(item => item.id !== id));
-    router.push('/') // Use router to navigate
+    router.push('/')
     setSuccessfulDeleted(true);
   };
 

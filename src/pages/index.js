@@ -1,7 +1,7 @@
-import transactions from '../data/transactions.json'
 import Link from 'next/link'
+import CheckIcon from 'src/assets/icons/check.svg';
 
-function TransactionList() {
+export default function TransactionList({transactions, successfulDeleted}) {
   // Sort transactions by date in descending order
   const sortedTransactions = transactions.sort((a, b) => new Date(b.date) - new Date(a.date));
 
@@ -13,16 +13,18 @@ function TransactionList() {
           <Link href={`/transactions/${transaction.id}`} key={transaction.id}>
             <li>
               <h3>{transaction.category}</h3>
-              {/* Convert the date stored in the date property of the transaction object into a localized date string
-                by using the date format based on the user's operating system/browser settings */}
-              <div>{new Intl.DateTimeFormat(typeof navigator !== 'undefined' ? navigator.language : 'en-US').format(new Date(transaction.date))}</div>
+              <div>{transaction.date}</div>
               <div>{transaction.amount.toFixed(2)} {transaction.currency}</div>
             </li>
           </Link>
           ))}
       </ul>
+      {successfulDeleted &&
+        <div>
+          <div><CheckIcon/></div>
+          <p>Entry successfully deleted!</p>
+        </div>
+      }
     </div>
   );
 }
-
-export default TransactionList;

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function SuccessfulAlert({ alertIcon, alertMessage }) {
+export default function Alert({ alertIcon, alertMessage }) {
   const [alertIsOpen, setAlertIsOpen] = useState(true);
 
   useEffect(() => {
@@ -9,7 +9,8 @@ export default function SuccessfulAlert({ alertIcon, alertMessage }) {
       timeoutId = setTimeout(() => {
         setAlertIsOpen(false);
       }, 5000);
-    } return () => {
+    }
+    return () => {
       clearTimeout(timeoutId);
     };
   }, [alertIsOpen]);

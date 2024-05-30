@@ -5,6 +5,7 @@ import transactionsData from "../data/transactions.json";
 export default function App({ Component, pageProps }) {
   const [transactions, setTransactions] = useState(transactionsData);
   const [mode, setMode] = useState("default");
+  const [action, setAction] = useState("default");
   const router = useRouter();
 
   function handleCancel() {
@@ -20,11 +21,12 @@ export default function App({ Component, pageProps }) {
     setTransactions((initialTransactions) => initialTransactions.filter(item => item.id !== id));
     router.push("/");
     setMode("default");
+    setAction("success");
   }
 
   return (
     <>
-      <Component {...pageProps} onDelete={handleDelete} transactions={transactions} mode={mode}
+      <Component {...pageProps} onDelete={handleDelete} transactions={transactions} mode={mode} action={action}
                  onCancel={handleCancel} onConfirmDelete={handleConfirmDelete} />
     </>
   );

@@ -1,23 +1,23 @@
 import { useEffect, useState } from "react";
 
 export default function Alert({ alertIcon, alertMessage }) {
-  const [alertIsOpen, setAlertIsOpen] = useState(true);
+  const [alert, setAlert] = useState(true);
 
   useEffect(() => {
     let timeoutId;
-    if (alertIsOpen) {
+    if (alert) {
       timeoutId = setTimeout(() => {
-        setAlertIsOpen(false);
+        setAlert(false);
       }, 5000);
     }
     return () => {
       clearTimeout(timeoutId);
     };
-  }, [alertIsOpen]);
+  }, [alert]);
 
   return (
     <>
-      {alertIsOpen && (
+      {alert && (
         <div>
           <div>{alertIcon}</div>
           <p>{alertMessage}</p>
@@ -26,4 +26,3 @@ export default function Alert({ alertIcon, alertMessage }) {
     </>
   );
 }
-

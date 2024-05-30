@@ -5,8 +5,12 @@ import Modal from "@/src/components/Modal";
 import ChevronLeft from "@/src/assets/icons/chevron_left.svg";
 import DeleteBin from "src/assets/icons/delete.svg";
 
-
-export default function TransactionDetails({ onConfirmDelete, onDelete, mode, onCancel }) {
+export default function TransactionDetails({
+  onConfirmDelete,
+  onDelete,
+  mode,
+  onCancel,
+}) {
   const router = useRouter();
   const { id } = router.query;
 
@@ -20,13 +24,19 @@ export default function TransactionDetails({ onConfirmDelete, onDelete, mode, on
   return (
     <div>
       <div>
-        <Link href={"/"}><ChevronLeft /> Back</Link>
+        <Link href={"/"}>
+          <ChevronLeft /> Back
+        </Link>
         <h1>{transaction.category}</h1>
-        <button onClick={onConfirmDelete}><DeleteBin /></button>
+        <button onClick={onConfirmDelete}>
+          <DeleteBin />
+        </button>
       </div>
       <div>
         <h2>Amount</h2>
-        <div>{transaction.amount.toFixed(2)} {transaction.currency}</div>
+        <div>
+          {transaction.amount.toFixed(2)} {transaction.currency}
+        </div>
       </div>
       <div>
         <h2>Date</h2>
@@ -46,7 +56,8 @@ export default function TransactionDetails({ onConfirmDelete, onDelete, mode, on
       </div>
       {mode === "delete" && (
         <Modal
-          message="Really?.. Delete?"
+          message="Are you sure you want to delete this entry?"
+          hint="This will delete this entry permanently and cannot be undone."
           onConfirm={() => onDelete(id)}
           onCancel={onCancel}
         />

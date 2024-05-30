@@ -1,27 +1,31 @@
-import { useState, useEffect } from 'react';
+import { useState } from "react";
 import { useRouter } from "next/router";
-import transactionsData from '../data/transactions.json';
+import transactionsData from "../data/transactions.json";
 
 export default function App({ Component, pageProps }) {
   const [transactions, setTransactions] = useState(transactionsData);
-  const [successfulDeleted, setSuccessfulDeleted] = useState(false);
+  const [mode, setMode] = useState("default");
   const router = useRouter();
 
-  const handleDelete = (id) => {
-    setTransactions((prevItems) => prevItems.filter(item => item.id !== id));
-    router.push('/')
-    setSuccessfulDeleted(true);
-  };
+  function handleCancel() {
+    setMode("default");
+  }
 
-  useEffect(() => {
-    if (successfulDeleted) {
-      setTimeout(() => {setSuccessfulDeleted(false)}, 5000)
-    }
-  },[successfulDeleted]);
+  function handleConfirmDelete() {
+    console.log("handleConfirmDelete");
+    setMode("delete");
+  }
+
+  function handleDelete(id) {
+    setTransactions((initialTransactions) => initialTransactions.filter(item => item.id !== id));
+    router.push("/");
+    setMode("default");
+  }
 
   return (
     <>
-      <Component {...pageProps} handleDelete={handleDelete} transactions={transactions} successfulDeleted={successfulDeleted} />
+      <Component {...pageProps} onDelete={handleDelete} transactions={transactions} mode={mode}
+                 onCancel={handleCancel} onConfirmDelete={handleConfirmDelete} />
     </>
   );
 }

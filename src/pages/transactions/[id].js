@@ -54,3 +54,4 @@ export default function TransactionDetails({ onConfirmDelete, onDelete, mode, on
     </div>
   );
 }
+// Test

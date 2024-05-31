@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import transactions from '../../data/transactions.json';
+import transactions from "../../data/transactions.json";
 import Link from "next/link";
 import ArrowBack from "../../icons/arrow_back.svg";
 
@@ -16,18 +16,20 @@ export default function Transaction() {
   return (
     <div>
       <div>
-        <Link href={"/"}><ArrowBack/> Back</Link>
+        <Link href={"/"}>
+          <ArrowBack /> Back
+        </Link>
         <h1>{transaction.category}</h1>
       </div>
       <div>
         <h2>Amount</h2>
-        <div>{transaction.amount.toFixed(2)} {transaction.currency}</div>
+        <div>
+          {transaction.amount.toFixed(2)} {transaction.currency}
+        </div>
       </div>
       <div>
         <h2>Date</h2>
-        {/* Convert the date stored in the date property of the transaction object into a localized date string
-         by using the date format based on the user's operating system/browser settings */}
-        <div>{new Intl.DateTimeFormat(navigator.language).format(new Date(transaction.date))}</div>
+        <div>{transaction.date}</div>
       </div>
       <div>
         <h2>Category</h2>
@@ -42,5 +44,5 @@ export default function Transaction() {
         <div>{transaction.description}</div>
       </div>
     </div>
-  )
+  );
 }

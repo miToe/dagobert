@@ -1,7 +1,9 @@
-import useRouter from "next/router";
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 export default function TransactionForm({ initialData, onSubmit }) {
   const router = useRouter();
+  const [formData, setFormData] = useState();
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -11,26 +13,31 @@ export default function TransactionForm({ initialData, onSubmit }) {
     router.push("/");
   }
 
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  }
+
   return (
     <form onSubmit={handleSubmit}>
       <fieldset>
         <legend>
           <h1>Theme Creator</h1>
         </legend>
-        <label htmlFor="role">Role :</label>
+        <label>Amount</label>
         <br />
         <input
-          type="text"
-          id="role"
-          name="role"
-          defaultValue={initialData.role}
-          placeholder="e.g.: primary, secondary"
+          type="number"
+          name="amount"
+          value={initialData.role}
+          onChange={handleChange}
           required
         />
-        <button type="submit">
-          {initialData.id ? "UPDATE" : "ADD SCHEME"}
+        <button type="submit">Add
         </button>
-        {initialData.id && <button onClick={onCancel}>CANCEL</button>}
       </fieldset>
     </form>
   );

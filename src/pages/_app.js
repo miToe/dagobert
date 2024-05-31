@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import transactions from "@/src/data/transactions.json";
+import { uid } from "uid";
 
 export default function App({ Component, pageProps }) {
   const [initialData, setInitialData] = useState(transactions);
@@ -10,6 +11,10 @@ export default function App({ Component, pageProps }) {
 
   function handleMode(mode) {
     setMode(mode);
+  }
+
+  function handleAddTransaction(data) {
+    setInitialData([{ id: uid(), ...data }, ...initialData]);
   }
 
   function handleCancel() {
@@ -36,6 +41,7 @@ export default function App({ Component, pageProps }) {
         onDelete={handleDelete}
         initialData={initialData}
         mode={mode}
+        onSubmit={handleAddTransaction}
         action={action}
         onCancel={handleCancel}
         onConfirmDelete={handleConfirmDelete}

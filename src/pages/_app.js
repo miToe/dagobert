@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
-import transactionsData from "@/src/data/transactions.json";
+import transactions from "@/src/data/transactions.json";
 
 export default function App({ Component, pageProps }) {
-  const [transactions, setTransactions] = useState(transactionsData);
+  const [initialData, setInitialData] = useState(transactions);
   const [mode, setMode] = useState("default");
   const [action, setAction] = useState("default");
   const router = useRouter();
@@ -11,6 +11,7 @@ export default function App({ Component, pageProps }) {
   function handleMode(mode) {
     setMode(mode);
   }
+
   function handleCancel() {
     handleMode("default");
   }
@@ -20,8 +21,8 @@ export default function App({ Component, pageProps }) {
   }
 
   function handleDelete(id) {
-    setTransactions((initialTransactions) =>
-      initialTransactions.filter((item) => item.id !== id)
+    setInitialData((initialData) =>
+      initialData.filter((item) => item.id !== id),
     );
     router.push("/");
     handleMode("default");
@@ -33,7 +34,7 @@ export default function App({ Component, pageProps }) {
       <Component
         {...pageProps}
         onDelete={handleDelete}
-        transactions={transactions}
+        initialData={initialData}
         mode={mode}
         action={action}
         onCancel={handleCancel}

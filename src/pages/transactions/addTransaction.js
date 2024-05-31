@@ -1,26 +1,15 @@
 import { useRouter } from "next/router";
 
-export default function TransactionForm({ onSubmit, onCancel }) {
+export default function TransactionForm({ onAddTransaction, onCancel }) {
   const router = useRouter();
-
-  // const [formData, setFormData] = useState();
 
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-    console.log(data);
-    onSubmit(data);
+    onAddTransaction(data);
     router.push("/");
   }
-
-  // function handleChange(event) {
-  //   const { name, value } = event.target;
-  //   setFormData({
-  //     ...formData,
-  //     [name]: value,
-  //   });
-  // }
 
   return (
     <div>
@@ -28,9 +17,10 @@ export default function TransactionForm({ onSubmit, onCancel }) {
       <form onSubmit={handleSubmit}>
         <button type="button" onClick={onCancel}>Cancel</button>
         <div>
-          <label>Transaction Type:</label>
+          <label htmlFor={"type"}>Transaction Type:</label>
           <select
-            name="transactionType"
+            id="type"
+            name="type"
             required
           >
             <option value="Expenses">Expenses</option>
@@ -38,16 +28,30 @@ export default function TransactionForm({ onSubmit, onCancel }) {
           </select>
         </div>
         <div>
-          <label>Amount:</label>
+          <label htmlFor={"amount"}>Amount:</label>
           <input
+            id="amount"
             name="amount"
             type="number"
             required
           />
         </div>
         <div>
-          <label>Category</label>
+          <label htmlFor={"currency"}>Currency</label>
           <select
+            id="currency"
+            name="currency"
+            required
+          >
+            <option value="">Select Currency</option>
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+          </select>
+        </div>
+        <div>
+          <label htmlFor={"category"}>Category</label>
+          <select
+            id="category"
             name="category"
             required
           >
@@ -59,23 +63,27 @@ export default function TransactionForm({ onSubmit, onCancel }) {
           </select>
         </div>
         <div>
-          <label>Date:</label>
+          <label htmlFor={"date"}>Date:</label>
           <input
+            id="date"
             name="date"
             type="date"
             required
           />
         </div>
         <div>
-          <label>Description:</label>
-          <input
+          <label htmlFor={"description"}>Description:</label>
+          <textarea
+            id="description"
             name="description"
-            type="text"
+            rows="5"
+            cols="30"
           />
         </div>
         <div>
-          <label>Payment Method:</label>
+          <label htmlFor={"paymentMethod"}>Payment Method:</label>
           <select
+            id="paymentMethod"
             name="paymentMethod"
             required
           >

@@ -19,6 +19,7 @@ export default function App({ Component, pageProps }) {
 
   function handleCancel() {
     handleMode("default");
+    router.push("/");
   }
 
   function handleConfirmDelete() {
@@ -41,7 +42,7 @@ export default function App({ Component, pageProps }) {
         onDelete={handleDelete}
         initialData={initialData}
         mode={mode}
-        onSubmit={handleAddTransaction}
+        onAddTransaction={handleAddTransaction}
         action={action}
         onCancel={handleCancel}
         onConfirmDelete={handleConfirmDelete}

@@ -1,21 +1,21 @@
 import { useRouter } from "next/router";
-import transactions from "@/src/data/transactions.json";
 import Link from "next/link";
 import Modal from "@/src/components/Modal";
 import ChevronLeft from "@/src/assets/icons/chevron_left.svg";
 import DeleteBin from "@/src/assets/icons/delete.svg";
 
 export default function TransactionDetails({
-  onConfirmDelete,
-  onDelete,
-  mode,
-  onCancel,
-}) {
+                                             initialData,
+                                             onConfirmDelete,
+                                             onDelete,
+                                             mode,
+                                             onCancel,
+                                           }) {
   const router = useRouter();
   const { id } = router.query;
 
   // Find transaction by its ID
-  const transaction = transactions.find((transaction) => transaction.id === id);
+  const transaction = initialData.find((transaction) => transaction.id === id);
 
   if (!transaction) {
     return <p>Transaction not found</p>;

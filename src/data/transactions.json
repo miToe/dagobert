@@ -6,7 +6,8 @@
     "currency": "USD",
     "category": "Groceries",
     "description": "Weekly grocery shopping",
-    "paymentMethod": "Credit Card"
+    "paymentMethod": "Credit Card",
+    "transactionType": "Expense"
   },
   {
     "id": "2",
@@ -15,7 +16,8 @@
     "currency": "USD",
     "category": "Transportation",
     "description": "Gas for car",
-    "paymentMethod": "Debit Card"
+    "paymentMethod": "Debit Card",
+    "transactionType": "Expense"
   },
   {
     "id": "3",
@@ -24,7 +26,8 @@
     "currency": "USD",
     "category": "Entertainment",
     "description": "Concert tickets",
-    "paymentMethod": "Credit Card"
+    "paymentMethod": "Credit Card",
+    "transactionType": "Expense"
   },
   {
     "id": "4",
@@ -33,7 +36,8 @@
     "currency": "USD",
     "category": "Rent",
     "description": "Monthly apartment rent",
-    "paymentMethod": "Bank Transfer"
+    "paymentMethod": "Bank Transfer",
+    "transactionType": "Expense"
   },
   {
     "id": "5",
@@ -42,7 +46,8 @@
     "currency": "USD",
     "category": "Dining",
     "description": "Lunch at a cafe",
-    "paymentMethod": "Cash"
+    "paymentMethod": "Cash",
+    "transactionType": "Expense"
   },
   {
     "id": "6",
@@ -51,7 +56,8 @@
     "currency": "USD",
     "category": "Utilities",
     "description": "Electricity bill",
-    "paymentMethod": "Debit Card"
+    "paymentMethod": "Debit Card",
+    "transactionType": "Expense"
   },
   {
     "id": "7",
@@ -60,7 +66,8 @@
     "currency": "USD",
     "category": "Healthcare",
     "description": "Doctor's appointment",
-    "paymentMethod": "Credit Card"
+    "paymentMethod": "Credit Card",
+    "transactionType": "Expense"
   },
   {
     "id": "8",
@@ -69,7 +76,8 @@
     "currency": "USD",
     "category": "Clothing",
     "description": "New shoes",
-    "paymentMethod": "Credit Card"
+    "paymentMethod": "Credit Card",
+    "transactionType": "Expense"
   },
   {
     "id": "9",
@@ -78,7 +86,8 @@
     "currency": "USD",
     "category": "Groceries",
     "description": "Bi-weekly grocery shopping",
-    "paymentMethod": "Debit Card"
+    "paymentMethod": "Debit Card",
+    "transactionType": "Expense"
   },
   {
     "id": "10",
@@ -87,6 +96,7 @@
     "currency": "USD",
     "category": "Transportation",
     "description": "Public transportation pass",
-    "paymentMethod": "Credit Card"
+    "paymentMethod": "Credit Card",
+    "transactionType": "Expense"
   }
 ]

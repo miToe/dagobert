@@ -16,7 +16,6 @@ export default function App({ Component, pageProps }) {
   }
 
   function handleConfirmDelete() {
-    console.log("handleConfirmDelete");
     handleMode("delete");
   }
 

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 
 export default function Alert({ alertIcon, alertMessage }) {
-  const [alert, setAlert] = useState(true);
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     let timeoutId;
-    if (alert) {
+    if (isVisible) {
       timeoutId = setTimeout(() => {
         setAlert(false);
       }, 5000);
@@ -13,7 +13,7 @@ export default function Alert({ alertIcon, alertMessage }) {
     return () => {
       clearTimeout(timeoutId);
     };
-  }, [alert]);
+  }, [isVisible]);
 
   return (
     <>

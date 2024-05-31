@@ -1,35 +1,26 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
 
-export default function TransactionForm({
-                                          initialData = {
-                                            date: "",
-                                            amount: "",
-                                            currency: "",
-                                            category: "",
-                                            description: "",
-                                            paymentMethod: "",
-                                            transactionType: "",
-                                          }, onSubmit, onCancel,
-                                        }) {
+export default function TransactionForm({ onSubmit, onCancel }) {
   const router = useRouter();
-  const [formData, setFormData] = useState();
+
+  // const [formData, setFormData] = useState();
 
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
+    console.log(data);
     onSubmit(data);
     router.push("/");
   }
 
-  function handleChange(event) {
-    const { name, value } = event.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  }
+  // function handleChange(event) {
+  //   const { name, value } = event.target;
+  //   setFormData({
+  //     ...formData,
+  //     [name]: value,
+  //   });
+  // }
 
   return (
     <div>
@@ -40,8 +31,6 @@ export default function TransactionForm({
           <label>Transaction Type:</label>
           <select
             name="transactionType"
-            value={initialData.transactionType}
-            onChange={handleChange}
             required
           >
             <option value="Expenses">Expenses</option>
@@ -53,8 +42,6 @@ export default function TransactionForm({
           <input
             name="amount"
             type="number"
-            value={initialData.amount}
-            onChange={handleChange}
             required
           />
         </div>
@@ -62,8 +49,6 @@ export default function TransactionForm({
           <label>Category</label>
           <select
             name="category"
-            value={initialData.category}
-            onChange={handleChange}
             required
           >
             <option value="">Select Category</option>
@@ -78,8 +63,6 @@ export default function TransactionForm({
           <input
             name="date"
             type="date"
-            value={initialData.date}
-            onChange={handleChange}
             required
           />
         </div>
@@ -88,16 +71,12 @@ export default function TransactionForm({
           <input
             name="description"
             type="text"
-            value={initialData.description}
-            onChange={handleChange}
           />
         </div>
         <div>
           <label>Payment Method:</label>
           <select
             name="paymentMethod"
-            value={initialData.paymentMethod}
-            onChange={handleChange}
             required
           >
             <option value="">Select Payment Method</option>

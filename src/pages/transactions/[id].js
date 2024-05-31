@@ -24,7 +24,7 @@ export default function Transaction({ transactions }) {
       <div>
         <h2>Amount</h2>
         <div>
-          {transaction.amount.toFixed(2)} {transaction.currency}
+          {data.amount.toFixed(2)} {data.currency}
         </div>
       </div>
       <div>

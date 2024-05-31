@@ -14,7 +14,7 @@ export default function App({ Component, pageProps }) {
   }
 
   function handleAddTransaction(data) {
-    setInitialData([{ id: uid(), ...data }, ...initialData]);
+    setInitialData([{ id: uid(), ...data, amount: parseFloat(data.amount) }, ...initialData]);
   }
 
   function handleCancel() {

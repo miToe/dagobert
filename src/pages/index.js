@@ -1,28 +1,35 @@
-import transactions from '../data/transactions.json'
-import Link from 'next/link'
+import Link from "next/link";
+import Alert from "@/src/components/Alert";
 
-function TransactionList() {
+export default function TransactionList({ transactions, action }) {
   // Sort transactions by date in descending order
-  const sortedTransactions = transactions.sort((a, b) => new Date(b.date) - new Date(a.date));
+  const sortedTransactions = transactions.sort(
+    (a, b) => new Date(b.date) - new Date(a.date)
+  );
 
   return (
     <div>
       <h1>Transactions</h1>
+      {action === "success" && (
+        <Alert
+          alertIcon="imagine a check icon"
+          alertMessage="Entry successfully deleted"
+        />
+      )}
+
       <ul>
         {sortedTransactions.map((transaction) => (
-          <Link href={`/transactions/${transaction.id}`} key={transaction.id}>
-            <li>
+          <li key={transaction.id}>
+            <Link href={`/transactions/${transaction.id}`}>
               <h3>{transaction.category}</h3>
-              {/* Convert the date stored in the date property of the transaction object into a localized date string
-                by using the date format based on the user's operating system/browser settings */}
-              <div>{new Intl.DateTimeFormat(typeof navigator !== 'undefined' ? navigator.language : 'en-US').format(new Date(transaction.date))}</div>
-              <div>{transaction.amount.toFixed(2)} {transaction.currency}</div>
-            </li>
-          </Link>
-          ))}
+              <div>{transaction.date}</div>
+              <div>
+                {transaction.amount.toFixed(2)} {transaction.currency}
+              </div>
+            </Link>
+          </li>
+        ))}
       </ul>
     </div>
   );
 }
-
-export default TransactionList;

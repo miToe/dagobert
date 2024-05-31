@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
-import transactionsData from "../data/transactions.json";
+import transactionsData from "@/src/data/transactions.json";
 
 export default function App({ Component, pageProps }) {
   const [transactions, setTransactions] = useState(transactionsData);

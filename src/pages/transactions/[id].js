@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
-import transactions from "../../data/transactions.json";
+import transactions from "@/src/data/transactions.json";
 import Link from "next/link";
 import Modal from "@/src/components/Modal";
 import ChevronLeft from "@/src/assets/icons/chevron_left.svg";
-import DeleteBin from "src/assets/icons/delete.svg";
+import DeleteBin from "@/src/assets/icons/delete.svg";
 
 export default function TransactionDetails({
   onConfirmDelete,
@@ -22,7 +22,7 @@ export default function TransactionDetails({
   }
 
   return (
-    <div>
+    <>
       <div>
         <Link href={"/"}>
           <ChevronLeft /> Back
@@ -32,28 +32,6 @@ export default function TransactionDetails({
           <DeleteBin />
         </button>
       </div>
-      <div>
-        <h2>Amount</h2>
-        <div>
-          {transaction.amount.toFixed(2)} {transaction.currency}
-        </div>
-      </div>
-      <div>
-        <h2>Date</h2>
-        <div>{transaction.date}</div>
-      </div>
-      <div>
-        <h2>Category</h2>
-        <div>{transaction.category}</div>
-      </div>
-      <div>
-        <h2>Payment Method</h2>
-        <div>{transaction.paymentMethod}</div>
-      </div>
-      <div>
-        <h2>Description</h2>
-        <div>{transaction.description}</div>
-      </div>
       {mode === "delete" && (
         <Modal
           message="Are you sure you want to delete this entry?"
@@ -62,6 +40,41 @@ export default function TransactionDetails({
           onCancel={onCancel}
         />
       )}
-    </div>
+
+      <ul>
+        <li>
+          <span>
+            <b>Amount: </b>
+          </span>
+          <span>
+            {transaction.amount.toFixed(2)} {transaction.currency}
+          </span>
+        </li>
+        <li>
+          <span>
+            <b>Date: </b>
+          </span>
+          <span>{transaction.date}</span>
+        </li>
+        <li>
+          <span>
+            <b>Category: </b>
+          </span>
+          <span>{transaction.category}</span>
+        </li>
+        <li>
+          <span>
+            <b>Payment Method: </b>
+          </span>
+          <span>{transaction.paymentMethod}</span>
+        </li>
+        <li>
+          <span>
+            <b>Description: </b>
+          </span>
+          <span>{transaction.description}</span>
+        </li>
+      </ul>
+    </>
   );
 }

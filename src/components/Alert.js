@@ -19,8 +19,12 @@ export default function Alert({ alertIcon, alertMessage }) {
     <>
       {alert && (
         <div>
+          <br />
+          <hr />
           <div>{alertIcon}</div>
           <p>{alertMessage}</p>
+          <hr />
+          <br />
         </div>
       )}
     </>

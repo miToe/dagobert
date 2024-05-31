@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
-import transactions from "../../data/transactions.json";
+
 import Link from "next/link";
 import ArrowBack from "../../icons/arrow_back.svg";
 
-export default function Transaction() {
+export default function Transaction({ transactions }) {
   const router = useRouter();
   const { id } = router.query;
   // Find transaction by its ID

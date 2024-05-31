@@ -27,6 +27,7 @@ export default function TransactionForm({ transactions, setTransactions }) {
     const newTransaction = {
       id: uid(),
       ...formData,
+      amount: parseFloat(formData.amount), // Convert string to number
     };
     console.log(formData);
     setTransactions((initialTransactions) => [
@@ -46,7 +47,7 @@ export default function TransactionForm({ transactions, setTransactions }) {
       <h1>Expense</h1>
       <form onSubmit={handleSubmit}>
         <button type="button" onClick={handleAbort}>
-          Abort
+          Cancel
         </button>
         <div>
           <label>Transaction Type:</label>

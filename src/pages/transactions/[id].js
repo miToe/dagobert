@@ -5,12 +5,12 @@ import ChevronLeft from "@/src/assets/icons/chevron_left.svg";
 import DeleteBin from "@/src/assets/icons/delete.svg";
 
 export default function TransactionDetails({
-                                             initialData,
-                                             onConfirmDelete,
-                                             onDelete,
-                                             mode,
-                                             onCancel,
-                                           }) {
+  initialData,
+  onConfirmDelete,
+  onDelete,
+  mode,
+  onCancel,
+}) {
   const router = useRouter();
   const { id } = router.query;
 

@@ -1,20 +1,37 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import transactions from "@/src/data/transactions.json";
 import { uid } from "uid";
 
 export default function App({ Component, pageProps }) {
-  const [initialData, setInitialData] = useState(transactions);
+  const [initialData, setInitialData] = useState([]);
   const [mode, setMode] = useState("default");
   const [action, setAction] = useState("default");
   const router = useRouter();
+
+  useEffect(() => {
+    const localData = localStorage.getItem("transactions");
+    if (localData) {
+      setInitialData(JSON.parse(localData));
+    } else {
+      localStorage.setItem("transactions", JSON.stringify(transactions));
+      setInitialData(transactions);
+    }
+  }, []);
 
   function handleMode(mode) {
     setMode(mode);
   }
 
   function handleAddTransaction(data) {
-    setInitialData([{ id: uid(), ...data, amount: parseFloat(data.amount) }, ...initialData]);
+    const newTransaction = {
+      id: uid(),
+      ...data,
+      amount: parseFloat(data.amount),
+    };
+    const updatedData = [newTransaction, ...initialData];
+    setInitialData(updatedData);
+    localStorage.setItem("transactions", JSON.stringify(updatedData));
   }
 
   function handleCancel() {
@@ -27,9 +44,9 @@ export default function App({ Component, pageProps }) {
   }
 
   function handleDelete(id) {
-    setInitialData((initialData) =>
-      initialData.filter((item) => item.id !== id),
-    );
+    const updatedData = initialData.filter((item) => item.id !== id);
+    setInitialData(updatedData);
+    localStorage.setItem("transactions", JSON.stringify(updatedData));
     router.push("/");
     handleMode("default");
     setAction("success");

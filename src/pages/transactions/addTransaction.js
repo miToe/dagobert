@@ -15,34 +15,23 @@ export default function TransactionForm({ onAddTransaction, onCancel }) {
     <div>
       <h1>Expense</h1>
       <form onSubmit={handleSubmit}>
-        <button type="button" onClick={onCancel}>Cancel</button>
+        <button type="button" onClick={onCancel}>
+          Cancel
+        </button>
         <div>
           <label htmlFor={"type"}>Transaction Type:</label>
-          <select
-            id="type"
-            name="type"
-            required
-          >
+          <select id="type" name="type" required>
             <option value="Expenses">Expenses</option>
             <option value="Income">Income</option>
           </select>
         </div>
         <div>
           <label htmlFor={"amount"}>Amount:</label>
-          <input
-            id="amount"
-            name="amount"
-            type="number"
-            required
-          />
+          <input id="amount" name="amount" type="number" required />
         </div>
         <div>
           <label htmlFor={"currency"}>Currency</label>
-          <select
-            id="currency"
-            name="currency"
-            required
-          >
+          <select id="currency" name="currency" required>
             <option value="">Select Currency</option>
             <option value="USD">USD</option>
             <option value="EUR">EUR</option>
@@ -50,11 +39,7 @@ export default function TransactionForm({ onAddTransaction, onCancel }) {
         </div>
         <div>
           <label htmlFor={"category"}>Category</label>
-          <select
-            id="category"
-            name="category"
-            required
-          >
+          <select id="category" name="category" required>
             <option value="">Select Category</option>
             <option value="Entertainment">Entertainment</option>
             <option value="Food">Food</option>
@@ -64,29 +49,15 @@ export default function TransactionForm({ onAddTransaction, onCancel }) {
         </div>
         <div>
           <label htmlFor={"date"}>Date:</label>
-          <input
-            id="date"
-            name="date"
-            type="date"
-            required
-          />
+          <input id="date" name="date" type="date" required />
         </div>
         <div>
           <label htmlFor={"description"}>Description:</label>
-          <textarea
-            id="description"
-            name="description"
-            rows="5"
-            cols="30"
-          />
+          <textarea id="description" name="description" rows="5" cols="30" />
         </div>
         <div>
           <label htmlFor={"paymentMethod"}>Payment Method:</label>
-          <select
-            id="paymentMethod"
-            name="paymentMethod"
-            required
-          >
+          <select id="paymentMethod" name="paymentMethod" required>
             <option value="">Select Payment Method</option>
             <option value="Credit Card">Credit Card</option>
             <option value="Debit Card">Debit Card</option>
@@ -99,4 +70,3 @@ export default function TransactionForm({ onAddTransaction, onCancel }) {
     </div>
   );
 }
-

@@ -7,8 +7,8 @@ export default function Alert({ alertIcon, alertMessage }) {
     let timeoutId;
     if (isVisible) {
       timeoutId = setTimeout(() => {
-        setAlert(false);
-      }, 5000);
+        setIsVisible(false);
+      }, 3000);
     }
     return () => {
       clearTimeout(timeoutId);
@@ -17,7 +17,7 @@ export default function Alert({ alertIcon, alertMessage }) {
 
   return (
     <>
-      {alert && (
+      {isVisible && (
         <div>
           <br />
           <hr />

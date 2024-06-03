@@ -10,12 +10,11 @@ export default function TransactionList({ initialData, action }) {
   return (
     <div>
       <h1>Transactions</h1>
-      {action === "success" && (
-        <Alert
-          alertIcon="imagine a check icon"
-          alertMessage="Entry successfully deleted"
-        />
-      )}
+      <Alert
+        isOpen={action === "successfullyDeleted"}
+        alertIcon="imagine a check icon"
+        alertMessage="Entry successfully deleted"
+      />
       <Link href="/transactions/addTransaction">Add</Link>
       <ul>
         {sortedTransactions.map((transaction) => (

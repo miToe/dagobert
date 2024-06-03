@@ -8,7 +8,7 @@ export default function Alert({ alertIcon, alertMessage }) {
     if (isVisible) {
       timeoutId = setTimeout(() => {
         setIsVisible(false);
-      }, 5000);
+      }, 3000);
     }
     return () => {
       clearTimeout(timeoutId);
@@ -17,16 +17,14 @@ export default function Alert({ alertIcon, alertMessage }) {
 
   return (
     <>
-      {alert && (
-        <div>
-          <br />
-          <hr />
-          <div>{alertIcon}</div>
-          <p>{alertMessage}</p>
-          <hr />
-          <br />
-        </div>
-      )}
+      <div>
+        <br />
+        <hr />
+        <div>{alertIcon}</div>
+        <p>{alertMessage}</p>
+        <hr />
+        <br />
+      </div>
     </>
   );
 }

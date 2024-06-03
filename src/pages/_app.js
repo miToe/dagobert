@@ -9,30 +9,22 @@ export default function App({ Component, pageProps }) {
   const [action, setAction] = useState("default");
   const router = useRouter();
 
-  function handleMode(mode) {
-    setMode(mode);
+  function handleMode(newMode) {
+    setMode(newMode);
   }
 
   function handleAddTransaction(data) {
     setInitialData([{ id: uid(), ...data, amount: parseFloat(data.amount) }, ...initialData]);
   }
 
-  function handleCancel() {
-    handleMode("default");
-    router.push("/");
-  }
-
-  function handleConfirmDelete() {
-    handleMode("delete");
-  }
 
   function handleDelete(id) {
     setInitialData((initialData) =>
       initialData.filter((item) => item.id !== id),
     );
     router.push("/");
-    handleMode("default");
-    setAction("success");
+    setMode("default");
+    setAction("successfullyDeleted");
   }
 
   return (
@@ -44,8 +36,7 @@ export default function App({ Component, pageProps }) {
         mode={mode}
         onAddTransaction={handleAddTransaction}
         action={action}
-        onCancel={handleCancel}
-        onConfirmDelete={handleConfirmDelete}
+        onMode={handleMode}
       />
     </>
   );

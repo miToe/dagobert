@@ -6,10 +6,9 @@ import DeleteBin from "@/src/assets/icons/delete.svg";
 
 export default function TransactionDetails({
                                              initialData,
-                                             onConfirmDelete,
                                              onDelete,
                                              mode,
-                                             onCancel,
+                                             onMode,
                                            }) {
   const router = useRouter();
   const { id } = router.query;
@@ -28,7 +27,7 @@ export default function TransactionDetails({
           <ChevronLeft /> Back
         </Link>
         <h1>{transaction.category}</h1>
-        <button onClick={onConfirmDelete}>
+        <button onClick={() => onMode("delete")}>
           <DeleteBin />
         </button>
       </div>
@@ -36,8 +35,9 @@ export default function TransactionDetails({
         <Modal
           message="Are you sure you want to delete this entry?"
           hint="This will delete this entry permanently and cannot be undone."
-          onConfirm={() => onDelete(id)}
-          onCancel={onCancel}
+          onConfirm={onDelete}
+          onCancel={onMode}
+          id={id}
         />
       )}
 

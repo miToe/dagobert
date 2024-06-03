@@ -15,7 +15,7 @@ export default function TransactionList({ initialData, action }) {
         alertIcon="imagine a check icon"
         alertMessage="Entry successfully deleted"
       />
-      <Link href="/transactions/addTransaction">Add</Link>
+      <Link href="/transactions/TransactionForm">Add</Link>
       <ul>
         {sortedTransactions.map((transaction) => (
           <li key={transaction.id}>

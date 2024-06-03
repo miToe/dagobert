@@ -13,9 +13,9 @@ export default function TransactionForm({ onAddTransaction, onCancel }) {
 
   return (
     <div>
-      <h1>Expense</h1>
+      <h1>Add Transaction</h1>
       <form onSubmit={handleSubmit}>
-        <button type="button" onClick={onCancel}>Cancel</button>
+        <button type="button" onClick={() => router.push("/")}>Cancel</button>
         <div>
           <label htmlFor={"type"}>Transaction Type:</label>
           <select

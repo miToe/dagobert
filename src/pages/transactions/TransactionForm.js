@@ -12,7 +12,7 @@ export default function TransactionForm({ onAddTransaction }) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-    // If the transaction type is "Expenses", convert the amount to negative
+    // Convert amount to negative if transaction type is "Expense"
     if (data.transactionType === "Expense") {
       data.amount = -Math.abs(parseFloat(data.amount)); // Convert to negative
     } else {
@@ -22,31 +22,26 @@ export default function TransactionForm({ onAddTransaction }) {
     router.push("/");
   }
 
-  // Function to handle changes in the transaction type
-  function handleTypeChange() {
-    const transactionType = typeRef.current.value;
-  }
-
-  // Function to handle changes in the amount input field
-  function handleAmountChange() {
-    const transactionType = typeRef.current.value;
-    const amount = parseFloat(amountRef.current.value);
-    // Validate the amount based on the transaction type
-    if (transactionType === "Income" && amount < 0) {
-      amountRef.current.value = "";
-      alert("Income amount cannot be negative");
-    }
-  }
-
   // Function to handle input events on the amount input field
   function handleAmountInput(event) {
     const value = event.target.value;
+    // Remove any negative signs
+    if (value.includes("-")) {
+      event.target.value = value.replace("-", "");
+    }
     // Ensure only two decimal places are allowed
     if (value.includes(".")) {
       const [integerPart, decimalPart] = value.split(".");
       if (decimalPart.length > 2) {
         event.target.value = `${integerPart}.${decimalPart.substring(0, 2)}`;
       }
+    }
+  }
+
+  // Function to prevent typing "-" in the amount input field
+  function handleAmountKeyDown(event) {
+    if (event.key === "-") {
+      event.preventDefault();
     }
   }
 
@@ -62,7 +57,6 @@ export default function TransactionForm({ onAddTransaction }) {
             id="transactionType"
             name="transactionType"
             ref={typeRef}
-            onChange={handleTypeChange}
             required
           >
             <option value="">Select Transaction Type</option>
@@ -78,9 +72,10 @@ export default function TransactionForm({ onAddTransaction }) {
             name="amount"
             type="number"
             step="0.01"
+            min="0"
             ref={amountRef}
-            onChange={handleAmountChange}
             onInput={handleAmountInput}
+            onKeyDown={handleAmountKeyDown}
             placeholder="Enter amount (e.g.: 123.45)"
             required
           />

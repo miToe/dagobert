@@ -2,7 +2,7 @@
   {
     "id": "1",
     "date": "2024-05-01",
-    "amount": 50.00,
+    "amount": -50.00,
     "currency": "USD",
     "category": "Groceries",
     "description": "Weekly grocery shopping",
@@ -12,7 +12,7 @@
   {
     "id": "2",
     "date": "2024-05-02",
-    "amount": 25.00,
+    "amount": -25.00,
     "currency": "USD",
     "category": "Transportation",
     "description": "Gas for car",
@@ -22,7 +22,7 @@
   {
     "id": "3",
     "date": "2024-05-03",
-    "amount": 100.00,
+    "amount": -100.00,
     "currency": "USD",
     "category": "Entertainment",
     "description": "Concert tickets",
@@ -32,7 +32,7 @@
   {
     "id": "4",
     "date": "2024-05-04",
-    "amount": 200.00,
+    "amount": -200.00,
     "currency": "USD",
     "category": "Rent",
     "description": "Monthly apartment rent",
@@ -42,7 +42,7 @@
   {
     "id": "5",
     "date": "2024-05-05",
-    "amount": 15.00,
+    "amount": -15.00,
     "currency": "USD",
     "category": "Dining",
     "description": "Lunch at a cafe",
@@ -52,7 +52,7 @@
   {
     "id": "6",
     "date": "2024-05-06",
-    "amount": 75.00,
+    "amount": -75.00,
     "currency": "USD",
     "category": "Utilities",
     "description": "Electricity bill",
@@ -62,7 +62,7 @@
   {
     "id": "7",
     "date": "2024-05-07",
-    "amount": 30.00,
+    "amount": -30.00,
     "currency": "USD",
     "category": "Healthcare",
     "description": "Doctor's appointment",
@@ -72,7 +72,7 @@
   {
     "id": "8",
     "date": "2024-05-08",
-    "amount": 50.00,
+    "amount": -50.00,
     "currency": "USD",
     "category": "Clothing",
     "description": "New shoes",
@@ -82,7 +82,7 @@
   {
     "id": "9",
     "date": "2024-05-09",
-    "amount": 60.00,
+    "amount": -60.00,
     "currency": "USD",
     "category": "Groceries",
     "description": "Bi-weekly grocery shopping",
@@ -92,7 +92,7 @@
   {
     "id": "10",
     "date": "2024-05-10",
-    "amount": 20.00,
+    "amount": -20.00,
     "currency": "USD",
     "category": "Transportation",
     "description": "Public transportation pass",

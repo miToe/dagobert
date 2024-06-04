@@ -44,6 +44,14 @@ export default function TransactionDetails({
       <ul>
         <li>
           <span>
+            <b>Transaction Type: </b>
+          </span>
+          <span>
+            {transaction.transactionType}
+          </span>
+        </li>
+        <li>
+          <span>
             <b>Amount: </b>
           </span>
           <span>

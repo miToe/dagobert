@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import transactionsData from "@/src/data/transactions.json";
+import { interFont } from "@/src/styles/font";
 import "@/src/styles/global.css";
 
 export default function App({ Component, pageProps }) {

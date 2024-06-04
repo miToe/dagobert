@@ -1,31 +1,30 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
-import transactionsData from "@/src/data/transactions.json";
+import transactions from "@/src/data/transactions.json";
+import { uid } from "uid";
 
 export default function App({ Component, pageProps }) {
-  const [transactions, setTransactions] = useState(transactionsData);
+  const [initialData, setInitialData] = useState(transactions);
   const [mode, setMode] = useState("default");
   const [action, setAction] = useState("default");
   const router = useRouter();
 
-  function handleMode(mode) {
-    setMode(mode);
-  }
-  function handleCancel() {
-    handleMode("default");
+  function handleMode(newMode) {
+    setMode(newMode);
   }
 
-  function handleConfirmDelete() {
-    handleMode("delete");
+  function handleAddTransaction(data) {
+    setInitialData([{ id: uid(), ...data, amount: parseFloat(data.amount) }, ...initialData]);
   }
+
 
   function handleDelete(id) {
-    setTransactions((initialTransactions) =>
-      initialTransactions.filter((item) => item.id !== id)
+    setInitialData((initialData) =>
+      initialData.filter((item) => item.id !== id),
     );
     router.push("/");
-    handleMode("default");
-    setAction("success");
+    setMode("default");
+    setAction("successfullyDeleted");
   }
 
   return (
@@ -33,11 +32,11 @@ export default function App({ Component, pageProps }) {
       <Component
         {...pageProps}
         onDelete={handleDelete}
-        transactions={transactions}
+        initialData={initialData}
         mode={mode}
+        onAddTransaction={handleAddTransaction}
         action={action}
-        onCancel={handleCancel}
-        onConfirmDelete={handleConfirmDelete}
+        onMode={handleMode}
       />
     </>
   );

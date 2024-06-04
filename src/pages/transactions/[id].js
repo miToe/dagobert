@@ -1,21 +1,20 @@
 import { useRouter } from "next/router";
-import transactions from "@/src/data/transactions.json";
 import Link from "next/link";
 import Modal from "@/src/components/Modal";
 import ChevronLeft from "@/src/assets/icons/chevron_left.svg";
 import DeleteBin from "@/src/assets/icons/delete.svg";
 
 export default function TransactionDetails({
-  onConfirmDelete,
-  onDelete,
-  mode,
-  onCancel,
-}) {
+                                             initialData,
+                                             onDelete,
+                                             mode,
+                                             onMode,
+                                           }) {
   const router = useRouter();
   const { id } = router.query;
 
   // Find transaction by its ID
-  const transaction = transactions.find((transaction) => transaction.id === id);
+  const transaction = initialData.find((transaction) => transaction.id === id);
 
   if (!transaction) {
     return <p>Transaction not found</p>;
@@ -28,7 +27,7 @@ export default function TransactionDetails({
           <ChevronLeft /> Back
         </Link>
         <h1>{transaction.category}</h1>
-        <button onClick={onConfirmDelete}>
+        <button onClick={() => onMode("delete")}>
           <DeleteBin />
         </button>
       </div>
@@ -36,12 +35,21 @@ export default function TransactionDetails({
         <Modal
           message="Are you sure you want to delete this entry?"
           hint="This will delete this entry permanently and cannot be undone."
-          onConfirm={() => onDelete(id)}
-          onCancel={onCancel}
+          onConfirm={onDelete}
+          onCancel={onMode}
+          id={id}
         />
       )}
 
       <ul>
+        <li>
+          <span>
+            <b>Transaction Type: </b>
+          </span>
+          <span>
+            {transaction.transactionType}
+          </span>
+        </li>
         <li>
           <span>
             <b>Amount: </b>

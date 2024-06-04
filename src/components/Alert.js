@@ -17,14 +17,16 @@ export default function Alert({ alertIcon, alertMessage }) {
 
   return (
     <>
-      <div>
-        <br />
-        <hr />
-        <div>{alertIcon}</div>
-        <p>{alertMessage}</p>
-        <hr />
-        <br />
-      </div>
+      {isVisible && (
+        <div>
+          <br />
+          <hr />
+          <div>{alertIcon}</div>
+          <p>{alertMessage}</p>
+          <hr />
+          <br />
+        </div>
+      )}
     </>
   );
 }

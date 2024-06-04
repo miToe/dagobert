@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { useRouter } from "next/router";
 
 export default function TransactionForm({ onAddTransaction }) {
@@ -6,7 +6,6 @@ export default function TransactionForm({ onAddTransaction }) {
   const typeRef = useRef();
   const amountRef = useRef();
   const currencyRef = useRef();
-  const [placeholder, setPlaceholder] = useState("Enter amount");
 
   // Function to handle form submission
   function handleSubmit(event) {
@@ -14,7 +13,7 @@ export default function TransactionForm({ onAddTransaction }) {
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
     // If the transaction type is "Expenses", convert the amount to negative
-    if (data.type === "Expenses") {
+    if (data.transactionType === "Expense") {
       data.amount = -Math.abs(parseFloat(data.amount)); // Convert to negative
     } else {
       data.amount = Math.abs(parseFloat(data.amount)); // Ensure positive
@@ -25,15 +24,15 @@ export default function TransactionForm({ onAddTransaction }) {
 
   // Function to handle changes in the transaction type
   function handleTypeChange() {
-    const type = typeRef.current.value;
+    const transactionType = typeRef.current.value;
   }
 
   // Function to handle changes in the amount input field
   function handleAmountChange() {
-    const type = typeRef.current.value;
+    const transactionType = typeRef.current.value;
     const amount = parseFloat(amountRef.current.value);
     // Validate the amount based on the transaction type
-    if (type === "Income" && amount < 0) {
+    if (transactionType === "Income" && amount < 0) {
       amountRef.current.value = "";
       alert("Income amount cannot be negative");
     }
@@ -58,16 +57,16 @@ export default function TransactionForm({ onAddTransaction }) {
         <button type="button" onClick={() => router.push("/")}>Cancel</button>
         {/* Dropdown for selecting transaction type */}
         <div>
-          <label htmlFor="type">Transaction Type:</label>
+          <label htmlFor="transactionType">Transaction Type:</label>
           <select
-            id="type"
-            name="type"
+            id="transactionType"
+            name="transactionType"
             ref={typeRef}
             onChange={handleTypeChange}
             required
           >
             <option value="">Select Transaction Type</option>
-            <option value="Expenses">Expenses</option>
+            <option value="Expense">Expenses</option>
             <option value="Income">Income</option>
           </select>
         </div>

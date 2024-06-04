@@ -66,7 +66,7 @@ export default function TransactionForm({ onAddTransaction }) {
             required
           >
             <option value="">Select Transaction Type</option>
-            <option value="Expense">Expenses</option>
+            <option value="Expense">Expense</option>
             <option value="Income">Income</option>
           </select>
         </div>

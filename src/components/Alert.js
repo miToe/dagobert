@@ -1,23 +1,21 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
-export default function Alert({ alertIcon, alertMessage }) {
-  const [isVisible, setIsVisible] = useState(true);
+export default function Alert({ isOpen, alertIcon, alertMessage, duration }) {
 
   useEffect(() => {
     let timeoutId;
-    if (isVisible) {
-      timeoutId = setTimeout(() => {
-        setIsVisible(false);
-      }, 3000);
+    if (isOpen) {
+      timeoutId = setTimeout(duration);
     }
     return () => {
       clearTimeout(timeoutId);
     };
-  }, [isVisible]);
+  }, [duration, isOpen]);
+
+if(isOpen) {
 
   return (
     <>
-      {isVisible && (
         <div>
           <br />
           <hr />
@@ -26,7 +24,7 @@ export default function Alert({ alertIcon, alertMessage }) {
           <hr />
           <br />
         </div>
-      )}
     </>
   );
+}
 }

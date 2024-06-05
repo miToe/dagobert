@@ -1,15 +1,22 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import transactionsData from "@/src/data/transactions.json";
-import { interFont } from "@/src/styles/font";
 import "@/src/styles/global.css";
 import { uid } from "uid";
+import Toast from "@/src/components/Toast";
 
 export default function App({ Component, pageProps }) {
   const [initialData, setInitialData] = useState(transactionsData);
   const [mode, setMode] = useState("default");
-  const [action, setAction] = useState("default");
   const router = useRouter();
+  const [alert, setAlert] = useState({
+    isOpen: false,
+    alertMessage: "",
+  });
+
+  function handleAlert(alertMessage) {
+    setAlert({ isOpen: true, alertMessage});
+  }
 
   function handleMode(newMode) {
     setMode(newMode);
@@ -19,15 +26,12 @@ export default function App({ Component, pageProps }) {
     setInitialData([{ id: uid(), ...data, amount: parseFloat(data.amount) }, ...initialData]);
   }
 
-
   function handleDelete(id) {
     setInitialData((initialData) =>
       initialData.filter((item) => item.id !== id),
     );
     router.push("/");
-    setMode("default");
-    setAction("successfullyDeleted");
-  }
+  handleAlert();}
 
   return (
     <>
@@ -37,8 +41,13 @@ export default function App({ Component, pageProps }) {
         initialData={initialData}
         mode={mode}
         onAddTransaction={handleAddTransaction}
-        action={action}
         onMode={handleMode}
+        onAlert={handleAlert}
+      />
+      <Alert
+        isOpen={alert.isOpen}
+        message={alert.alertMessage}
+        duration={3000}
       />
     </>
   );

@@ -6,7 +6,7 @@ import "@/src/styles/global.css";
 import { uid } from "uid";
 
 export default function App({ Component, pageProps }) {
-  const [initialData, setInitialData] = useState(transactions);
+  const [initialData, setInitialData] = useState(transactionsData);
   const [mode, setMode] = useState("default");
   const [action, setAction] = useState("default");
   const router = useRouter();

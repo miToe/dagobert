@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import transactionsData from "@/src/data/transactions.json";
 import "@/src/styles/global.css";
 import { uid } from "uid";
-import Toast from "@/src/components/Toast";
+import Alert from "@/src/components/Alert";
 
 export default function App({ Component, pageProps }) {
   const [initialData, setInitialData] = useState(transactionsData);
@@ -16,6 +16,10 @@ export default function App({ Component, pageProps }) {
 
   function handleAlert(alertMessage) {
     setAlert({ isOpen: true, alertMessage});
+  }
+
+  function handleAlertClose() {
+    setAlert({ isOpen: false, message: "" });
   }
 
   function handleMode(newMode) {
@@ -31,7 +35,7 @@ export default function App({ Component, pageProps }) {
       initialData.filter((item) => item.id !== id),
     );
     router.push("/");
-  handleAlert();}
+  handleAlert("Transaction successfully deleted!");}
 
   return (
     <>
@@ -47,6 +51,7 @@ export default function App({ Component, pageProps }) {
       <Alert
         isOpen={alert.isOpen}
         message={alert.alertMessage}
+        onAlertClose={handleAlertClose}
         duration={3000}
       />
     </>

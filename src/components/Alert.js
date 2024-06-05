@@ -1,30 +1,25 @@
 import { useEffect } from "react";
 
-export default function Alert({ isOpen, alertIcon, alertMessage, duration }) {
-
+export default function Alert({ isOpen, message, duration, onAlertClose}) {
   useEffect(() => {
     let timeoutId;
+
     if (isOpen) {
-      timeoutId = setTimeout(duration);
+      timeoutId = setTimeout(onAlertClose, duration);
     }
+
     return () => {
       clearTimeout(timeoutId);
     };
-  }, [duration, isOpen]);
+  }, [duration, isOpen, onAlertClose]);
 
-if(isOpen) {
-
-  return (
-    <>
-        <div>
-          <br />
-          <hr />
-          <div>{alertIcon}</div>
-          <p>{alertMessage}</p>
-          <hr />
-          <br />
-        </div>
-    </>
-  );
-}
+  if (isOpen) {
+    return (
+      <>
+        <p>
+          {message}
+        </p>
+      </>
+    );
+  }
 }

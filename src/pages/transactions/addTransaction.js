@@ -19,18 +19,18 @@ export default function TransactionForm({ onAddTransaction, onCancel }) {
           Cancel
         </button>
         <div>
-          <label htmlFor={"type"}>Transaction Type:</label>
+          <label htmlFor="type">Transaction Type:</label>
           <select id="type" name="type" required>
             <option value="Expenses">Expenses</option>
             <option value="Income">Income</option>
           </select>
         </div>
         <div>
-          <label htmlFor={"amount"}>Amount:</label>
+          <label htmlFor="amount">Amount:</label>
           <input id="amount" name="amount" type="number" required />
         </div>
         <div>
-          <label htmlFor={"currency"}>Currency</label>
+          <label htmlFor="currency">Currency</label>
           <select id="currency" name="currency" required>
             <option value="">Select Currency</option>
             <option value="USD">USD</option>
@@ -38,7 +38,7 @@ export default function TransactionForm({ onAddTransaction, onCancel }) {
           </select>
         </div>
         <div>
-          <label htmlFor={"category"}>Category</label>
+          <label htmlFor="category">Category</label>
           <select id="category" name="category" required>
             <option value="">Select Category</option>
             <option value="Entertainment">Entertainment</option>
@@ -48,15 +48,15 @@ export default function TransactionForm({ onAddTransaction, onCancel }) {
           </select>
         </div>
         <div>
-          <label htmlFor={"date"}>Date:</label>
+          <label htmlFor="date">Date:</label>
           <input id="date" name="date" type="date" required />
         </div>
         <div>
-          <label htmlFor={"description"}>Description:</label>
+          <label htmlFor="description">Description:</label>
           <textarea id="description" name="description" rows="5" cols="30" />
         </div>
         <div>
-          <label htmlFor={"paymentMethod"}>Payment Method:</label>
+          <label htmlFor="paymentMethod">Payment Method:</label>
           <select id="paymentMethod" name="paymentMethod" required>
             <option value="">Select Payment Method</option>
             <option value="Credit Card">Credit Card</option>

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import transactions from "@/src/data/transactions.json";
+import transactionsData from "@/src/data/transactions.json";
+import { interFont } from "@/src/styles/font";
+import "@/src/styles/global.css";
 import { uid } from "uid";
 
 export default function App({ Component, pageProps }) {

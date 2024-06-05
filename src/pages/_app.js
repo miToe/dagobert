@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
-import transactions from "@/src/data/transactions.json";
+import transactionsData from "@/src/data/transactions.json";
+import { interFont } from "@/src/styles/font";
+import "@/src/styles/global.css";
 import { uid } from "uid";
 
 export default function App({ Component, pageProps }) {
-  const [initialData, setInitialData] = useState(transactions);
+  const [initialData, setInitialData] = useState(transactionsData);
   const [mode, setMode] = useState("default");
   const [action, setAction] = useState("default");
   const router = useRouter();

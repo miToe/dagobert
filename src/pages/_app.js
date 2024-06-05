@@ -9,8 +9,12 @@ export default function App({ Component, pageProps }) {
   const [action, setAction] = useState("default");
   const router = useRouter();
 
+  console.log("reload-main", mode);
+
   function handleMode(newMode) {
+    console.log("handlemode1", mode);
     setMode(newMode);
+    console.log("handlemode2", mode);
   }
 
   function handleAddTransaction(data) {
@@ -23,8 +27,8 @@ export default function App({ Component, pageProps }) {
       initialData.filter((item) => item.id !== id),
     );
     router.push("/");
-    setMode("default");
     setAction("successfullyDeleted");
+    setMode("default");
   }
 
   return (

@@ -1,19 +1,20 @@
+// Alert.js
 import { useEffect, useState } from "react";
 
-export default function Alert({ alertIcon, alertMessage }) {
-  const [isVisible, setIsVisible] = useState(true);
+export default function Alert({ alertIcon, alertMessage, action }) {
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    let timeoutId;
-    if (isVisible) {
-      timeoutId = setTimeout(() => {
+    if (action === "successfullyDeleted") {
+      setIsVisible(true);
+      const timeoutId = setTimeout(() => {
         setIsVisible(false);
       }, 3000);
+      return () => {
+        clearTimeout(timeoutId);
+      };
     }
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, [isVisible]);
+  }, [action]);
 
   return (
     <>

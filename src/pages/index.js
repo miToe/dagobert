@@ -1,3 +1,4 @@
+// index.js
 import Link from "next/link";
 import Alert from "@/src/components/Alert";
 
@@ -14,6 +15,7 @@ export default function TransactionList({ initialData, action }) {
         isOpen={action === "successfullyDeleted"}
         alertIcon="imagine a check icon"
         alertMessage="Entry successfully deleted"
+        action={action}
       />
       <Link href="/transactions/TransactionForm">Add</Link>
       <ul>

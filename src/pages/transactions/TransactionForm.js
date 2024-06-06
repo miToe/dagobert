@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useRouter } from "next/router";
 
-export default function TransactionForm({ onAddTransaction }) {
+export default function TransactionForm({ onAddTransaction, onAlert }) {
   const router = useRouter();
   const typeRef = useRef();
   const amountRef = useRef();
@@ -20,6 +20,7 @@ export default function TransactionForm({ onAddTransaction }) {
     }
     onAddTransaction(data);
     router.push("/");
+    onAlert("Transaction successfully added!");
   }
 
   // Function to handle input events on the amount input field

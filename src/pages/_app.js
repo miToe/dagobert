@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import transactionsData from "@/src/data/transactions.json";
-import { interFont } from "@/src/styles/font";
 import "@/src/styles/global.css";
 import { uid } from "uid";
+import Alert from "@/src/components/Alert";
 import useLocalStorageState from "use-local-storage-state";
 
 export default function App({ Component, pageProps }) {
@@ -11,8 +11,19 @@ export default function App({ Component, pageProps }) {
     defaultValue: transactionsData,
   });
   const [mode, setMode] = useState("default");
-  const [action, setAction] = useState("default");
   const router = useRouter();
+  const [alert, setAlert] = useState({
+    isOpen: false,
+    alertMessage: "",
+  });
+
+  function handleAlert(alertMessage) {
+    setAlert({ isOpen: true, alertMessage});
+  }
+
+  function handleAlertClose() {
+    setAlert({ isOpen: false, message: "" });
+  }
 
   function handleMode(mode) {
     setMode(mode);
@@ -32,8 +43,7 @@ export default function App({ Component, pageProps }) {
     setTransactions(updatedData);
     router.push("/");
     setMode("default");
-    setAction("successfullyDeleted");
-  }
+  handleAlert("Transaction successfully deleted!");}
 
   return (
     <>
@@ -43,8 +53,14 @@ export default function App({ Component, pageProps }) {
         initialData={transactions}
         mode={mode}
         onAddTransaction={handleAddTransaction}
-        action={action}
         onMode={handleMode}
+        onAlert={handleAlert}
+      />
+      <Alert
+        isOpen={alert.isOpen}
+        message={alert.alertMessage}
+        onAlertClose={handleAlertClose}
+        duration={3000}
       />
     </>
   );

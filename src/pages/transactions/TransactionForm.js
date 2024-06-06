@@ -50,7 +50,9 @@ export default function TransactionForm({ onAddTransaction, onAlert }) {
     <div>
       <h1>Add Transaction</h1>
       <form onSubmit={handleSubmit}>
-        <button type="button" onClick={() => router.push("/")}>Cancel</button>
+        <button type="button" onClick={() => router.push("/")}>
+          Cancel
+        </button>
         {/* Dropdown for selecting transaction type */}
         <div>
           <label htmlFor="transactionType">Transaction Type:</label>
@@ -84,12 +86,7 @@ export default function TransactionForm({ onAddTransaction, onAlert }) {
         {/* Dropdown for selecting currency */}
         <div>
           <label htmlFor="currency">Currency:</label>
-          <select
-            id="currency"
-            name="currency"
-            ref={currencyRef}
-            required
-          >
+          <select id="currency" name="currency" ref={currencyRef} required>
             <option value="EUR">EUR</option>
             <option value="USD">USD</option>
           </select>
@@ -97,11 +94,7 @@ export default function TransactionForm({ onAddTransaction, onAlert }) {
         {/* Dropdown for selecting category */}
         <div>
           <label htmlFor="category">Category:</label>
-          <select
-            id="category"
-            name="category"
-            required
-          >
+          <select id="category" name="category" required>
             <option value="">Select Category</option>
             <option value="Entertainment">Entertainment</option>
             <option value="Food">Food</option>
@@ -134,11 +127,7 @@ export default function TransactionForm({ onAddTransaction, onAlert }) {
         {/* Dropdown for selecting payment method */}
         <div>
           <label htmlFor="paymentMethod">Payment Method:</label>
-          <select
-            id="paymentMethod"
-            name="paymentMethod"
-            required
-          >
+          <select id="paymentMethod" name="paymentMethod" required>
             <option value="">Select Payment Method</option>
             <option value="Credit Card">Credit Card</option>
             <option value="Debit Card">Debit Card</option>

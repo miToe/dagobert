@@ -4,9 +4,12 @@ import transactionsData from "@/src/data/transactions.json";
 import "@/src/styles/global.css";
 import { uid } from "uid";
 import Alert from "@/src/components/Alert";
+import useLocalStorageState from "use-local-storage-state";
 
 export default function App({ Component, pageProps }) {
-  const [initialData, setInitialData] = useState(transactionsData);
+  const [transactions, setTransactions] = useLocalStorageState("transactions", {
+    defaultValue: transactionsData,
+  });
   const [mode, setMode] = useState("default");
   const router = useRouter();
   const [alert, setAlert] = useState({
@@ -22,18 +25,22 @@ export default function App({ Component, pageProps }) {
     setAlert({ isOpen: false, message: "" });
   }
 
-  function handleMode(newMode) {
-    setMode(newMode);
+  function handleMode(mode) {
+    setMode(mode);
   }
 
   function handleAddTransaction(data) {
-    setInitialData([{ id: uid(), ...data, amount: parseFloat(data.amount) }, ...initialData]);
+    const newTransaction = {
+      id: uid(),
+      ...data,
+      amount: parseFloat(data.amount),
+    };
+    setTransactions([newTransaction, ...transactions]);
   }
 
   function handleDelete(id) {
-    setInitialData((initialData) =>
-      initialData.filter((item) => item.id !== id),
-    );
+    const updatedData = transactions.filter((item) => item.id !== id);
+    setTransactions(updatedData);
     router.push("/");
     setMode("default");
   handleAlert("Transaction successfully deleted!");}
@@ -43,7 +50,7 @@ export default function App({ Component, pageProps }) {
       <Component
         {...pageProps}
         onDelete={handleDelete}
-        initialData={initialData}
+        initialData={transactions}
         mode={mode}
         onAddTransaction={handleAddTransaction}
         onMode={handleMode}

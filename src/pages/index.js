@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function TransactionList({ initialData}) {
   // Sort transactions by date in descending order
   const sortedTransactions = initialData.sort(
-    (a, b) => new Date(b.date) - new Date(a.date),
+    (a, b) => new Date(b.date) - new Date(a.date)
   );
 
   return (

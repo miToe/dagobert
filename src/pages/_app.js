@@ -35,6 +35,7 @@ export default function App({ Component, pageProps }) {
       initialData.filter((item) => item.id !== id),
     );
     router.push("/");
+    setMode("default");
   handleAlert("Transaction successfully deleted!");}
 
   return (

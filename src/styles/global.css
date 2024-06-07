@@ -13,3 +13,54 @@
 body {
   font-family: var(--font-inter), sans-serif;
 }
+
+/* General button styles */
+.button {
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.button-icon {
+  display: inline-flex;
+}
+
+.start-icon {
+  margin-right: 0.5rem;
+}
+
+.end-icon {
+  margin-left: 0.5rem;
+}
+
+.button-label {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Primary button styles */
+.button-primary {
+  background-color: var(--primary-500);
+  color: var(--neutrals-white);
+}
+
+.button-primary:hover {
+  background-color: var(--primary-700);
+}
+
+/* Secondary button styles */
+.button-secondary {
+  background-color: var(--primary-50);
+  border: 2px solid var(--primary-500);
+  color: var(--primary-500);
+}
+
+.button-secondary:hover {
+  background-color: var(--primary-100);
+}

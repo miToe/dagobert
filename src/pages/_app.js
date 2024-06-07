@@ -5,8 +5,11 @@ import "@/src/styles/global.css";
 import { uid } from "uid";
 import Alert from "@/src/components/Alert";
 import useLocalStorageState from "use-local-storage-state";
+import "@/src/styles/ui-colors.css"
+import React from "react";
+import Button from "@/src/components/styles/Button";
 
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps, onClick }) {
   const [transactions, setTransactions] = useLocalStorageState("transactions", {
     defaultValue: transactionsData,
   });
@@ -62,6 +65,14 @@ export default function App({ Component, pageProps }) {
         onAlertClose={handleAlertClose}
         duration={3000}
       />
+      <div className="app">
+        <Button variant="primary" startIcon="add" endIcon="delete">Primary Button</Button>
+        <Button variant="secondary" startIcon="add">Secondary Button</Button>
+        <Button variant="primary" endIcon="delete">Another Primary Button</Button>
+      </div>
+      <div style={{ padding: "20px" }}>
+
+      </div>
     </>
   );
 }

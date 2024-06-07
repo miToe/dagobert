@@ -1,9 +1,28 @@
-export default function Form({ transaction, onSubmitForm }) {
+export default function Form({
+                               onSubmitForm,
+                               initialData = {
+                                 transactionType: "",
+                                 amount: "",
+                                 currency: "EUR",
+                                 date: "",
+                                 category: "",
+                                 paymentMethod: "",
+                                 description: "",
+                               },
+                             }) {
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData);
+    onSubmitForm(data);
+  }
+
   return (
-    <form onSubmit={onSubmitForm}>
+    <form onSubmit={handleSubmit}>
       <label htmlFor="transactionType">Transaction Type</label>
       <br />
-      <select id="transactionType" name="transactionType" defaultValue={transaction.transactionType} required>
+      <select id="transactionType" name="transactionType" defaultValue={initialData.transactionType} required>
         <option value="">Select a transaction type</option>
         <option value="Income">Income</option>
         <option value="Expense">Expense</option>
@@ -16,25 +35,24 @@ export default function Form({ transaction, onSubmitForm }) {
         id="amount"
         name="amount"
         placeholder="Set an amount (e.g.: 50,00)"
-        defaultValue={transaction.amount}
+        defaultValue={initialData.amount}
         required
       />
       <br />
       <label htmlFor="currency">Currency</label>
       <br />
-      <select id="currency" name="currency" defaultValue={transaction.currency} required>
-        <option value="">Select currency</option>
+      <select id="currency" name="currency" defaultValue={initialData.currency} required>
         <option value="EUR">EUR</option>
         <option value="USD">USD</option>
       </select>
       <br />
       <label htmlFor="date">Date</label>
       <br />
-      <input type="date" id="date" name="date" defaultValue={transaction.date} required />
+      <input type="date" id="date" name="date" defaultValue={initialData.date} required />
       <br />
       <label htmlFor="category">Category</label>
       <br />
-      <select id="category" name="category" defaultValue={transaction.category} required>
+      <select id="category" name="category" defaultValue={initialData.category} required>
         <option value="">Select category</option>
         <option value="Groceries">Groceries</option>
         <option value="Transport">Transport</option>
@@ -44,7 +62,7 @@ export default function Form({ transaction, onSubmitForm }) {
       <br />
       <label htmlFor="paymentMethod">Payment Method</label>
       <br />
-      <select id="paymentMethod" name="paymentMethod" defaultValue={transaction.paymentMethod} required>
+      <select id="paymentMethod" name="paymentMethod" defaultValue={initialData.paymentMethod} required>
         <option value="">Select payment method</option>
         <option value="Cash">Cash</option>
         <option value="Debit card">Debit card</option>
@@ -56,7 +74,7 @@ export default function Form({ transaction, onSubmitForm }) {
       <label htmlFor="description">Description</label>
       <br />
       <textarea id="description" name="description" rows="5" cols="50" placeholder="Add a desrciption (optional)"
-                defaultValue={transaction.description} />
+                defaultValue={initialData.description} />
       <button type="submit">Submit</button>
     </form>
   );

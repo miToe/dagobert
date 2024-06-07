@@ -9,31 +9,7 @@ import useLocalStorageState from "use-local-storage-state";
 export default function App({ Component, pageProps }) {
   const router = useRouter();
   const [transactions, setTransactions] = useLocalStorageState("transactions", { defaultValue: transactionsData });
-  const [mode, setMode] = useState("default");
   const [alert, setAlert] = useState({ isOpen: false, alertMessage: "" });
-  console.log(mode);
-
-  //-------------App mode logic-------------
-  function handleMode(mode) {
-    if (mode === "add") {
-      setMode("add");
-      console.log(mode);
-      router.push("./transactions/TransactionForm");
-    } else if (mode === "edit") {
-      setMode("edit");
-      console.log(mode);
-      router.push("./TransactionForm");
-    } else if (mode === "delete") {
-      setMode("delete");
-      console.log(mode);
-    } else {
-      setMode("default");
-      console.log(mode);
-    }
-  }
-
-  //----------------------------------------
-
 
   //-------------Alert logic-------------
   function handleAlert(alertMessage) {
@@ -68,8 +44,6 @@ export default function App({ Component, pageProps }) {
     setTransactions(transactions.filter((item) => item.id !== id));
     router.push("/");
     handleAlert("Transaction successfully deleted!");
-    handleMode("default");
-    console.log(mode);
   }
 
   //------------------------------------------------
@@ -80,10 +54,8 @@ export default function App({ Component, pageProps }) {
         {...pageProps}
         onDelete={handleDelete}
         transactions={transactions}
-        mode={mode}
         onAddTransaction={handleAddTransaction}
         onEditTransaction={handleEditTransaction}
-        onMode={handleMode}
         onAlert={handleAlert}
       />
       <Alert

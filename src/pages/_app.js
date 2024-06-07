@@ -7,19 +7,23 @@ import Alert from "@/src/components/Alert";
 import useLocalStorageState from "use-local-storage-state";
 
 export default function App({ Component, pageProps }) {
-  const [transactions, setTransactions] = useLocalStorageState("transactions", {
-    defaultValue: transactionsData,
-  });
-  const [mode, setMode] = useState("default");
   const router = useRouter();
-  const [alert, setAlert] = useState({
-    isOpen: false,
-    alertMessage: "",
-  });
+  const [transactions, setTransactions] = useLocalStorageState("transactions", { defaultValue: transactionsData });
+  const [mode, setMode] = useState("default");
+  const [alert, setAlert] = useState({ isOpen: false, alertMessage: "" });
 
   //-------------App mode logic-------------
   function handleMode(mode) {
-    setMode(mode);
+    if (mode === "default") {
+      setMode("default");
+    } else if (mode === "add") {
+      setMode("add");
+      router.push("/");
+    } else if (mode === "edit") {
+      setMode("edit");
+    } else if (mode === "delete") {
+      setMode("delete");
+    }
   }
 
   //----------------------------------------

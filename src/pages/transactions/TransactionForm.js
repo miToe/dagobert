@@ -41,7 +41,7 @@ export default function TransactionForm({ onAddTransaction }) {
       <br />
       <label htmlFor="date">Date</label>
       <br />
-      <input type="date" id="date" name="date" />
+      <input type="date" id="date" name="date" defaultValue={new Date().toISOString().substring(0, 10)} />
       <br />
       <label htmlFor="category">Category</label>
       <br />

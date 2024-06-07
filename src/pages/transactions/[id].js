@@ -3,7 +3,7 @@ import Link from "next/link";
 import Modal from "@/src/components/Modal";
 
 export default function TransactionDetails({
-                                             initialData,
+                                             transactions,
                                              onDelete,
                                              mode,
                                              onMode,
@@ -12,7 +12,7 @@ export default function TransactionDetails({
   const { id } = router.query;
 
   // Find transaction by its ID
-  const transaction = initialData.find((transaction) => transaction.id === id);
+  const transaction = transactions.find((transaction) => transaction.id === id);
 
   if (!transaction) {
     return <p>Transaction not found</p>;

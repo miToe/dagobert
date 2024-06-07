@@ -11,22 +11,23 @@ export default function App({ Component, pageProps }) {
   const [transactions, setTransactions] = useLocalStorageState("transactions", { defaultValue: transactionsData });
   const [mode, setMode] = useState("default");
   const [alert, setAlert] = useState({ isOpen: false, alertMessage: "" });
+  console.log(mode);
 
   //-------------App mode logic-------------
   function handleMode(mode) {
-    if (mode === "default") {
-      setMode("default");
-      console.log(mode);
-    } else if (mode === "add") {
+    if (mode === "add") {
       setMode("add");
       console.log(mode);
       router.push("./transactions/TransactionForm");
     } else if (mode === "edit") {
       setMode("edit");
       console.log(mode);
-      router.push("./transactions/TransactionForm");
+      router.push("./TransactionForm");
     } else if (mode === "delete") {
       setMode("delete");
+      console.log(mode);
+    } else {
+      setMode("default");
       console.log(mode);
     }
   }
@@ -66,8 +67,9 @@ export default function App({ Component, pageProps }) {
   function handleDelete(id) {
     setTransactions(transactions.filter((item) => item.id !== id));
     router.push("/");
-    setMode("default");
     handleAlert("Transaction successfully deleted!");
+    handleMode("default");
+    console.log(mode);
   }
 
   //------------------------------------------------
@@ -77,9 +79,10 @@ export default function App({ Component, pageProps }) {
       <Component
         {...pageProps}
         onDelete={handleDelete}
-        initialData={transactions}
+        transactions={transactions}
         mode={mode}
         onAddTransaction={handleAddTransaction}
+        onEditTransaction={handleEditTransaction}
         onMode={handleMode}
         onAlert={handleAlert}
       />

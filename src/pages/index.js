@@ -1,8 +1,8 @@
 import Link from "next/link";
 
-export default function TransactionList({ initialData, onMode }) {
+export default function TransactionList({ transactions, onMode }) {
   // Sort transactions by date in descending order
-  const sortedTransactions = initialData.sort(
+  const sortedTransactions = transactions.sort(
     (a, b) => new Date(b.date) - new Date(a.date),
   );
 

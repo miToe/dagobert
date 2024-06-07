@@ -17,7 +17,7 @@ export default function TransactionList({ initialData, onMode }) {
               <h3>{transaction.category}</h3>
               <div>{transaction.date}</div>
               <div>
-                {/*{transaction.amount.toFixed(2)} {transaction.currency}*/}
+                {transaction.amount} {transaction.currency}
               </div>
             </Link>
           </li>

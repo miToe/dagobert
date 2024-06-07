@@ -16,13 +16,18 @@ export default function App({ Component, pageProps }) {
   function handleMode(mode) {
     if (mode === "default") {
       setMode("default");
+      console.log(mode);
     } else if (mode === "add") {
       setMode("add");
-      router.push("/");
+      console.log(mode);
+      router.push("./transactions/TransactionForm");
     } else if (mode === "edit") {
       setMode("edit");
+      console.log(mode);
+      router.push("./transactions/TransactionForm");
     } else if (mode === "delete") {
       setMode("delete");
+      console.log(mode);
     }
   }
 

@@ -7,9 +7,8 @@ import Alert from "@/src/components/Alert";
 import useLocalStorageState from "use-local-storage-state";
 import "@/src/styles/ui-colors.css"
 import React from "react";
-import Button from "@/src/components/styles/Button";
 
-export default function App({ Component, pageProps, onClick }) {
+export default function App({ Component, pageProps}) {
   const [transactions, setTransactions] = useLocalStorageState("transactions", {
     defaultValue: transactionsData,
   });

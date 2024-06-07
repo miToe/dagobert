@@ -1,5 +1,4 @@
 import Button from "@/src/components/styles/Button";
-import React from "react";
 
 export default function Modal({ message, onConfirm, onCancel, id, hint }) {
   return (

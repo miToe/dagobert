@@ -6,7 +6,6 @@ import { uid } from "uid";
 import Alert from "@/src/components/Alert";
 import useLocalStorageState from "use-local-storage-state";
 import "@/src/styles/ui-colors.css"
-import React from "react";
 
 export default function App({ Component, pageProps}) {
   const [transactions, setTransactions] = useLocalStorageState("transactions", {

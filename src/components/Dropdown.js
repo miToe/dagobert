@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   DropdownContainer,
   DropdownLabel,
@@ -16,20 +16,17 @@ const Dropdown = ({
   onOptionClick,
   required,
   errorMessage,
+  defaultSelected,
 }) => {
+  // State to manage the open/close state of the dropdown
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("");
-  const [buttonElement, setButtonElement] = useState(null);
-  const [menuElement, setMenuElement] = useState(null);
+  // State to manage the selected option, initialized with defaultSelected if provided
+  const [selectedOption, setSelectedOption] = useState(defaultSelected || "");
 
+  // Effect to close dropdown when clicking outside of it
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (
-        buttonElement &&
-        !buttonElement.contains(event.target) &&
-        menuElement &&
-        !menuElement.contains(event.target)
-      ) {
+      if (isOpen && !event.target.closest(".dropdown-container")) {
         setIsOpen(false);
       }
     };
@@ -38,71 +35,61 @@ const Dropdown = ({
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [buttonElement, menuElement]);
+  }, [isOpen]);
 
-  const toggleDropdown = (event) => {
+  // Toggle dropdown open/close state
+  const toggleDropdown = useCallback((event) => {
     event.preventDefault();
-    setIsOpen(!isOpen);
-  };
+    setIsOpen((prev) => !prev);
+  }, []);
 
-  const handleOptionClick = (option) => {
-    setSelectedOption(option);
-    setIsOpen(false);
-    onOptionClick(option);
-  };
+  // Handle option selection
+  const handleOptionClick = useCallback(
+    (option) => {
+      setSelectedOption(option);
+      setIsOpen(false);
+      onOptionClick(option);
+    },
+    [onOptionClick]
+  );
 
-  const handleKeyDown = (event) => {
-    switch (event.key) {
-      case "Enter":
-      case " ":
-        event.preventDefault();
-        setIsOpen(!isOpen);
-        break;
-      case "Escape":
-        setIsOpen(false);
-        buttonElement && buttonElement.focus();
-        break;
-      case "ArrowDown":
-        if (!isOpen) {
-          setIsOpen(true);
-        } else {
-          const firstItem = menuElement?.querySelector('[role="option"]');
-          firstItem && firstItem.focus();
-        }
-        break;
-      default:
-        break;
+  // Handle key down events for the dropdown button
+  const handleKeyDown = useCallback((event) => {
+    if (["Enter", " ", "ArrowDown"].includes(event.key)) {
+      event.preventDefault();
+      setIsOpen(true);
+      setTimeout(() => {
+        document.querySelector('[role="option"]')?.focus();
+      }, 0);
+    } else if (event.key === "Escape") {
+      setIsOpen(false);
     }
-  };
+  }, []);
 
-  const handleMenuKeyDown = (event) => {
-    switch (event.key) {
-      case "ArrowDown":
+  // Handle key down events for the dropdown menu
+  const handleMenuKeyDown = useCallback(
+    (event) => {
+      const currentIndex = options.findIndex(
+        (option) => option === event.target.innerText
+      );
+      if (event.key === "ArrowDown" || event.key === "ArrowUp") {
         event.preventDefault();
-        const nextSibling = event.target.nextElementSibling;
-        nextSibling && nextSibling.focus();
-        break;
-      case "ArrowUp":
-        event.preventDefault();
-        const previousSibling = event.target.previousElementSibling;
-        previousSibling && previousSibling.focus();
-        break;
-      case "Escape":
+        const offset = event.key === "ArrowDown" ? 1 : -1;
+        const nextIndex =
+          (currentIndex + offset + options.length) % options.length;
+        document.getElementById(`option-${nextIndex}`)?.focus();
+      } else if (event.key === "Escape") {
         setIsOpen(false);
-        buttonElement && buttonElement.focus();
-        break;
-      case "Enter":
-      case " ":
+      } else if (["Enter", " "].includes(event.key)) {
         event.preventDefault();
         handleOptionClick(event.target.innerText);
-        break;
-      default:
-        break;
-    }
-  };
+      }
+    },
+    [options, handleOptionClick]
+  );
 
   return (
-    <DropdownContainer>
+    <DropdownContainer className="dropdown-container">
       <DropdownLabel htmlFor={name}>{label}</DropdownLabel>
       <input
         type="hidden"
@@ -116,20 +103,16 @@ const Dropdown = ({
         onKeyDown={handleKeyDown}
         aria-expanded={isOpen}
         aria-haspopup="listbox"
-        ref={setButtonElement}
         className={errorMessage ? "has-error" : ""}
       >
         {selectedOption || buttonText}
       </DropdownButton>
       {isOpen && (
-        <DropdownMenu
-          role="listbox"
-          ref={setMenuElement}
-          onKeyDown={handleMenuKeyDown}
-        >
+        <DropdownMenu role="listbox" onKeyDown={handleMenuKeyDown}>
           {options.map((option, index) => (
             <DropdownItem
               key={index}
+              id={`option-${index}`}
               role="option"
               tabIndex={0}
               aria-selected={selectedOption === option}

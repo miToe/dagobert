@@ -6,6 +6,10 @@ export default function TransactionForm({ onAddTransaction, onAlert }) {
   const router = useRouter();
 
   const transactionTypeOptions = ["Expense", "Income"];
+  const currencyOptions = ["EUR", "US"];
+  const categoryOptions = ["Entertainment", "Food", "Shopping", "Transport"];
+  const paymentMethodOptions = ["Credit Card", "Debit Card", "Cash", "PayPal"];
+
   const [dropdownError, setDropdownError] = useState("");
   const [formValues, setFormValues] = useState({
     amount: "",
@@ -83,13 +87,14 @@ export default function TransactionForm({ onAddTransaction, onAlert }) {
         </button>
 
         <Dropdown
-          label="Transaction Type:"
+          label="Transaction Type"
+          name="transactionType"
           options={transactionTypeOptions}
-          buttonText="Select an option"
+          buttonText="Select a transaction type"
           onOptionClick={handleOptionClick}
           required={true}
-          name="transactionType"
-          errorMessage={dropdownError}
+          errorMessage="" // Can be replaced with an actual error message
+          defaultSelected="" // Specify the pre-selected option here
         />
 
         <div>
@@ -108,36 +113,27 @@ export default function TransactionForm({ onAddTransaction, onAlert }) {
           />
         </div>
 
-        <div>
-          <label htmlFor="currency">Currency:</label>
-          <select
-            id="currency"
-            name="currency"
-            value={formValues.currency}
-            onChange={handleInputChange}
-            required
-          >
-            <option value="EUR">EUR</option>
-            <option value="USD">USD</option>
-          </select>
-        </div>
+        <Dropdown
+          label="Currency:"
+          name="currency"
+          options={currencyOptions}
+          buttonText="Select a currency"
+          onOptionClick={handleOptionClick}
+          required={true}
+          errorMessage="" // Can be replaced with an actual error message
+          defaultSelected="EUR" // Specify the pre-selected option here
+        />
 
-        <div>
-          <label htmlFor="category">Category:</label>
-          <select
-            id="category"
-            name="category"
-            value={formValues.category}
-            onChange={handleInputChange}
-            required
-          >
-            <option value="">Select Category</option>
-            <option value="Entertainment">Entertainment</option>
-            <option value="Food">Food</option>
-            <option value="Shopping">Shopping</option>
-            <option value="Transport">Transport</option>
-          </select>
-        </div>
+        <Dropdown
+          label="Category:"
+          name="category"
+          options={categoryOptions}
+          buttonText="Select a category"
+          onOptionClick={handleOptionClick}
+          required={true}
+          errorMessage="" // Can be replaced with an actual error message
+          defaultSelected="" // Specify the pre-selected option here
+        />
 
         <div>
           <label htmlFor="date">Date:</label>
@@ -164,22 +160,16 @@ export default function TransactionForm({ onAddTransaction, onAlert }) {
           />
         </div>
 
-        <div>
-          <label htmlFor="paymentMethod">Payment Method:</label>
-          <select
-            id="paymentMethod"
-            name="paymentMethod"
-            value={formValues.paymentMethod}
-            onChange={handleInputChange}
-            required
-          >
-            <option value="">Select Payment Method</option>
-            <option value="Credit Card">Credit Card</option>
-            <option value="Debit Card">Debit Card</option>
-            <option value="Cash">Cash</option>
-            <option value="PayPal">PayPal</option>
-          </select>
-        </div>
+        <Dropdown
+          label="Payment Method:"
+          name="paymentMethod"
+          options={paymentMethodOptions}
+          buttonText="Select Payment Method"
+          onOptionClick={handleOptionClick}
+          required={true}
+          errorMessage="" // Can be replaced with an actual error message
+          defaultSelected="" // Specify the pre-selected option here
+        />
 
         <button type="submit">Add</button>
       </form>

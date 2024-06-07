@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import transactionsData from "@/src/data/transactions.json";
 import "@/src/styles/global.css";
+import "@/src/styles/ui-colors.css";
 import { uid } from "uid";
 import Alert from "@/src/components/Alert";
 import useLocalStorageState from "use-local-storage-state";
@@ -18,7 +19,7 @@ export default function App({ Component, pageProps }) {
   });
 
   function handleAlert(alertMessage) {
-    setAlert({ isOpen: true, alertMessage});
+    setAlert({ isOpen: true, alertMessage });
   }
 
   function handleAlertClose() {
@@ -43,7 +44,8 @@ export default function App({ Component, pageProps }) {
     setTransactions(updatedData);
     router.push("/");
     setMode("default");
-  handleAlert("Transaction successfully deleted!");}
+    handleAlert("Transaction successfully deleted!");
+  }
 
   return (
     <>

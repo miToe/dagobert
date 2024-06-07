@@ -6,10 +6,18 @@
 
 :root {
   --max-width: 100%;
-  --border-radius: 12px;
+  --border-radius-small: 6px;
   --font-inter: "Inter";
 }
 
 body {
   font-family: var(--font-inter), sans-serif;
+}
+
+body > div {
+  padding: 2rem;
+}
+
+form {
+  padding: 0.5rem;
 }

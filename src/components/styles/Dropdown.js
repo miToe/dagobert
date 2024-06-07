@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const DropdownContainer = styled.div`
   position: relative;
-  display: inline-block;
+  display: block;
   margin-bottom: 20px;
 `;
 
@@ -14,19 +14,22 @@ export const DropdownLabel = styled.label`
 `;
 
 export const DropdownButton = styled.button`
-  background-color: #4caf50;
-  color: white;
-  padding: 16px;
+  background-color: var(--neutrals-white);
+  padding: 13px 12px;
   font-size: 16px;
-  border: none;
   cursor: pointer;
   width: 100%;
   text-align: left;
+  border: 1px solid var(--neutrals-dark-gray);
+  border-radius: var(--border-radius-small);
   &:hover {
-    background-color: #3e8e41;
+    border-color: var(--primary-500);
   }
+  &[aria-expanded="true"],
   &:focus {
-    outline: 3px solid #3e8e41;
+    border: 1px solid var(--primary-500);
+    border-bottom: none;
+    border-radius: var(--border-radius-small) var(--border-radius-small) 0 0;
   }
 
   &.has-error {
@@ -39,10 +42,11 @@ export const DropdownMenu = styled.div`
   position: absolute;
   background-color: #f9f9f9;
   min-width: 100%;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
-  max-height: 200px;
   overflow-y: auto;
+  border: 1px solid var(--primary-500);
+  border-radius: 0 0 var(--border-radius-small) var(--border-radius-small);
 `;
 
 export const DropdownItem = styled.div`
@@ -52,10 +56,11 @@ export const DropdownItem = styled.div`
   display: block;
   cursor: pointer;
   &:hover {
-    background-color: #f1f1f1;
+    background-color: var(--primary-100);
   }
   &[aria-selected="true"] {
-    background-color: #ddd;
+    background-color: var(--primary-200);
+    pointer-events: none;
   }
   &:focus {
     background-color: #ddd;

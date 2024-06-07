@@ -17,18 +17,27 @@ export default function App({ Component, pageProps }) {
     alertMessage: "",
   });
 
+  //-------------App mode logic-------------
+  function handleMode(mode) {
+    setMode(mode);
+  }
+
+  //----------------------------------------
+
+
+  //-------------Alert logic-------------
   function handleAlert(alertMessage) {
-    setAlert({ isOpen: true, alertMessage});
+    setAlert({ isOpen: true, alertMessage });
   }
 
   function handleAlertClose() {
     setAlert({ isOpen: false, message: "" });
   }
 
-  function handleMode(mode) {
-    setMode(mode);
-  }
+  //-------------------------------------
 
+
+  //-------------Transaction form logic-------------
   function handleAddTransaction(data) {
     const newTransaction = {
       id: uid(),
@@ -38,12 +47,21 @@ export default function App({ Component, pageProps }) {
     setTransactions([newTransaction, ...transactions]);
   }
 
+  function handleEditTransaction(id, updatedTransaction) {
+    setTransactions(
+      transactions.map((transaction) =>
+        transaction.id === id ? { ...transaction, ...updatedTransaction } : transaction),
+    );
+  }
+
   function handleDelete(id) {
-    const updatedData = transactions.filter((item) => item.id !== id);
-    setTransactions(updatedData);
+    setTransactions(transactions.filter((item) => item.id !== id));
     router.push("/");
     setMode("default");
-  handleAlert("Transaction successfully deleted!");}
+    handleAlert("Transaction successfully deleted!");
+  }
+
+  //------------------------------------------------
 
   return (
     <>

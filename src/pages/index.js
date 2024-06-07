@@ -1,9 +1,9 @@
 import Link from "next/link";
 
-export default function TransactionList({ initialData}) {
+export default function TransactionList({ initialData }) {
   // Sort transactions by date in descending order
   const sortedTransactions = initialData.sort(
-    (a, b) => new Date(b.date) - new Date(a.date)
+    (a, b) => new Date(b.date) - new Date(a.date),
   );
 
   return (
@@ -17,7 +17,7 @@ export default function TransactionList({ initialData}) {
               <h3>{transaction.category}</h3>
               <div>{transaction.date}</div>
               <div>
-                {transaction.amount.toFixed(2)} {transaction.currency}
+                {/*{transaction.amount.toFixed(2)} {transaction.currency}*/}
               </div>
             </Link>
           </li>

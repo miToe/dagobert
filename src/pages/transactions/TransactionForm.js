@@ -1,24 +1,50 @@
-import { useRef } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
+import Dropdown from "@/src/components/Dropdown";
 
 export default function TransactionForm({ onAddTransaction, onAlert }) {
   const router = useRouter();
-  const typeRef = useRef();
-  const amountRef = useRef();
-  const currencyRef = useRef();
+
+  const transactionTypeOptions = ["Expense", "Income"];
+  const [dropdownError, setDropdownError] = useState("");
+  const [formValues, setFormValues] = useState({
+    amount: "",
+    currency: "EUR",
+    category: "",
+    date: new Date().toISOString().substring(0, 10),
+    description: "",
+    paymentMethod: "",
+    transactionType: "",
+  });
+
+  const handleOptionClick = (option) => {
+    setDropdownError(""); // Reset error when option is selected
+    setFormValues({ ...formValues, transactionType: option });
+  };
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormValues({ ...formValues, [name]: value });
+  };
 
   // Function to handle form submission
   function handleSubmit(event) {
     event.preventDefault();
-    const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData);
-    // Convert amount to negative if transaction type is "Expense"
-    if (data.transactionType === "Expense") {
-      data.amount = -Math.abs(parseFloat(data.amount)); // Convert to negative
-    } else {
-      data.amount = Math.abs(parseFloat(data.amount)); // Ensure positive
+
+    if (!formValues.transactionType) {
+      setDropdownError("Field required");
+      return;
     }
-    onAddTransaction(data);
+
+    setDropdownError("");
+
+    // Convert amount to negative if transaction type is "Expense"
+    if (formValues.transactionType === "Expense") {
+      formValues.amount = -Math.abs(parseFloat(formValues.amount)); // Convert to negative
+    } else {
+      formValues.amount = Math.abs(parseFloat(formValues.amount)); // Ensure positive
+    }
+    onAddTransaction(formValues);
     router.push("/");
     onAlert("Transaction successfully added!");
   }
@@ -26,6 +52,7 @@ export default function TransactionForm({ onAddTransaction, onAlert }) {
   // Function to handle input events on the amount input field
   function handleAmountInput(event) {
     const value = event.target.value;
+
     // Remove any negative signs
     if (value.includes("-")) {
       event.target.value = value.replace("-", "");
@@ -37,6 +64,7 @@ export default function TransactionForm({ onAddTransaction, onAlert }) {
         event.target.value = `${integerPart}.${decimalPart.substring(0, 2)}`;
       }
     }
+    handleInputChange(event); // Update form values
   }
 
   // Function to prevent typing "-" in the amount input field
@@ -53,21 +81,17 @@ export default function TransactionForm({ onAddTransaction, onAlert }) {
         <button type="button" onClick={() => router.push("/")}>
           Cancel
         </button>
-        {/* Dropdown for selecting transaction type */}
-        <div>
-          <label htmlFor="transactionType">Transaction Type:</label>
-          <select
-            id="transactionType"
-            name="transactionType"
-            ref={typeRef}
-            required
-          >
-            <option value="">Select Transaction Type</option>
-            <option value="Expense">Expense</option>
-            <option value="Income">Income</option>
-          </select>
-        </div>
-        {/* Input field for amount */}
+
+        <Dropdown
+          label="Transaction Type:"
+          options={transactionTypeOptions}
+          buttonText="Select an option"
+          onOptionClick={handleOptionClick}
+          required={true}
+          name="transactionType"
+          errorMessage={dropdownError}
+        />
+
         <div>
           <label htmlFor="amount">Amount:</label>
           <input
@@ -76,25 +100,37 @@ export default function TransactionForm({ onAddTransaction, onAlert }) {
             type="number"
             step="0.01"
             min="0"
-            ref={amountRef}
-            onInput={handleAmountInput}
+            value={formValues.amount}
+            onChange={handleAmountInput}
             onKeyDown={handleAmountKeyDown}
             placeholder="Enter amount (e.g.: 123.45)"
             required
           />
         </div>
-        {/* Dropdown for selecting currency */}
+
         <div>
           <label htmlFor="currency">Currency:</label>
-          <select id="currency" name="currency" ref={currencyRef} required>
+          <select
+            id="currency"
+            name="currency"
+            value={formValues.currency}
+            onChange={handleInputChange}
+            required
+          >
             <option value="EUR">EUR</option>
             <option value="USD">USD</option>
           </select>
         </div>
-        {/* Dropdown for selecting category */}
+
         <div>
           <label htmlFor="category">Category:</label>
-          <select id="category" name="category" required>
+          <select
+            id="category"
+            name="category"
+            value={formValues.category}
+            onChange={handleInputChange}
+            required
+          >
             <option value="">Select Category</option>
             <option value="Entertainment">Entertainment</option>
             <option value="Food">Food</option>
@@ -102,18 +138,19 @@ export default function TransactionForm({ onAddTransaction, onAlert }) {
             <option value="Transport">Transport</option>
           </select>
         </div>
-        {/* Input field for selecting date */}
+
         <div>
           <label htmlFor="date">Date:</label>
           <input
             id="date"
             name="date"
             type="date"
-            defaultValue={new Date().toISOString().substring(0, 10)}
+            value={formValues.date}
+            onChange={handleInputChange}
             required
           />
         </div>
-        {/* Textarea for entering description */}
+
         <div>
           <label htmlFor="description">Description:</label>
           <textarea
@@ -121,13 +158,21 @@ export default function TransactionForm({ onAddTransaction, onAlert }) {
             name="description"
             rows="5"
             cols="30"
+            value={formValues.description}
+            onChange={handleInputChange}
             placeholder="Enter description (optional)"
           />
         </div>
-        {/* Dropdown for selecting payment method */}
+
         <div>
           <label htmlFor="paymentMethod">Payment Method:</label>
-          <select id="paymentMethod" name="paymentMethod" required>
+          <select
+            id="paymentMethod"
+            name="paymentMethod"
+            value={formValues.paymentMethod}
+            onChange={handleInputChange}
+            required
+          >
             <option value="">Select Payment Method</option>
             <option value="Credit Card">Credit Card</option>
             <option value="Debit Card">Debit Card</option>
@@ -135,7 +180,7 @@ export default function TransactionForm({ onAddTransaction, onAlert }) {
             <option value="PayPal">PayPal</option>
           </select>
         </div>
-        {/* Submit button */}
+
         <button type="submit">Add</button>
       </form>
     </div>

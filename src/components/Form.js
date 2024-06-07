@@ -15,7 +15,23 @@ export default function Form({
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
+
+    // Convert amount to negative if transaction type is "Expense"
+    if (data.transactionType === "Expense") {
+      data.amount = (-Math.abs(parseFloat(data.amount))).toFixed(2);
+    } else {
+      data.amount = parseFloat(data.amount).toFixed(2);
+    }
+
     onSubmitForm(data);
+  }
+
+  function handleAmountInput(event) {
+    const value = event.target.value;
+    const regex = /^(?!-)\d+(\.\d{0,2})?$/;  // Disallow negative values
+    if (!regex.test(value)) {
+      event.target.value = value.slice(0, -1);
+    }
   }
 
   return (
@@ -34,8 +50,11 @@ export default function Form({
         type="number"
         id="amount"
         name="amount"
-        placeholder="Set an amount (e.g.: 50,00)"
+        placeholder="Set an amount (e.g.: 50.00)"
         defaultValue={initialData.amount}
+        step="0.01"
+        min="0"  // Ensure the minimum value is 0
+        onInput={handleAmountInput}
         required
       />
       <br />
@@ -73,8 +92,9 @@ export default function Form({
       <br />
       <label htmlFor="description">Description</label>
       <br />
-      <textarea id="description" name="description" rows="5" cols="50" placeholder="Add a desrciption (optional)"
+      <textarea id="description" name="description" rows="5" cols="50" placeholder="Add a description (optional)"
                 defaultValue={initialData.description} />
+      <br />
       <button type="submit">Submit</button>
     </form>
   );

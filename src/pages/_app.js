@@ -10,6 +10,7 @@ export default function App({ Component, pageProps }) {
   const router = useRouter();
   const [transactions, setTransactions] = useLocalStorageState("transactions", { defaultValue: transactionsData });
   const [alert, setAlert] = useState({ isOpen: false, alertMessage: "" });
+  console.log(transactions);
 
   //-------------Alert logic-------------
   function handleAlert(alertMessage) {
@@ -38,6 +39,7 @@ export default function App({ Component, pageProps }) {
       transactions.map((transaction) =>
         transaction.id === id ? { ...transaction, ...updatedTransaction } : transaction),
     );
+    handleAlert("Transaction successfully updated!");
   }
 
   function handleDelete(id) {

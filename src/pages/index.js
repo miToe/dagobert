@@ -2,9 +2,11 @@ import Link from "next/link";
 
 export default function TransactionList({ transactions }) {
   // Sort transactions by date in descending order
+  console.log("not sorted", transactions);
   const sortedTransactions = transactions.sort(
     (a, b) => new Date(b.date) - new Date(a.date),
   );
+  console.log("sorted", sortedTransactions);
 
   return (
     <div>
@@ -17,7 +19,7 @@ export default function TransactionList({ transactions }) {
               <h3>{transaction.category}</h3>
               <div>{transaction.date}</div>
               <div>
-                {transaction.amount} {transaction.currency}
+                {transaction.amount.toFixed(2)} {transaction.currency}
               </div>
             </Link>
           </li>

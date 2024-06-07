@@ -38,39 +38,21 @@ const IconWrapper = styled.span`
   ${(props) => props.end && 'margin-left: 0.5rem;'}
 `;
 
-export default function Button ({ buttonVariant = 'primary', startIcon, endIcon, children, onClick, ...props }) {
+export default function Button ({variant = 'primary', startIcon, endIcon, children, onClick, ...props }) {
   return (
-    <ButtonStyled variant={buttonVariant} onClick={onClick} {...props}>
+    <ButtonStyled variant={variant} onClick={onClick} {...props}>
       {startIcon && (
         <IconWrapper start>
-          <SVGIcon iconName={startIcon} variant={buttonVariant} />
+          <SVGIcon iconName={startIcon} variant={variant} />
         </IconWrapper>
       )}
       {children}
       {endIcon && (
         <IconWrapper end>
-          <SVGIcon iconName={endIcon} variant={buttonVariant} />
+          <SVGIcon iconName={endIcon} variant={variant} />
         </IconWrapper>
       )}
     </ButtonStyled>
   );
 };
 
-
-
-
-
-
-/*export default function Button ({ variant = 'primary', startIcon, endIcon, children, onClick, ...props }) {
-  const buttonClass = `button button-${variant}`;
-
-  return (
-    <button className={buttonClass} onClick={onClick} {...props}>
-      {startIcon && <SVGIcon iconName={startIcon} variant={variant} className="button-icon start-icon" />}
-      <span className="button-label">{children}</span>
-      {endIcon && <SVGIcon iconName={endIcon} variant={variant} className="button-icon end-icon" />}
-    </button>
-  );
-};
-
-*/

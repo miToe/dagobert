@@ -65,14 +65,6 @@ export default function App({ Component, pageProps, onClick }) {
         onAlertClose={handleAlertClose}
         duration={3000}
       />
-      <div className="app">
-        <Button variant="primary" startIcon="add" endIcon="delete">Primary Button</Button>
-        <Button variant="secondary" startIcon="add">Secondary Button</Button>
-        <Button variant="primary" endIcon="delete">Another Primary Button</Button>
-      </div>
-      <div style={{ padding: "20px" }}>
-
-      </div>
     </>
   );
 }

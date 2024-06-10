@@ -89,6 +89,9 @@ export default function Form({
         <option value="Transport">Transport</option>
         <option value="Clothing">Clothing</option>
         <option value="Entertainment">Entertainment</option>
+        <option value="Utilities">Utilities</option>
+        <option value="Utilities">Utilities</option>
+        <option value="Healthcare">Healthcare</option>
       </select>
       <br />
       <label htmlFor="paymentMethod">Payment Method</label>

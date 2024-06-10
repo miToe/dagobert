@@ -12,10 +12,8 @@ export default function TransactionList({ transactions }) {
       <Link href="/transactions/create">Add</Link>
       <ul>
         {sortedTransactions.map((transaction) => {
-          console.log("Amount", transaction.amount);
-          const displayAmount = transaction.transactionType === "Expense" ?
-            `-${parseFloat(transaction.amount).toFixed(2)}` :
-            parseFloat(transaction.amount).toFixed(2);
+          console.log("Amount", typeof transaction.amount);
+          const displayAmount = `${transaction.transactionType === "Expense" && "-"}${transaction.amount.toFixed(2)}`;
           console.log("displayAmount", displayAmount);
 
           return (

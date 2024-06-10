@@ -18,9 +18,7 @@ export default function TransactionDetails({
     return <p>Transaction not found</p>;
   }
 
-  const displayAmount = transaction.transactionType === "Expense" ?
-    `-${parseFloat(transaction.amount).toFixed(2)}` :
-    parseFloat(transaction.amount).toFixed(2);
+  const displayAmount = `${transaction.transactionType === "Expense" && "-"}${transaction.amount.toFixed(2)}`;
 
   return (
     <>

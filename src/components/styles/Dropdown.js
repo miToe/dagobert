@@ -81,7 +81,7 @@ export const DropdownItem = styled.div`
     pointer-events: none;
   }
   &:focus {
-    background-color: #ddd;
+    background-color: var(--primary-200);
     outline: none;
   }
 `;

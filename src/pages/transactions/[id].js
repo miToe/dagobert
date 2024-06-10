@@ -5,13 +5,12 @@ import ChevronLeft from "@/src/assets/icons/chevron_left.svg";
 import Button from "@/src/components/styles/Button";
 import SVGIcon from "@/src/components/SVGIcon";
 
-
 export default function TransactionDetails({
-                                             initialData,
-                                             onDelete,
-                                             mode,
-                                             onMode,
-                                           }) {
+  initialData,
+  onDelete,
+  mode,
+  onMode,
+}) {
   const router = useRouter();
   const { id } = router.query;
 
@@ -29,7 +28,9 @@ export default function TransactionDetails({
           <ChevronLeft /> Back
         </Link>
         <h1>{transaction.category}</h1>
-        <Button startIcon="delete" onClick={() => onMode("delete")}/>
+        <Button startIcon="delete" onClick={() => onMode("delete")}>
+          Delete
+        </Button>
       </div>
       {mode === "delete" && (
         <Modal
@@ -46,9 +47,7 @@ export default function TransactionDetails({
           <span>
             <b>Transaction Type: </b>
           </span>
-          <span>
-            {transaction.transactionType}
-          </span>
+          <span>{transaction.transactionType}</span>
         </li>
         <li>
           <span>

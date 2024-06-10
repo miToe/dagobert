@@ -28,7 +28,7 @@ export default function Form({
 
   function handleAmountInput(event) {
     const value = event.target.value;
-    const regex = /^(?!-)\d+(\.\d{0,2})?$/;  // Disallow negative values
+    const regex = /^(?!-)\d+(\.\d{0,2})?$/;  // Disallow certain characters & negative values
     if (!regex.test(value)) {
       event.target.value = value.slice(0, -1);
     }
@@ -53,7 +53,7 @@ export default function Form({
         placeholder="Set an amount (e.g.: 50.00)"
         defaultValue={initialData.amount}
         step="0.01"
-        min="0"  // Ensure the minimum value is 0
+        min="0"  // Ensure the value cannot be below 0
         onInput={handleAmountInput}
         required
       />

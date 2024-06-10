@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
 import Form from "@/src/components/Form";
-import { useState } from "react";
 
 export default function TransactionDetails({
                                              transactions,
@@ -8,7 +7,6 @@ export default function TransactionDetails({
                                            }) {
   const router = useRouter();
   const { id } = router.query;
-  const [modal, setModal] = useState(false);
 
   // Find transaction by its ID
   const transaction = transactions.find((transaction) => transaction.id === id);

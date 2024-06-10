@@ -24,12 +24,7 @@ export default function Form({
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
 
-    // Convert amount to negative if transaction type is "Expense"
-    if (data.transactionType === "Expense") {
-      data.amount = (-Math.abs(parseFloat(data.amount))).toFixed(2);
-    } else {
-      data.amount = parseFloat(data.amount).toFixed(2);
-    }
+    data.amount = parseFloat(data.amount).toFixed(2);
     onSubmitForm(data);
   }
 
@@ -68,7 +63,7 @@ export default function Form({
         id="amount"
         name="amount"
         placeholder="Set an amount (e.g.: 50.00)"
-        defaultValue={initialData.amount}
+        defaultValue={Math.abs(initialData.amount)}
         step="0.01"
         min="0"  // Ensure the value cannot be below 0
         onInput={handleAmountInput}

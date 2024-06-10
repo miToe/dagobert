@@ -11,17 +11,25 @@ export default function TransactionList({ transactions }) {
       <h1>Transactions</h1>
       <Link href="/transactions/create">Add</Link>
       <ul>
-        {sortedTransactions.map((transaction) => (
-          <li key={transaction.id}>
-            <Link href={`/transactions/${transaction.id}`}>
-              <h3>{transaction.category}</h3>
-              <div>{transaction.date}</div>
-              <div>
-                {transaction.amount.toFixed(2)} {transaction.currency}
-              </div>
-            </Link>
-          </li>
-        ))}
+        {sortedTransactions.map((transaction) => {
+          console.log("Amount", transaction.amount);
+          const displayAmount = transaction.transactionType === "Expense" ?
+            `-${parseFloat(transaction.amount).toFixed(2)}` :
+            parseFloat(transaction.amount).toFixed(2);
+          console.log("displayAmount", displayAmount);
+
+          return (
+            <li key={transaction.id}>
+              <Link href={`/transactions/${transaction.id}`}>
+                <h3>{transaction.category}</h3>
+                <div>{transaction.date}</div>
+                <div>
+                  {displayAmount} {transaction.currency}
+                </div>
+              </Link>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

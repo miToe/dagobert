@@ -1,3 +1,5 @@
+import Button from "@/src/components/styles/Button";
+
 export default function Modal({ message, onConfirm, onCancel, id, hint }) {
   return (
     <>
@@ -5,8 +7,8 @@ export default function Modal({ message, onConfirm, onCancel, id, hint }) {
       <hr />
       <h2>{message}</h2>
       <p>{hint}</p>
-      <button onClick={() => onCancel("default")}>Cancel</button>
-      <button onClick={() => onConfirm(id)}>Confirm</button>
+      <Button variant="secondary" onClick={() => onCancel("default")}>Cancel</Button>
+      <Button variant="primary" onClick={() => onConfirm(id)}>Confirm</Button>
       <hr />
       <br />
     </>

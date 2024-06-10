@@ -2,7 +2,9 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import Modal from "@/src/components/Modal";
 import ChevronLeft from "@/src/assets/icons/chevron_left.svg";
-import DeleteBin from "@/src/assets/icons/delete.svg";
+import Button from "@/src/components/styles/Button";
+import SVGIcon from "@/src/components/SVGIcon";
+
 
 export default function TransactionDetails({
                                              initialData,
@@ -27,9 +29,7 @@ export default function TransactionDetails({
           <ChevronLeft /> Back
         </Link>
         <h1>{transaction.category}</h1>
-        <button onClick={() => onMode("delete")}>
-          <DeleteBin />
-        </button>
+        <Button startIcon="delete" onClick={() => onMode("delete")}/>
       </div>
       {mode === "delete" && (
         <Modal

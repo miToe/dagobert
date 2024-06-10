@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { useRouter } from "next/router";
+import Input from "@/src/components/Input";
 
 export default function TransactionForm({ onAddTransaction, onAlert }) {
   const router = useRouter();
@@ -114,16 +115,13 @@ export default function TransactionForm({ onAddTransaction, onAlert }) {
           />
         </div>
         {/* Textarea for entering description */}
-        <div>
-          <label htmlFor="description">Description:</label>
-          <textarea
-            id="description"
-            name="description"
-            rows="5"
-            cols="30"
-            placeholder="Enter description (optional)"
-          />
-        </div>
+        <Input
+          label="Description:"
+          placeholder="Enter your description here..."
+        >
+          <div htmlFor="description">Description:</div>
+        </Input>
+
         {/* Dropdown for selecting payment method */}
         <div>
           <label htmlFor="paymentMethod">Payment Method:</label>

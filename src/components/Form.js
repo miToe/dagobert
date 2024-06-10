@@ -4,7 +4,7 @@ export default function Form({
                                  transactionType: "",
                                  amount: "",
                                  currency: "EUR",
-                                 date: "",
+                                 date: new Date().toISOString().substring(0, 10),
                                  category: "",
                                  paymentMethod: "",
                                  description: "",

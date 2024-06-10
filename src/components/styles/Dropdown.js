@@ -13,11 +13,22 @@ export const DropdownLabel = styled.label`
   color: #333;
 `;
 
+export const IconWrapper = styled.span`
+  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const DropdownButton = styled.button`
+  position: relative;
   background-color: var(--neutrals-white);
   padding: 13px 12px;
   font-size: 16px;
   cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   text-align: left;
   border: 1px solid var(--neutrals-dark-gray);
@@ -28,8 +39,15 @@ export const DropdownButton = styled.button`
   &[aria-expanded="true"],
   &:focus {
     border: 1px solid var(--primary-500);
+  }
+
+  &[aria-expanded="true"] {
     border-bottom: none;
     border-radius: var(--border-radius-small) var(--border-radius-small) 0 0;
+  }
+
+  &[aria-expanded="true"] ${IconWrapper} {
+    transform: rotate(180deg);
   }
 
   &.has-error {

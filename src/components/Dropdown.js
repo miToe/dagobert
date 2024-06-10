@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
+import SVGIcon from "@/src/components/SVGIcon";
 import {
   DropdownContainer,
   DropdownLabel,
@@ -6,6 +7,7 @@ import {
   DropdownMenu,
   DropdownItem,
   ErrorMessage,
+  IconWrapper,
 } from "@/src/components/styles/Dropdown";
 
 const Dropdown = ({
@@ -106,6 +108,9 @@ const Dropdown = ({
         className={errorMessage ? "has-error" : ""}
       >
         {selectedOption || buttonText}
+        <IconWrapper>
+          <SVGIcon iconName="arrow_down" color="var(--neutrals-dark-gray)" />
+        </IconWrapper>
       </DropdownButton>
       {isOpen && (
         <DropdownMenu role="listbox" onKeyDown={handleMenuKeyDown}>

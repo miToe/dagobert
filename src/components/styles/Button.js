@@ -12,7 +12,9 @@ const ButtonStyled = styled.button`
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
 
-  ${(props) => props.variant === 'primary' && `
+  ${(props) =>
+    props.$variant === "primary" &&
+    `
     background-color: var(--primary-500);
     color: var(--neutrals-white);
 
@@ -21,7 +23,9 @@ const ButtonStyled = styled.button`
     }
   `}
 
-  ${(props) => props.variant === 'secondary' && `
+  ${(props) =>
+    props.$variant === "secondary" &&
+    `
     background-color: var(--primary-50);
     border: 2px solid var(--primary-500);
     color: var(--primary-500);
@@ -34,25 +38,31 @@ const ButtonStyled = styled.button`
 
 const IconWrapper = styled.span`
   display: inline-flex;
-  ${(props) => props.start && 'margin-right: 0.5rem;'}
-  ${(props) => props.end && 'margin-left: 0.5rem;'}
+  ${(props) => props.$start && "margin-right: 0.5rem;"}
+  ${(props) => props.$end && "margin-left: 0.5rem;"}
 `;
 
-export default function Button ({variant = 'primary', startIcon, endIcon, children, onClick, ...props }) {
+export default function Button({
+  variant = "primary",
+  startIcon,
+  endIcon,
+  children,
+  onClick,
+  ...props
+}) {
   return (
-    <ButtonStyled variant={variant} onClick={onClick} {...props}>
+    <ButtonStyled $variant={variant} onClick={onClick} {...props}>
       {startIcon && (
-        <IconWrapper start>
+        <IconWrapper $start>
           <SVGIcon iconName={startIcon} variant={variant} />
         </IconWrapper>
       )}
       {children}
       {endIcon && (
-        <IconWrapper end>
+        <IconWrapper $end>
           <SVGIcon iconName={endIcon} variant={variant} />
         </IconWrapper>
       )}
     </ButtonStyled>
   );
-};
-
+}

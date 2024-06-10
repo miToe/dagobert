@@ -35,6 +35,10 @@ export default function TransactionDetails({
           paymentMethod: transaction.paymentMethod,
           description: transaction.description,
         }}
+        formTitle={"Edit Transaction"}
+        confirmButtonText={"Update"}
+        id={id}
+        edit
       />
     </>
   );

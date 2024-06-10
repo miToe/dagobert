@@ -1,3 +1,5 @@
+import { useRouter } from "next/router";
+
 export default function Form({
                                onSubmitForm,
                                initialData = {
@@ -9,7 +11,13 @@ export default function Form({
                                  paymentMethod: "",
                                  description: "",
                                },
+                               formTitle,
+                               confirmButtonText,
+                               add,
+                               edit,
                              }) {
+  const router = useRouter();
+  const { id } = router.query;
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -22,7 +30,6 @@ export default function Form({
     } else {
       data.amount = parseFloat(data.amount).toFixed(2);
     }
-
     onSubmitForm(data);
   }
 
@@ -36,6 +43,16 @@ export default function Form({
 
   return (
     <form onSubmit={handleSubmit}>
+      <div>
+        {add && (<button type="button" onClick={() => {
+          router.push("/");
+        }}>Cancel</button>)}
+        {edit && (<button type="button" onClick={() => {
+          router.push(`/transactions/${id}`);
+        }}>Cancel</button>)}
+        <h2>{formTitle}</h2>
+        <button type="submit">{confirmButtonText}</button>
+      </div>
       <label htmlFor="transactionType">Transaction Type</label>
       <br />
       <select id="transactionType" name="transactionType" defaultValue={initialData.transactionType} required>
@@ -94,8 +111,6 @@ export default function Form({
       <br />
       <textarea id="description" name="description" rows="5" cols="50" placeholder="Add a description (optional)"
                 defaultValue={initialData.description} />
-      <br />
-      <button type="submit">Submit</button>
     </form>
   );
 }

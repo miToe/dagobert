@@ -12,6 +12,9 @@ export default function Create({ onAddTransaction }) {
   return (
     <Form
       onSubmitForm={handleAdd}
+      formTitle={"Add Transaction"}
+      confirmButtonText={"Add"}
+      add
     />
   );
 }

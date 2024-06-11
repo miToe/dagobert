@@ -26,6 +26,7 @@ export const Textarea = styled.textarea`
   border-radius: 5px;
   color: var(--neutrals-dark-gray);
   background-color: white;
+  height: 100px;
   transition: border-color 0.2s, background-color 0.2s;
   resize: none;
   & ::placeholder {

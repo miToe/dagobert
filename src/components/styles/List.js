@@ -68,4 +68,5 @@ export const RightBlock = styled.div`
 
 export const StyledAmount = styled.span`
     font-size: 16px;
+    font-weight: 400;
 `;

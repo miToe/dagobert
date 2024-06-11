@@ -5,7 +5,6 @@ export const InputContainer = styled.div`
   flex-direction: column;
   margin: 10px 0;
   padding: 1px;
-  background-color: none; //not set yet
   border-radius: 10px;
   border: 2px solid #ffffff; /* White border */
   max-width: 300px;

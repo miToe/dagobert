@@ -8,9 +8,9 @@ import {
 export default function Input({ label, name, placeholder }) {
   const [isFilled, setIsFilled] = useState(false);
 
-  const handleBlur = (event) => {
+  function handleBlur(event) {
     setIsFilled(event.target.value !== "");
-  };
+  }
 
   return (
     <InputContainer>

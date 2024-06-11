@@ -13,7 +13,7 @@ export default function TransactionList({ transactions }) {
       <Link href="/transactions/create">Add</Link>
       <ul>
         {sortedTransactions.map((transaction) => {
-          const displayAmount = `${transaction.transactionType === "Expense" && "-"}${transaction.amount.toFixed(2)}`;
+          const displayAmount = `${transaction.transactionType === "Expense" ? "-" : ""}${transaction.amount.toFixed(2)}`;
 
           return (
             <li key={transaction.id}>

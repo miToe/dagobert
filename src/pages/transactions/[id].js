@@ -2,9 +2,6 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import Modal from "@/src/components/Modal";
 import { useState } from "react";
-import ChevronLeft from "@/src/assets/icons/chevron_left.svg";
-import Button from "@/src/components/styles/Button";
-import SVGIcon from "@/src/components/SVGIcon";
 
 
 export default function TransactionDetails({
@@ -21,8 +18,8 @@ export default function TransactionDetails({
   if (!transaction) {
     return <p>Transaction not found</p>;
   }
-
-  const displayAmount = `${transaction.transactionType === "Expense" && "-"}${transaction.amount.toFixed(2)}`;
+  console.log(transaction);
+  const displayAmount = `${transaction.transactionType === "Expense" && "-"}${transaction?.amount.toFixed(2)}`;
 
   return (
     <>

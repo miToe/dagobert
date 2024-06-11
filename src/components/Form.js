@@ -23,9 +23,8 @@ export default function Form({
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-
-    data.amount = parseFloat(data.amount).toFixed(2);
-    onSubmitForm(data);
+    const parsedData = { ...data, amount: parseFloat(data.amount) };
+    onSubmitForm(parsedData);
   }
 
   function handleAmountInput(event) {

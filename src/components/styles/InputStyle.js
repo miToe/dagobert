@@ -4,7 +4,7 @@ export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: 10px 0;
-  padding: 10px;
+  padding: 1px;
   background-color: none; //not set yet
   border-radius: 10px;
   border: 2px solid #ffffff; /* White border */

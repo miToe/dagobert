@@ -5,7 +5,7 @@ import {
   Textarea,
 } from "/src/components/styles/InputStyle.js";
 
-export default function Input({ label, placeholder }) {
+export default function Input({ label, name, placeholder }) {
   const [isFilled, setIsFilled] = useState(false);
 
   const handleBlur = (event) => {
@@ -14,11 +14,13 @@ export default function Input({ label, placeholder }) {
 
   return (
     <InputContainer>
-      <Label>{label}</Label>
+      <Label htmlFor={name}>{label}</Label>
       <Textarea
+        id={name}
+        name={name}
         placeholder={placeholder}
         onBlur={handleBlur}
-        className={isFilled ? "filled" : ""}
+        className={isFilled ? "filled" : ""} //className is used to apply different styles when the textarea is filled
       />
     </InputContainer>
   );

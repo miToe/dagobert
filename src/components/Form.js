@@ -13,8 +13,8 @@ export default function Form({
                                },
                                formTitle,
                                confirmButtonText,
-                               add,
-                               edit,
+                               addMode,
+                               editMode,
                              }) {
   const router = useRouter();
   const { id } = router.query;

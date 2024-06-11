@@ -39,10 +39,10 @@ export default function Form({
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        {add && (<button type="button" onClick={() => {
+        {addMode && (<button type="button" onClick={() => {
           router.push("/");
         }}>Cancel</button>)}
-        {edit && (<button type="button" onClick={() => {
+        {editMode && (<button type="button" onClick={() => {
           router.push(`/transactions/${id}`);
         }}>Cancel</button>)}
         <h2>{formTitle}</h2>
@@ -89,7 +89,6 @@ export default function Form({
         <option value="Transport">Transport</option>
         <option value="Clothing">Clothing</option>
         <option value="Entertainment">Entertainment</option>
-        <option value="Utilities">Utilities</option>
         <option value="Utilities">Utilities</option>
         <option value="Healthcare">Healthcare</option>
       </select>

@@ -4,17 +4,17 @@ import Form from "@/src/components/Form";
 export default function Create({ onAddTransaction }) {
   const router = useRouter();
 
-  function handleAdd(data) {
+  function handleAddTransaction(data) {
     onAddTransaction(data);
     router.push("/");
   }
 
   return (
     <Form
-      onSubmitForm={handleAdd}
+      onSubmitForm={handleAddTransaction}
       formTitle={"Add Transaction"}
       confirmButtonText={"Add"}
-      add
+      addMode
     />
   );
 }

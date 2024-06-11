@@ -36,7 +36,7 @@ export default function TransactionDetails({
         formTitle={"Edit Transaction"}
         confirmButtonText={"Update"}
         id={id}
-        edit
+        editMode
       />
     </>
   );

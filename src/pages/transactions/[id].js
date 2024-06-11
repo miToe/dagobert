@@ -2,6 +2,10 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import Modal from "@/src/components/Modal";
 import { useState } from "react";
+import ChevronLeft from "@/src/assets/icons/chevron_left.svg";
+import Button from "@/src/components/styles/Button";
+import SVGIcon from "@/src/components/SVGIcon";
+
 
 export default function TransactionDetails({
                                              transactions,

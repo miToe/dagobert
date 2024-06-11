@@ -2,9 +2,10 @@ import Link from "next/link";
 
 export default function TransactionList({ transactions }) {
   // Sort transactions by date in descending order
-  const sortedTransactions = transactions.sort(
+  const sortedTransactions = transactions.slice().sort(
     (a, b) => new Date(b.date) - new Date(a.date),
   );
+
 
   return (
     <div>

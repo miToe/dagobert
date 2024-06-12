@@ -22,14 +22,14 @@ export default function TransactionForm({ onAddTransaction, onAlert }) {
     transactionType: "",
   });
 
-  function handleOptionClick(option) {
+  function handleOptionClick(name, option) {
     setDropdownError("");
-    setFormValues({ ...formValues, transactionType: option });
+    setFormValues((prevFormValues) => ({ ...prevFormValues, [name]: option }));
   }
 
   function handleInputChange(event) {
     const { name, value } = event.target;
-    setFormValues({ ...formValues, [name]: value });
+    setFormValues((prevFormValues) => ({ ...formValues, [name]: value }));
   }
 
   function handleSubmit(event) {
@@ -41,7 +41,7 @@ export default function TransactionForm({ onAddTransaction, onAlert }) {
     }
 
     setDropdownError("");
-    const amount = parseFloat(formValues.amount).toFixed(2);
+    //const amount = parseFloat(formValues.amount).toFixed(2);
     if (formValues.transactionType === "Expense") {
       formValues.amount = -Math.abs(parseFloat(formValues.amount));
       formValues.amount = Math.abs(parseFloat(formValues.amount));
@@ -89,7 +89,9 @@ export default function TransactionForm({ onAddTransaction, onAlert }) {
           name="transactionType"
           options={transactionTypeOptions}
           buttonText="Select a transaction type"
-          onOptionClick={handleOptionClick}
+          onOptionClick={(option) =>
+            handleOptionClick("transactionType", option)
+          }
           required={true}
           errorMessage={dropdownError}
           defaultSelected=""
@@ -115,22 +117,22 @@ export default function TransactionForm({ onAddTransaction, onAlert }) {
           label="Currency:"
           name="currency"
           options={currencyOptions}
-          buttonText="Select a currency"
-          onOptionClick={handleOptionClick}
+          buttonText={formValues.currency || "Select a currency"}
+          onOptionClick={(option) => handleOptionClick("currency", option)}
           required={true}
           errorMessage=""
-          defaultSelected="EUR"
+          defaultSelected={formValues.currency}
         />
 
         <Dropdown
           label="Category:"
           name="category"
           options={categoryOptions}
-          buttonText="Select a category"
-          onOptionClick={handleOptionClick}
+          buttonText={formValues.category || "Select a category"}
+          onOptionClick={(option) => handleOptionClick("category", option)}
           required={true}
           errorMessage=""
-          defaultSelected=""
+          defaultSelected={formValues.category}
         />
 
         <div>
@@ -162,11 +164,11 @@ export default function TransactionForm({ onAddTransaction, onAlert }) {
           label="Payment Method:"
           name="paymentMethod"
           options={paymentMethodOptions}
-          buttonText="Select Payment Method"
-          onOptionClick={handleOptionClick}
+          buttonText={formValues.paymentMethod || "Select Payment Method"}
+          onOptionClick={(option) => handleOptionClick("paymentMethod", option)}
           required={true}
           errorMessage=""
-          defaultSelected=""
+          defaultSelected={formValues.paymentMethod}
         />
 
         <Button variant="primary" endIcon="add" type="submit">

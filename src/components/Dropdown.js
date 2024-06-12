@@ -24,17 +24,22 @@ export default function Dropdown({
   const [selectedOption, setSelectedOption] = useState(defaultSelected || "");
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    function handleClickOutside(event) {
       if (isOpen && !event.target.closest(".dropdown-container")) {
         setIsOpen(false);
       }
-    };
+    }
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isOpen]);
+
+  function handleClick(option) {
+    setSelectedOption(option);
+    onOptionClick(name, option);
+  }
 
   const toggleDropdown = useCallback((event) => {
     event.preventDefault();

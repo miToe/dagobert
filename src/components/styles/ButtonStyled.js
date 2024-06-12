@@ -1,7 +1,6 @@
-import SVGIcon from "@/src/components/SVGIcon";
 import styled from "styled-components";
 
-const ButtonStyled = styled.button`
+export const ButtonStyled = styled.button`
   font-size: 16px;
   padding: 10px 20px;
   border-radius: 5px;
@@ -32,27 +31,8 @@ const ButtonStyled = styled.button`
   `}
 `;
 
-const IconWrapper = styled.span`
+export const IconWrapper = styled.span`
   display: inline-flex;
   ${(props) => props.start && 'margin-right: 0.5rem;'}
   ${(props) => props.end && 'margin-left: 0.5rem;'}
 `;
-
-export default function Button ({variant = 'primary', startIcon, endIcon, children, onClick, ...props }) {
-  return (
-    <ButtonStyled variant={variant} onClick={onClick} {...props}>
-      {startIcon && (
-        <IconWrapper start>
-          <SVGIcon iconName={startIcon} variant={variant} />
-        </IconWrapper>
-      )}
-      {children}
-      {endIcon && (
-        <IconWrapper end>
-          <SVGIcon iconName={endIcon} variant={variant} />
-        </IconWrapper>
-      )}
-    </ButtonStyled>
-  );
-};
-

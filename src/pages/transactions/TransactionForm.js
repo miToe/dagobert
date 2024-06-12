@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { useRouter } from "next/router";
-import Button from "@/src/components/styles/Button";
+import Button from "@/src/components/Button";
 
 export default function TransactionForm({ onAddTransaction, onAlert }) {
   const router = useRouter();

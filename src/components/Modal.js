@@ -1,4 +1,4 @@
-import Button from "@/src/components/styles/Button";
+import Button from "@/src/components/Button";
 
 export default function Modal({ message, onConfirm, onCancel, id, hint }) {
   return (

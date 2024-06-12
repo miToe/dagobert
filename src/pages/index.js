@@ -1,15 +1,50 @@
 import Link from "next/link";
+import { useState } from "react";
+import Filter from "@/src/components/Filter";
+import Button from "@/src/components/Button"
 
 export default function TransactionList({ initialData}) {
+  const [isFilterVisible, setIsFilterVisible] = useState(false);
+  const [filteredTransactions, setFilteredTransactions] = useState(initialData);
+  const [currentFilters, setCurrentFilters] = useState({
+    transactionType: [],
+    category: [],
+    paymentMethod: [],
+  });
+
+  const handleOpenFilter = () => {
+    setIsFilterVisible(true);
+  };
+
+  const handleCloseFilter = () => {
+    setIsFilterVisible(false);
+  };
+
+  const handleApplyFilter = (filters) => {
+    setCurrentFilters(filters);
+    const { transactionType, category, paymentMethod } = filters;
+    const filtered = initialData.filter((transaction) => {
+      return (
+        (transactionType.length === 0 || transactionType.includes(transaction.transactionType)) &&
+        (category.length === 0 || category.includes(transaction.category)) &&
+        (paymentMethod.length === 0 || paymentMethod.includes(transaction.paymentMethod))
+      );
+    });
+    setFilteredTransactions(filtered);
+  };
+
   // Sort transactions by date in descending order
-  const sortedTransactions = initialData.sort(
+  const sortedTransactions = filteredTransactions.sort(
     (a, b) => new Date(b.date) - new Date(a.date)
   );
 
   return (
     <div>
       <h1>Transactions</h1>
-      <Link href="/transactions/TransactionForm">Add</Link>
+      <div>
+        <Link href="/transactions/TransactionForm">Add</Link>
+        <Button variant="primary" startIcon="filter" onClick={handleOpenFilter}>Filter</Button>
+      </div>
       <ul>
         {sortedTransactions.map((transaction) => (
           <li key={transaction.id}>
@@ -23,6 +58,13 @@ export default function TransactionList({ initialData}) {
           </li>
         ))}
       </ul>
+      {isFilterVisible && (
+        <Filter
+          currentFilters={currentFilters}
+          onApplyFilter={handleApplyFilter}
+          onClose={handleCloseFilter}
+        />
+      )}
     </div>
   );
 }

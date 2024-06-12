@@ -12,12 +12,12 @@
   {
     "id": "2",
     "date": "2024-05-02",
-    "amount": -25.00,
+    "amount": 1500.00,
     "currency": "USD",
-    "category": "Transportation",
+    "category": "Entertainment",
     "description": "Gas for car",
-    "paymentMethod": "Debit Card",
-    "transactionType": "Expense"
+    "paymentMethod": "Cash",
+    "transactionType": "Income"
   },
   {
     "id": "3",
@@ -94,8 +94,8 @@
     "date": "2024-05-10",
     "amount": -20.00,
     "currency": "USD",
-    "category": "Transportation",
-    "description": "Public transportation pass",
+    "category": "Transport",
+    "description": "Public transport pass",
     "paymentMethod": "Credit Card",
     "transactionType": "Expense"
   }

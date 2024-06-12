@@ -6,7 +6,7 @@ export const ListWrapper = styled.div`
     flex-direction: column;
     gap: 1rem;
     color: #667080;
-    width: 90%;
+    max-width: 60%;
     margin: 2rem auto 0 auto;
 `;
 

@@ -1,4 +1,3 @@
-// components/SearchBar.js
 import { useState, useEffect, useRef } from "react";
 import SVGIcon from "./SVGIcon";
 
@@ -13,24 +12,22 @@ import {
   EasterEggIcon,
 } from "@/src/components/styles/SearchBar";
 
-// Verschlüsselungs- und Entschlüsselungsfunktion
-const encrypt = (text) => {
-  const offset = 3; // einfacher Verschlüsselungs-Offset
+function encrypt(text) {
+  const offset = 3;
   return text
     .split("")
     .map((char) => String.fromCharCode(char.charCodeAt(0) + offset))
     .join("");
-};
+}
 
-const decrypt = (text) => {
-  const offset = 3; // einfacher Entschlüsselungs-Offset
+function decrypt(text) {
+  const offset = 3;
   return text
     .split("")
     .map((char) => String.fromCharCode(char.charCodeAt(0) - offset))
     .join("");
-};
+}
 
-// Der verschlüsselte Wert von 'dagobert', aber nicht im Klartext im Code
 const encryptedSecret = "gdjrehuw";
 
 export default function SearchBar({ data, onSearchResults }) {
@@ -42,14 +39,15 @@ export default function SearchBar({ data, onSearchResults }) {
   const searchBarRef = useRef(null);
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    function handleClickOutside(event) {
       if (
         searchBarRef.current &&
         !searchBarRef.current.contains(event.target)
       ) {
         setIsOpen(false);
+        setSuggestions([]); // Vorschläge leeren
       }
-    };
+    }
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
@@ -71,37 +69,29 @@ export default function SearchBar({ data, onSearchResults }) {
       setSuggestions([]);
       onSearchResults([]);
       setIsOpen(false);
-      return;
     } else {
       setShowEasterEgg(false);
     }
 
-    const results = data.filter((item) => {
+    const results = data.filter(function (item) {
       const values = Object.values(item).join(" ").toLowerCase();
       return values.includes(query.trim().toLowerCase());
     });
     onSearchResults(results);
 
-    const uniqueSuggestions = [
-      ...new Set(
-        results.flatMap((item) =>
-          Object.values(item).filter((value) => typeof value === "string")
-        )
-      ),
-    ].slice(0, 5);
-    setSuggestions(uniqueSuggestions);
-    setIsOpen(uniqueSuggestions.length > 0);
+    setSuggestions(results.slice(0, 5));
+    setIsOpen(results.length > 0);
   }, [query, data, onSearchResults]);
 
-  const handleClear = () => {
+  function handleClear() {
     setQuery("");
     onSearchResults(data);
     setSuggestions([]);
     setShowEasterEgg(false);
     setIsOpen(false);
-  };
+  }
 
-  const highlightMatch = (text, query) => {
+  function highlightMatch(text, query) {
     if (typeof text !== "string") return text;
     const parts = text.split(new RegExp(`(${query})`, "gi"));
     return (
@@ -115,13 +105,19 @@ export default function SearchBar({ data, onSearchResults }) {
         )}
       </span>
     );
-  };
+  }
 
-  const handleSuggestionClick = (suggestion) => {
-    setQuery(suggestion);
-    setSelectedSuggestion(suggestion);
+  function handleSuggestionClick(suggestion) {
+    setQuery(suggestion.description);
+    setSuggestions([]);
     setIsOpen(false);
-  };
+  }
+
+  function handleInputFocus() {
+    if (suggestions.length > 0) {
+      setIsOpen(true);
+    }
+  }
 
   return (
     <SearchBarContainer ref={searchBarRef}>
@@ -133,8 +129,8 @@ export default function SearchBar({ data, onSearchResults }) {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search..."
-        aria-expanded={isOpen}
-        onFocus={() => setIsOpen(suggestions.length > 0)}
+        aria-expanded={isOpen ? "true" : "false"}
+        onFocus={handleInputFocus}
       />
       {query && (
         <ClearButton onClick={handleClear}>
@@ -156,7 +152,8 @@ export default function SearchBar({ data, onSearchResults }) {
                 onClick={() => handleSuggestionClick(suggestion)}
                 aria-selected={selectedSuggestion === suggestion}
               >
-                {highlightMatch(suggestion, query)}
+                {highlightMatch(suggestion.description, query)} - $
+                {suggestion.amount}
               </SuggestionItem>
             ))}
           </SuggestionsList>

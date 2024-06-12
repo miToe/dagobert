@@ -32,7 +32,7 @@ export const Textarea = styled.textarea`
   & ::placeholder {
     color: var(--neutrals-gray);
   }
-  & ::-webkit-input-placeholder {
+  /* & ::-webkit-input-placeholder {
     color: var(--neutrals-gray);
-  }
+  } */
 `;

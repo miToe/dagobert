@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import SVGIcon from "@/src/components/SVGIcon";
 import {
   DropdownContainer,
@@ -10,7 +10,7 @@ import {
   IconWrapper,
 } from "@/src/components/styles/Dropdown";
 
-const Dropdown = ({
+export default function Dropdown({
   label,
   name,
   options,
@@ -19,13 +19,10 @@ const Dropdown = ({
   required,
   errorMessage,
   defaultSelected,
-}) => {
-  // State to manage the open/close state of the dropdown
+}) {
   const [isOpen, setIsOpen] = useState(false);
-  // State to manage the selected option, initialized with defaultSelected if provided
   const [selectedOption, setSelectedOption] = useState(defaultSelected || "");
 
-  // Effect to close dropdown when clicking outside of it
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (isOpen && !event.target.closest(".dropdown-container")) {
@@ -39,13 +36,11 @@ const Dropdown = ({
     };
   }, [isOpen]);
 
-  // Toggle dropdown open/close state
   const toggleDropdown = useCallback((event) => {
     event.preventDefault();
     setIsOpen((prev) => !prev);
   }, []);
 
-  // Handle option selection
   const handleOptionClick = useCallback(
     (option) => {
       setSelectedOption(option);
@@ -55,7 +50,6 @@ const Dropdown = ({
     [onOptionClick]
   );
 
-  // Handle key down events for the dropdown button
   const handleKeyDown = useCallback((event) => {
     if (["Enter", " ", "ArrowDown"].includes(event.key)) {
       event.preventDefault();
@@ -68,7 +62,6 @@ const Dropdown = ({
     }
   }, []);
 
-  // Handle key down events for the dropdown menu
   const handleMenuKeyDown = useCallback(
     (event) => {
       const currentIndex = options.findIndex(
@@ -131,6 +124,4 @@ const Dropdown = ({
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
     </DropdownContainer>
   );
-};
-
-export default Dropdown;
+}

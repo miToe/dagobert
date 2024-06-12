@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import Dropdown from "@/src/components/Dropdown";
 import Button from "@/src/components/styles/Button";
@@ -22,17 +22,16 @@ export default function TransactionForm({ onAddTransaction, onAlert }) {
     transactionType: "",
   });
 
-  const handleOptionClick = (option) => {
-    setDropdownError(""); // Reset error when option is selected
+  function handleOptionClick(option) {
+    setDropdownError("");
     setFormValues({ ...formValues, transactionType: option });
-  };
+  }
 
-  const handleInputChange = (event) => {
+  function handleInputChange(event) {
     const { name, value } = event.target;
     setFormValues({ ...formValues, [name]: value });
-  };
+  }
 
-  // Function to handle form submission
   function handleSubmit(event) {
     event.preventDefault();
 
@@ -42,37 +41,31 @@ export default function TransactionForm({ onAddTransaction, onAlert }) {
     }
 
     setDropdownError("");
-
-    // Convert amount to negative if transaction type is "Expense"
+    const amount = parseFloat(formValues.amount).toFixed(2);
     if (formValues.transactionType === "Expense") {
-      formValues.amount = -Math.abs(parseFloat(formValues.amount)); // Convert to negative
-    } else {
-      formValues.amount = Math.abs(parseFloat(formValues.amount)); // Ensure positive
+      formValues.amount = -Math.abs(parseFloat(formValues.amount));
+      formValues.amount = Math.abs(parseFloat(formValues.amount));
     }
     onAddTransaction(formValues);
     router.push("/");
     onAlert("Transaction successfully added!");
   }
 
-  // Function to handle input events on the amount input field
   function handleAmountInput(event) {
     const value = event.target.value;
 
-    // Remove any negative signs
     if (value.includes("-")) {
       event.target.value = value.replace("-", "");
     }
-    // Ensure only two decimal places are allowed
     if (value.includes(".")) {
       const [integerPart, decimalPart] = value.split(".");
       if (decimalPart.length > 2) {
         event.target.value = `${integerPart}.${decimalPart.substring(0, 2)}`;
       }
     }
-    handleInputChange(event); // Update form values
+    handleInputChange(event);
   }
 
-  // Function to prevent typing "-" in the amount input field
   function handleAmountKeyDown(event) {
     if (event.key === "-") {
       event.preventDefault();
@@ -86,7 +79,10 @@ export default function TransactionForm({ onAddTransaction, onAlert }) {
         <Button
           variant="secondary"
           type="button"
-          onClick={() => router.push("/")}>Cancel</Button>
+          onClick={() => router.push("/")}
+        >
+          Cancel
+        </Button>
 
         <Dropdown
           label="Transaction Type"
@@ -95,8 +91,8 @@ export default function TransactionForm({ onAddTransaction, onAlert }) {
           buttonText="Select a transaction type"
           onOptionClick={handleOptionClick}
           required={true}
-          errorMessage="" // Can be replaced with an actual error message
-          defaultSelected="" // Specify the pre-selected option here
+          errorMessage={dropdownError}
+          defaultSelected=""
         />
 
         <div>
@@ -122,8 +118,8 @@ export default function TransactionForm({ onAddTransaction, onAlert }) {
           buttonText="Select a currency"
           onOptionClick={handleOptionClick}
           required={true}
-          errorMessage="" // Can be replaced with an actual error message
-          defaultSelected="EUR" // Specify the pre-selected option here
+          errorMessage=""
+          defaultSelected="EUR"
         />
 
         <Dropdown
@@ -133,8 +129,8 @@ export default function TransactionForm({ onAddTransaction, onAlert }) {
           buttonText="Select a category"
           onOptionClick={handleOptionClick}
           required={true}
-          errorMessage="" // Can be replaced with an actual error message
-          defaultSelected="" // Specify the pre-selected option here
+          errorMessage=""
+          defaultSelected=""
         />
 
         <div>
@@ -169,14 +165,13 @@ export default function TransactionForm({ onAddTransaction, onAlert }) {
           buttonText="Select Payment Method"
           onOptionClick={handleOptionClick}
           required={true}
-          errorMessage="" // Can be replaced with an actual error message
-          defaultSelected="" // Specify the pre-selected option here
+          errorMessage=""
+          defaultSelected=""
         />
 
-        <Button
-          variant="primary"
-          endIcon="add"
-          onClick={onAddTransaction}>Add</Button>
+        <Button variant="primary" endIcon="add" type="submit">
+          Add
+        </Button>
       </form>
     </div>
   );

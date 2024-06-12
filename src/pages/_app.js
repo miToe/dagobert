@@ -8,6 +8,7 @@ import useLocalStorageState from "use-local-storage-state";
 import "@/src/styles/ui-colors.css"
 
 export default function App({ Component, pageProps}) {
+
   const [transactions, setTransactions] = useLocalStorageState("transactions", {
     defaultValue: transactionsData,
   });
@@ -19,7 +20,7 @@ export default function App({ Component, pageProps}) {
   });
 
   function handleAlert(alertMessage) {
-    setAlert({ isOpen: true, alertMessage});
+    setAlert({ isOpen: true, alertMessage });
   }
 
   function handleAlertClose() {
@@ -44,7 +45,8 @@ export default function App({ Component, pageProps}) {
     setTransactions(updatedData);
     router.push("/");
     setMode("default");
-  handleAlert("Transaction successfully deleted!");}
+    handleAlert("Transaction successfully deleted!");
+  }
 
   return (
     <>

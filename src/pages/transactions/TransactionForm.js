@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { useRouter } from "next/router";
-import Button from "@/src/components/styles/Button";
+import Input from "@/src/components/Input";
 
 export default function TransactionForm({ onAddTransaction, onAlert }) {
   const router = useRouter();
@@ -51,10 +51,9 @@ export default function TransactionForm({ onAddTransaction, onAlert }) {
     <div>
       <h1>Add Transaction</h1>
       <form onSubmit={handleSubmit}>
-        <Button
-          variant="secondary"
-          type="button"
-          onClick={() => router.push("/")}>Cancel</Button>
+        <button type="button" onClick={() => router.push("/")}>
+          Cancel
+        </button>
         {/* Dropdown for selecting transaction type */}
         <div>
           <label htmlFor="transactionType">Transaction Type:</label>
@@ -116,16 +115,12 @@ export default function TransactionForm({ onAddTransaction, onAlert }) {
           />
         </div>
         {/* Textarea for entering description */}
-        <div>
-          <label htmlFor="description">Description:</label>
-          <textarea
-            id="description"
-            name="description"
-            rows="5"
-            cols="30"
-            placeholder="Enter description (optional)"
-          />
-        </div>
+        <Input
+          label="Description:"
+          name="description"
+          placeholder="Enter your description here..."
+        />
+
         {/* Dropdown for selecting payment method */}
         <div>
           <label htmlFor="paymentMethod">Payment Method:</label>
@@ -138,10 +133,7 @@ export default function TransactionForm({ onAddTransaction, onAlert }) {
           </select>
         </div>
         {/* Submit button */}
-        <Button
-          variant="primary"
-          endIcon="add"
-          onClick={onAddTransaction}>Add</Button>
+        <button type="submit">Add</button>
       </form>
     </div>
   );

@@ -18,7 +18,7 @@ export default function TransactionDetails({
   if (!transaction) {
     return <p>Transaction not found</p>;
   }
-  console.log(transaction);
+
   const displayAmount = `${transaction.transactionType === "Expense" && "-"}${transaction?.amount.toFixed(2)}`;
 
   return (

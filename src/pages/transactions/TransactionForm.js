@@ -98,9 +98,9 @@ export default function TransactionForm({ onAddTransaction, onAlert }) {
           <label htmlFor="category">Category:</label>
           <select id="category" name="category" required>
             <option value="">Select Category</option>
-            <option value="Entertainment">Entertainment</option>
-            <option value="Food">Food</option>
-            <option value="Shopping">Shopping</option>
+            <option value="Groceries">Groceries</option>
+            <option value="Restaurant">Restaurant</option>
+            <option value="Clothing">Clothing</option>
             <option value="Transport">Transport</option>
           </select>
         </div>

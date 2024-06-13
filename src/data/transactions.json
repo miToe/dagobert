@@ -14,7 +14,7 @@
     "date": "2024-05-02",
     "amount": -25.00,
     "currency": "USD",
-    "category": "Transportation",
+    "category": "Transport",
     "description": "Gas for car",
     "paymentMethod": "Debit Card",
     "transactionType": "Expense"
@@ -44,7 +44,7 @@
     "date": "2024-05-05",
     "amount": -15.00,
     "currency": "USD",
-    "category": "Dining",
+    "category": "Restaurant",
     "description": "Lunch at a cafe",
     "paymentMethod": "Cash",
     "transactionType": "Expense"
@@ -94,7 +94,7 @@
     "date": "2024-05-10",
     "amount": -20.00,
     "currency": "USD",
-    "category": "Transportation",
+    "category": "Transport",
     "description": "Public transportation pass",
     "paymentMethod": "Credit Card",
     "transactionType": "Expense"

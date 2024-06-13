@@ -36,13 +36,15 @@ export const LeftBlock = styled.div`
 `;
 
 export const IconWrapper = styled.div`
-    background: #004666;
+    background-color: ${props => props.$backgroundColor};
     border-radius: 50%;
-    height: 48px;
-    width: 48px;
+    width: 40px;
+    height: 40px;
     display: flex;
+    align-items: center;
     justify-content: center;
 `;
+
 
 export const CategoryAndDate = styled.div`
     display: flex;

@@ -4,7 +4,7 @@ import Link from "next/link";
 export const ListWrapper = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.5rem;
     color: #667080;
     max-width: 60%;
     margin: 2rem auto 0 auto;
@@ -18,7 +18,7 @@ export const StyledTitle = styled.h1`
 export const StyledList = styled.ul`
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.0rem;
     list-style: none;
 `;
 

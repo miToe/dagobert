@@ -19,7 +19,7 @@ export default function TransactionDetails({
     return <p>Transaction not found</p>;
   }
 
-  const displayAmount = `${transaction.transactionType === "Expense" && "-"}${transaction?.amount.toFixed(2)}`;
+  const displayAmount = transaction.amount.toFixed(2);
 
   return (
     <>
@@ -56,7 +56,7 @@ export default function TransactionDetails({
             <b>Amount: </b>
           </span>
           <span>
-            {displayAmount} {transaction.currency}
+            {transaction.transactionType === "Expense" ? "-" : ""}{displayAmount} {transaction.currency}
           </span>
         </li>
         <li>

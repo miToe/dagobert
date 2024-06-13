@@ -55,17 +55,23 @@ export default function Dropdown({
     [onOptionClick]
   );
 
-  const handleKeyDown = useCallback((event) => {
-    if (["Enter", " ", "ArrowDown"].includes(event.key)) {
-      event.preventDefault();
-      setIsOpen(true);
-      setTimeout(() => {
-        document.querySelector('[role="option"]')?.focus();
-      }, 0);
-    } else if (event.key === "Escape") {
-      setIsOpen(false);
-    }
-  }, []);
+  const handleKeyDown = useCallback(
+    (event) => {
+      if (
+        ["Enter", " ", "ArrowDown"].includes(event.key) ||
+        (event.key === "Tab" && !isOpen)
+      ) {
+        event.preventDefault();
+        setIsOpen(true);
+        setTimeout(() => {
+          document.querySelector('[role="option"]')?.focus();
+        }, 0);
+      } else if (event.key === "Escape") {
+        setIsOpen(false);
+      }
+    },
+    [isOpen]
+  );
 
   const handleMenuKeyDown = useCallback(
     (event) => {
@@ -78,6 +84,14 @@ export default function Dropdown({
         const nextIndex =
           (currentIndex + offset + options.length) % options.length;
         document.getElementById(`option-${nextIndex}`)?.focus();
+      } else if (event.key === "Tab") {
+        event.preventDefault();
+        const nextIndex = (currentIndex + 1) % options.length;
+        if (nextIndex === 0) {
+          setIsOpen(false);
+        } else {
+          document.getElementById(`option-${nextIndex}`)?.focus();
+        }
       } else if (event.key === "Escape") {
         setIsOpen(false);
       } else if (["Enter", " "].includes(event.key)) {

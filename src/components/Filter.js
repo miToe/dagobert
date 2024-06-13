@@ -13,11 +13,12 @@ import DateFilter from "@/src/components/DateFilter";
 
 export default function Filter({ initialData, currentFilters, onApplyFilter, onClose }) {
   const [selectedFilters, setSelectedFilters] = useState({
+    dateFrom: "",
+    dateUntil: "",
     transactionType: [],
     category: [],
     paymentMethod: [],
-    dateFrom: "",
-    dateUntil: "",
+
   });
   const [filterSuccess, setFilterSuccess] = useState(true);
   const filterRef = useRef(null);

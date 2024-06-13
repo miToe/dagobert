@@ -15,7 +15,6 @@ export default function TransactionList({ initialData}) {
     dateUntil: [],
   });
 
-
   const handleOpenFilter = () => {
     setIsFilterVisible(true);
   };
@@ -26,12 +25,14 @@ export default function TransactionList({ initialData}) {
 
   const handleApplyFilter = (filters) => {
     setCurrentFilters(filters);
-    const { transactionType, category, paymentMethod } = filters;
+
     const filtered = initialData.filter((transaction) => {
       return (
-        (transactionType.length === 0 || transactionType.includes(transaction.transactionType)) &&
-        (category.length === 0 || category.includes(transaction.category)) &&
-        (paymentMethod.length === 0 || paymentMethod.includes(transaction.paymentMethod))
+        (filters.transactionType.length === 0 || filters.transactionType.includes(transaction.transactionType)) &&
+        (filters.category.length === 0 || filters.category.includes(transaction.category)) &&
+        (filters.paymentMethod.length === 0 || filters.paymentMethod.includes(transaction.paymentMethod)) &&
+        (filters.dateFrom === '' || new Date(transaction.date) >= new Date(filters.dateFrom)) &&
+        (filters.dateUntil === '' || new Date(transaction.date) <= new Date(filters.dateUntil))
       );
     });
     setFilteredTransactions(filtered);
@@ -50,7 +51,7 @@ export default function TransactionList({ initialData}) {
         <Button $variant="primary" startIcon="filter" onClick={handleOpenFilter}>Filter</Button>
       </div>
       <ul>
-        {sortedTransactions.map((transaction) => (
+        {filteredTransactions.map((transaction) => (
           <li key={transaction.id}>
             <Link href={`/transactions/${transaction.id}`}>
               <h3>{transaction.category}</h3>

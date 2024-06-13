@@ -3,7 +3,6 @@ import Link from "next/link";
 import Modal from "@/src/components/Modal";
 import ChevronLeft from "@/src/assets/icons/chevron_left.svg";
 import Button from "@/src/components/Button";
-import IconsForButtons from "@/src/components/IconsForButtons";
 
 
 export default function TransactionDetails({

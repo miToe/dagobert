@@ -10,7 +10,7 @@ import {
 import { CategoryIcon } from "@/src/components/CategoryIcon";
 
 // Utility function to get currency symbol
-const getCurrencySymbol = (currencyCode) => {
+function getCurrencySymbol(currencyCode) {
   const symbols = {
     USD: "$",
     EUR: "€",
@@ -18,7 +18,7 @@ const getCurrencySymbol = (currencyCode) => {
     JPY: "¥",
   };
   return symbols[currencyCode] || currencyCode;
-};
+}
 
 export function StyledListItem({ transaction }) {
 

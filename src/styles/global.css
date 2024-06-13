@@ -14,4 +14,5 @@
 body {
   font-family: var(--font-inter), sans-serif;
   color: var(--neutrals-dark-gray);
+  height: 100vh;
 }

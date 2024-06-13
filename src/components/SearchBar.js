@@ -9,10 +9,14 @@ import {
   SuggestionsList,
   SuggestionItem,
   Highlight,
-  EasterEggIcon,
 } from "@/src/components/styles/SearchBar";
 
-//Easteregg
+import {
+  EasterEgg,
+  EasterHeads,
+  EasterTails,
+} from "@/src/components/styles/EasterEgg";
+
 function encrypt(text) {
   const offset = 3;
   return text
@@ -52,8 +56,15 @@ export default function SearchBar({ data, onSearchResults }) {
       setShowEasterEgg(true);
       setSuggestions([]);
       onSearchResults([]);
-      setIsOpen(false); // Close suggestions list if Easter Egg is shown
-      return;
+      setIsOpen(false);
+
+      // Set a timeout to hide the Easter egg after 3 seconds
+      const timer = setTimeout(() => {
+        setShowEasterEgg(false);
+      }, 3000);
+
+      // Cleanup the timer on component unmount or when Easter egg is hidden
+      return () => clearTimeout(timer);
     } else {
       setShowEasterEgg(false);
     }
@@ -97,11 +108,11 @@ export default function SearchBar({ data, onSearchResults }) {
 
   // Handle the click event on a suggestion
   function handleSuggestionClick(suggestion) {
-    setQuery(suggestion.description); // Set the query to the description or another field
+    setQuery(suggestion.description);
     setSelectedSuggestion(suggestion);
-    setSuggestions([]); // Clear suggestions
-    setIsOpen(false); // Close suggestions list
-    onSearchResults([suggestion]); // Show only the selected suggestion in the results
+    setSuggestions([]);
+    setIsOpen(false);
+    onSearchResults([suggestion]);
   }
 
   // Handle focus event on the input
@@ -113,12 +124,11 @@ export default function SearchBar({ data, onSearchResults }) {
 
   // Handle blur event on the input
   function handleInputBlur(event) {
-    // Check if the blur event was triggered by clicking on a suggestion
     const relatedTarget = event.relatedTarget;
     if (relatedTarget && relatedTarget.classList.contains("suggestion-item")) {
       return;
     }
-    setIsOpen(false); // Close suggestions list
+    setIsOpen(false);
   }
 
   return (
@@ -145,10 +155,10 @@ export default function SearchBar({ data, onSearchResults }) {
         </ClearButton>
       )}
       {showEasterEgg ? (
-        <EasterEggIcon>
-          <div class="tails"></div>
-          <div class="heads"></div>
-        </EasterEggIcon>
+        <EasterEgg>
+          <EasterTails />
+          <EasterHeads />
+        </EasterEgg>
       ) : (
         isOpen && (
           <SuggestionsList>
@@ -156,7 +166,7 @@ export default function SearchBar({ data, onSearchResults }) {
               <SuggestionItem
                 key={index}
                 onClick={() => handleSuggestionClick(suggestion)}
-                className="suggestion-item" // Added class name for identifying suggestions
+                className="suggestion-item"
                 aria-selected={selectedSuggestion === suggestion}
               >
                 {highlightMatch(suggestion.description, query)} - $

@@ -1,54 +1,55 @@
-:root{
-  --neutrals-white: #FFFFFF;
-  --neutrals-light-gray: #EEF1f4;
+
+:root {
+  --neutrals-white: #ffffff;
+  --neutrals-light-gray: #eef1f4;
+
+
   --neutrals-mid-gray: #bac0ca;
   --neutrals-gray: #a3a9b3;
   --neutrals-dark-gray: #667080;
   --neutrals-black-gray: #363636;
 
-  --primary-50: #EFF9FF;
-  --primary-100: #DEF2FF;
-  --primary-200: #B6E6FF;
-  --primary-300: #75D5FF;
-  --primary-400: #2CC0FF;
-  --primary-500: #14B4FF;
-  --primary-600: #0086D4;
-  --primary-700: #006BAB;
-  --primary-800: #005A8D;
-  --primary-900: #064B74;
-  --primary-950: #042F4D;
+  --primary-50: #eff9ff;
+  --primary-100: #def2ff;
+  --primary-200: #b6e6ff;
+  --primary-300: #75d5ff;
+  --primary-400: #2cc0ff;
+  --primary-500: #14b4ff;
+  --primary-600: #0086d4;
+  --primary-700: #006bab;
+  --primary-800: #005a8d;
+  --primary-900: #064b74;
+  --primary-950: #042f4d;
 
-  --secondary-50: #FFF0FB;
-  --secondary-100: #FFE3F9;
-  --secondary-200: #FFC6F3;
-  --secondary-300: #FF98E7;
-  --secondary-400: #FF59D4;
-  --secondary-500: #FF28BF;
-  --secondary-600: #FE14A5;
-  --secondary-700: #DE007F;
-  --secondary-800: #B70068;
+  --secondary-50: #fff0fb;
+  --secondary-100: #ffe3f9;
+  --secondary-200: #ffc6f3;
+  --secondary-300: #ff98e7;
+  --secondary-400: #ff59d4;
+  --secondary-500: #ff28bf;
+  --secondary-600: #fe14a5;
+  --secondary-700: #de007f;
+  --secondary-800: #b70068;
   --secondary-900: #980359;
-  --secondary-950: #5E0031;
+  --secondary-950: #5e0031;
 
-  --tertiary-50: #FEFDE8;
-  --tertiary-100: #FFFCC2;
-  --tertiary-200: #FFF788;
-  --tertiary-300: #FFE944;
-  --tertiary-400: #FED814;
-  --tertiary-500: #FED814;
-  --tertiary-600: #CD9301;
-  --tertiary-700: #A46804;
-  --tertiary-800: #87520C;
+  --tertiary-50: #fefde8;
+  --tertiary-100: #fffcc2;
+  --tertiary-200: #fff788;
+  --tertiary-300: #ffe944;
+  --tertiary-400: #fed814;
+  --tertiary-500: #fed814;
+  --tertiary-600: #cd9301;
+  --tertiary-700: #a46804;
+  --tertiary-800: #87520c;
   --tertiary-900: #734310;
   --tertiary-950: #432205;
 
-  --feedback-success: #04BF2D;
+  --feedback-success: #04bf2d;
   --feedback-warning: #ffcd1b;
   --feedback-error: #fc1358;
-
 }
 :root[data-theme="dark"] {
-
   --neutrals-50: #0a0d0f;
   --neutrals-100: #141b1f;
   --neutrals-400: #526a7a;
@@ -92,8 +93,7 @@
   --accent-900: #fff6cc;
   --accent-950: #fffbe6;
 
-  --feedback-success: #04BF2D;
+  --feedback-success: #04bf2d;
   --feedback-warning: #ffcd1b;
   --feedback-error: #fc1358;
-
 }

@@ -3,6 +3,8 @@ import { useState } from "react";
 import Link from "next/link";
 import SearchBar from "@/src/components/SearchBar";
 import transactionsData from "@/src/data/transactions.json";
+import SVGIcon from "@/src/components/SVGIcon";
+import { OhNoContainer } from "@/src/components/styles/OhNo";
 
 export default function TransactionList({ initialData }) {
   const [filteredTransactions, setFilteredTransactions] =
@@ -31,14 +33,24 @@ export default function TransactionList({ initialData }) {
                 <div>
                   {transaction.amount.toFixed(2)} {transaction.currency}
                 </div>
-                <div>{transaction.paymentMethod}</div>
-                <div>{transaction.description}</div>
               </Link>
             </li>
           ))}
         </ul>
       ) : (
-        <p>Oh Nooo</p>
+        <OhNoContainer>
+          <SVGIcon
+            iconName="ohNo"
+            color="var(--neutrals-dark-gray)"
+            size="115"
+          />
+          <br />
+          <span>
+            <b>No matching results found.</b>
+            <br />
+            Please try again.
+          </span>
+        </OhNoContainer>
       )}
     </div>
   );

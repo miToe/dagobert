@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from "react";
-import SVGIcon from "./SVGIcon";
+import { useState, useEffect } from "react";
+import SVGIcon from "@/src/components/SVGIcon";
 
 import {
   SearchBarContainer,
@@ -12,6 +12,7 @@ import {
   EasterEggIcon,
 } from "@/src/components/styles/SearchBar";
 
+//Easteregg
 function encrypt(text) {
   const offset = 3;
   return text
@@ -36,24 +37,6 @@ export default function SearchBar({ data, onSearchResults }) {
   const [showEasterEgg, setShowEasterEgg] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedSuggestion, setSelectedSuggestion] = useState(null);
-  const searchBarRef = useRef(null);
-
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (
-        searchBarRef.current &&
-        !searchBarRef.current.contains(event.target)
-      ) {
-        setIsOpen(false);
-        setSuggestions([]); // Vorschläge leeren
-      }
-    }
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
 
   useEffect(() => {
     if (query.trim() === "") {
@@ -64,15 +47,18 @@ export default function SearchBar({ data, onSearchResults }) {
       return;
     }
 
+    // Check if the query matches the encrypted Easter Egg value
     if (encrypt(query.trim().toLowerCase()) === encryptedSecret) {
       setShowEasterEgg(true);
       setSuggestions([]);
       onSearchResults([]);
-      setIsOpen(false);
+      setIsOpen(false); // Close suggestions list if Easter Egg is shown
+      return;
     } else {
       setShowEasterEgg(false);
     }
 
+    // Filter results based on the query
     const results = data.filter(function (item) {
       const values = Object.values(item).join(" ").toLowerCase();
       return values.includes(query.trim().toLowerCase());
@@ -83,6 +69,7 @@ export default function SearchBar({ data, onSearchResults }) {
     setIsOpen(results.length > 0);
   }, [query, data, onSearchResults]);
 
+  // Clear the search input and reset the state
   function handleClear() {
     setQuery("");
     onSearchResults(data);
@@ -91,6 +78,7 @@ export default function SearchBar({ data, onSearchResults }) {
     setIsOpen(false);
   }
 
+  // Highlight the matching parts of the text in the suggestions
   function highlightMatch(text, query) {
     if (typeof text !== "string") return text;
     const parts = text.split(new RegExp(`(${query})`, "gi"));
@@ -107,20 +95,34 @@ export default function SearchBar({ data, onSearchResults }) {
     );
   }
 
+  // Handle the click event on a suggestion
   function handleSuggestionClick(suggestion) {
-    setQuery(suggestion.description);
-    setSuggestions([]);
-    setIsOpen(false);
+    setQuery(suggestion.description); // Set the query to the description or another field
+    setSelectedSuggestion(suggestion);
+    setSuggestions([]); // Clear suggestions
+    setIsOpen(false); // Close suggestions list
+    onSearchResults([suggestion]); // Show only the selected suggestion in the results
   }
 
+  // Handle focus event on the input
   function handleInputFocus() {
-    if (suggestions.length > 0) {
+    if (query.trim() !== "" && suggestions.length > 0) {
       setIsOpen(true);
     }
   }
 
+  // Handle blur event on the input
+  function handleInputBlur(event) {
+    // Check if the blur event was triggered by clicking on a suggestion
+    const relatedTarget = event.relatedTarget;
+    if (relatedTarget && relatedTarget.classList.contains("suggestion-item")) {
+      return;
+    }
+    setIsOpen(false); // Close suggestions list
+  }
+
   return (
-    <SearchBarContainer ref={searchBarRef}>
+    <SearchBarContainer>
       <SearchIcon>
         <SVGIcon iconName="search" color="var(--neutrals-dark-gray)" />
       </SearchIcon>
@@ -131,6 +133,7 @@ export default function SearchBar({ data, onSearchResults }) {
         placeholder="Search..."
         aria-expanded={isOpen ? "true" : "false"}
         onFocus={handleInputFocus}
+        onBlur={handleInputBlur}
       />
       {query && (
         <ClearButton onClick={handleClear}>
@@ -142,7 +145,10 @@ export default function SearchBar({ data, onSearchResults }) {
         </ClearButton>
       )}
       {showEasterEgg ? (
-        <EasterEggIcon />
+        <EasterEggIcon>
+          <div class="tails"></div>
+          <div class="heads"></div>
+        </EasterEggIcon>
       ) : (
         isOpen && (
           <SuggestionsList>
@@ -150,6 +156,7 @@ export default function SearchBar({ data, onSearchResults }) {
               <SuggestionItem
                 key={index}
                 onClick={() => handleSuggestionClick(suggestion)}
+                className="suggestion-item" // Added class name for identifying suggestions
                 aria-selected={selectedSuggestion === suggestion}
               >
                 {highlightMatch(suggestion.description, query)} - $

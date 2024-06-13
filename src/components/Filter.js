@@ -1,19 +1,17 @@
-import { useState, useEffect, useRef} from "react";
-import {useRouter} from "next/router";
+import { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/router";
 import Button from "@/src/components/Button";
 import {
   Overlay,
   FilterContainer,
   FilterSection,
   ButtonContainer,
-  DateInputContainer,
-  DateInputLabel,
-  DateInput,
-} from "@/src/components/styles/FilterStyled.js";
+} from "@/src/components/styles/FilterStyled";
 import Checkbox from "@/src/components/Checkbox";
 import { CheckboxGroup } from "@/src/components/styles/CheckboxStyled";
+import DateFilter from "@/src/components/DateFilter";
 
-export default function Filter ({initialData, currentFilters, onApplyFilter, onClose }) {
+export default function Filter({ initialData, currentFilters, onApplyFilter, onClose }) {
   const [selectedFilters, setSelectedFilters] = useState({
     transactionType: [],
     category: [],
@@ -65,7 +63,7 @@ export default function Filter ({initialData, currentFilters, onApplyFilter, onC
   };
 
   const handleApplyFilter = () => {
-    const { transactionType, category, paymentMethod, dateFrom, dateUntil} = selectedFilters;
+    const { transactionType, category, paymentMethod, dateFrom, dateUntil } = selectedFilters;
 
     const filteredData = initialData.filter((transaction) => {
       const transactionDate = new Date(transaction.date);
@@ -102,83 +100,71 @@ export default function Filter ({initialData, currentFilters, onApplyFilter, onC
 
   return (
     <Overlay>
-        <FilterContainer ref={filterRef}>
-          <h2>Filter transactions</h2>
-          <FilterSection>
-            <h4>Date</h4>
-            <DateInputContainer>
-              <DateInputLabel>From:</DateInputLabel>
-              <DateInput
-                type="date"
-                value={selectedFilters.dateFrom}
-                onChange={(event) => handleDateChange("dateFrom", event.target.value)}
+      <FilterContainer ref={filterRef}>
+        <h2>Filter transactions</h2>
+        <FilterSection>
+          <DateFilter
+            dateFrom={selectedFilters.dateFrom}
+            dateUntil={selectedFilters.dateUntil}
+            onDateChange={handleDateChange}
+          />
+        </FilterSection>
+        <FilterSection>
+          <h4>Transaction type</h4>
+          <CheckboxGroup>
+            <label>
+              <Checkbox
+                value="Expense"
+                checked={selectedFilters.transactionType.includes("Expense")}
+                onChange={() => handleCheckboxChange("transactionType", "Expense")}
               />
-            </DateInputContainer>
-            <DateInputContainer>
-              <DateInputLabel>Until:</DateInputLabel>
-              <DateInput
-                type="date"
-                value={selectedFilters.dateUntil}
-                onChange={(event) => handleDateChange("dateUntil", event.target.value)}
+              Expense
+            </label>
+            <label>
+              <Checkbox
+                value="Income"
+                checked={selectedFilters.transactionType.includes("Income")}
+                onChange={() => handleCheckboxChange("transactionType", "Income")}
               />
-            </DateInputContainer>
-          </FilterSection>
-          <FilterSection>
-            <h4>Transaction type</h4>
-            <CheckboxGroup>
-              <label>
+              Income
+            </label>
+          </CheckboxGroup>
+        </FilterSection>
+        <FilterSection>
+          <h4>Categories</h4>
+          <CheckboxGroup>
+            {["Entertainment", "Food", "Shopping", "Transport"].map((category) => (
+              <label key={category}>
                 <Checkbox
-                  value="Expense"
-                  checked={selectedFilters.transactionType.includes("Expense")}
-                  onChange={() => handleCheckboxChange("transactionType", "Expense")}
+                  value={category}
+                  checked={selectedFilters.category.includes(category)}
+                  onChange={() => handleCheckboxChange("category", category)}
                 />
-                Expense
+                {category}
               </label>
-              <label>
+            ))}
+          </CheckboxGroup>
+        </FilterSection>
+        <FilterSection>
+          <h4>Payment method</h4>
+          <CheckboxGroup>
+            {["Credit Card", "Debit Card", "Cash", "PayPal"].map((method) => (
+              <label key={method}>
                 <Checkbox
-                  value="Income"
-                  checked={selectedFilters.transactionType.includes("Income")}
-                  onChange={() => handleCheckboxChange("transactionType", "Income")}
+                  value={method}
+                  checked={selectedFilters.paymentMethod.includes(method)}
+                  onChange={() => handleCheckboxChange("paymentMethod", method)}
                 />
-                Income
+                {method}
               </label>
-            </CheckboxGroup>
-          </FilterSection>
-          <FilterSection>
-            <h4>Categories</h4>
-            <CheckboxGroup>
-              {["Entertainment", "Food", "Shopping", "Transport"].map((category) => (
-                <label key={category}>
-                  <Checkbox
-                    value={category}
-                    checked={selectedFilters.category.includes(category)}
-                    onChange={() => handleCheckboxChange("category", category)}
-                  />
-                  {category}
-                </label>
-              ))}
-            </CheckboxGroup>
-          </FilterSection>
-          <FilterSection>
-            <h4>Payment method</h4>
-            <CheckboxGroup>
-              {["Credit Card", "Debit Card", "Cash", "PayPal"].map((method) => (
-                <label key={method}>
-                  <Checkbox
-                    value={method}
-                    checked={selectedFilters.paymentMethod.includes(method)}
-                    onChange={() => handleCheckboxChange("paymentMethod", method)}
-                  />
-                  {method}
-                </label>
-              ))}
-            </CheckboxGroup>
-          </FilterSection>
-          <ButtonContainer>
-            <Button $variant="secondary" startIcon="refresh" onClick={handleClearAll}>Clear All</Button>
-            <Button $variant="primary" onClick={handleApplyFilter}>Apply Filter</Button>
-          </ButtonContainer>
-        </FilterContainer>
+            ))}
+          </CheckboxGroup>
+        </FilterSection>
+        <ButtonContainer>
+          <Button $variant="secondary" startIcon="refresh" onClick={handleClearAll}>Clear All</Button>
+          <Button $variant="primary" onClick={handleApplyFilter}>Apply Filter</Button>
+        </ButtonContainer>
+      </FilterContainer>
     </Overlay>
   );
-};
+}

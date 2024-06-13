@@ -1,8 +1,8 @@
 export default function ErrorPage () {
   return (
     <div>
-      <h2>Error</h2>
-      <p>Sorry, there was an error applying the filter. Please try again later.</p>
+      <h2>Not matching results found.</h2>
+      <p>Try changing your filter criteria.</p>
     </div>
   );
 };

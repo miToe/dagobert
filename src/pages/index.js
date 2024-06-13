@@ -11,7 +11,10 @@ export default function TransactionList({ initialData}) {
     transactionType: [],
     category: [],
     paymentMethod: [],
+    dateFrom: [],
+    dateUntil: [],
   });
+
 
   const handleOpenFilter = () => {
     setIsFilterVisible(true);

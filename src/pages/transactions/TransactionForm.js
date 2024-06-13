@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { useRouter } from "next/router";
 import Input from "@/src/components/Input";
+import Button from "@/src/components/styles/Button";
 
 export default function TransactionForm({ onAddTransaction, onAlert }) {
   const router = useRouter();
@@ -51,9 +52,13 @@ export default function TransactionForm({ onAddTransaction, onAlert }) {
     <div>
       <h1>Add Transaction</h1>
       <form onSubmit={handleSubmit}>
-        <button type="button" onClick={() => router.push("/")}>
+        <Button
+          variant="secondary"
+          type="button"
+          onClick={() => router.push("/")}
+        >
           Cancel
-        </button>
+        </Button>
         {/* Dropdown for selecting transaction type */}
         <div>
           <label htmlFor="transactionType">Transaction Type:</label>
@@ -133,7 +138,9 @@ export default function TransactionForm({ onAddTransaction, onAlert }) {
           </select>
         </div>
         {/* Submit button */}
-        <button type="submit">Add</button>
+        <Button variant="primary" endIcon="add" onClick={onAddTransaction}>
+          Add
+        </Button>
       </form>
     </div>
   );

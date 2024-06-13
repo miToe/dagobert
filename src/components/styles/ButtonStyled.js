@@ -11,7 +11,7 @@ export const ButtonStyled = styled.button`
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
 
-  ${(props) => props.variant === 'primary' && `
+  ${(props) => props.$variant === 'primary' && `
     background-color: var(--primary-500);
     color: var(--neutrals-white);
 
@@ -20,7 +20,7 @@ export const ButtonStyled = styled.button`
     }
   `}
 
-  ${(props) => props.variant === 'secondary' && `
+  ${(props) => props.$variant === 'secondary' && `
     background-color: var(--primary-50);
     border: 2px solid var(--primary-500);
     color: var(--primary-500);

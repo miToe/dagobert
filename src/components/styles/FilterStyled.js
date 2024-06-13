@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import IconsForButtons from "@/src/components/IconsForButtons";
 
 export const Overlay = styled.div`
     position: fixed;
@@ -31,5 +32,35 @@ export const ButtonContainer = styled.div`
     justify-content: space-between;
     margin-top: 20px;
 `;
+
+export const DateInputContainer = styled.div`
+    margin-bottom: 10px;
+`;
+
+export const DateInputLabel = styled.label`
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: var(--neutrals-dark-gray);
+`;
+
+export const DateInput = styled.input`
+    width: 100%;
+    appearance: none;
+    padding: 8px 8px 8px 8px;
+    font-size: 16px;
+    color: var(--neutrals-dark-gray);
+    border: 1px solid var(--neutrals-mid-gray);
+    border-radius: 6px;
+    text-transform: uppercase;
+`;
+
+export const CalendarWrapper = styled.div`
+    input[type="date"]::-webkit-calendar-picker-indicator {
+display: none;
+webkit-appearance: none;
+`
+
 
 

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useState } from "react";
 import Filter from "@/src/components/Filter";
 import Button from "@/src/components/Button"
+import FilterErrorPage from "../components/FilterErrorPage";
 
 export default function TransactionList({ initialData}) {
   const [isFilterVisible, setIsFilterVisible] = useState(false);
@@ -43,7 +44,7 @@ export default function TransactionList({ initialData}) {
       <h1>Transactions</h1>
       <div>
         <Link href="/transactions/TransactionForm">Add</Link>
-        <Button variant="primary" startIcon="filter" onClick={handleOpenFilter}>Filter</Button>
+        <Button $variant="primary" startIcon="filter" onClick={handleOpenFilter}>Filter</Button>
       </div>
       <ul>
         {sortedTransactions.map((transaction) => (
@@ -60,10 +61,14 @@ export default function TransactionList({ initialData}) {
       </ul>
       {isFilterVisible && (
         <Filter
+          initialData={initialData}
           currentFilters={currentFilters}
           onApplyFilter={handleApplyFilter}
           onClose={handleCloseFilter}
         />
+      )}
+      {!isFilterVisible && !filteredTransactions.length && ( // Show FilterErrorPage if no transactions are filtered
+        <FilterErrorPage/>
       )}
     </div>
   );

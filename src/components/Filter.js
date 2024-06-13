@@ -1,25 +1,38 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef} from "react";
+import {useRouter} from "next/router";
 import Button from "@/src/components/Button";
-import SVGIcon from "@/src/components/SVGIcon";
 import {
   Overlay,
   FilterContainer,
   FilterSection,
   ButtonContainer,
+  DateInputContainer,
+  DateInputLabel,
+  DateInput,
 } from "@/src/components/styles/FilterStyled.js";
 import Checkbox from "@/src/components/Checkbox";
 import { CheckboxGroup } from "@/src/components/styles/CheckboxStyled";
 
-export default function Filter ({ currentFilters, onApplyFilter, onClose }) {
+export default function Filter ({initialData, currentFilters, onApplyFilter, onClose }) {
   const [selectedFilters, setSelectedFilters] = useState({
     transactionType: [],
     category: [],
     paymentMethod: [],
+    dateFrom: "",
+    dateUntil: "",
   });
+  const [filterSuccess, setFilterSuccess] = useState(true);
   const filterRef = useRef(null);
+  const router = useRouter();
 
   useEffect(() => {
-    setSelectedFilters(currentFilters);
+    setSelectedFilters({
+      transactionType: currentFilters.transactionType || [],
+      category: currentFilters.category || [],
+      paymentMethod: currentFilters.paymentMethod || [],
+      dateFrom: currentFilters.dateFrom || "",
+      dateUntil: currentFilters.dateUntil || "",
+    });
   }, [currentFilters]);
 
   useEffect(() => {
@@ -44,9 +57,36 @@ export default function Filter ({ currentFilters, onApplyFilter, onClose }) {
     }));
   };
 
+  const handleDateChange = (field, value) => {
+    setSelectedFilters((prevFilters) => ({
+      ...prevFilters,
+      [field]: value,
+    }));
+  };
+
   const handleApplyFilter = () => {
-    onApplyFilter(selectedFilters);
-    onClose();
+    const { transactionType, category, paymentMethod, dateFrom, dateUntil} = selectedFilters;
+
+    const filteredData = initialData.filter((transaction) => {
+      const transactionDate = new Date(transaction.date);
+      const isDateInRange = (!dateFrom || new Date(dateFrom) <= transactionDate) &&
+        (!dateUntil || transactionDate <= new Date(dateUntil));
+
+      return (
+        isDateInRange &&
+        (transactionType.length === 0 || transactionType.includes(transaction.transactionType)) &&
+        (category.length === 0 || category.includes(transaction.category)) &&
+        (paymentMethod.length === 0 || paymentMethod.includes(transaction.paymentMethod))
+      );
+    });
+    if (filteredData.length > 0) {
+      onApplyFilter(selectedFilters);
+      onClose();
+      setFilterSuccess(true); // Filter success
+    } else {
+      setFilterSuccess(false); // Filter failure
+      router.push("/filter-error");
+    }
   };
 
   const handleClearAll = () => {
@@ -54,15 +94,37 @@ export default function Filter ({ currentFilters, onApplyFilter, onClose }) {
       transactionType: [],
       category: [],
       paymentMethod: [],
+      dateFrom: "",
+      dateUntil: "",
     });
+    setFilterSuccess(true);
   };
 
   return (
     <Overlay>
         <FilterContainer ref={filterRef}>
-          <h2>Filter Transactions</h2>
+          <h2>Filter transactions</h2>
           <FilterSection>
-            <h4>Transaction Type</h4>
+            <h4>Date</h4>
+            <DateInputContainer>
+              <DateInputLabel>From:</DateInputLabel>
+              <DateInput
+                type="date"
+                value={selectedFilters.dateFrom}
+                onChange={(event) => handleDateChange("dateFrom", event.target.value)}
+              />
+            </DateInputContainer>
+            <DateInputContainer>
+              <DateInputLabel>Until:</DateInputLabel>
+              <DateInput
+                type="date"
+                value={selectedFilters.dateUntil}
+                onChange={(event) => handleDateChange("dateUntil", event.target.value)}
+              />
+            </DateInputContainer>
+          </FilterSection>
+          <FilterSection>
+            <h4>Transaction type</h4>
             <CheckboxGroup>
               <label>
                 <Checkbox
@@ -98,7 +160,7 @@ export default function Filter ({ currentFilters, onApplyFilter, onClose }) {
             </CheckboxGroup>
           </FilterSection>
           <FilterSection>
-            <h4>Payment Method</h4>
+            <h4>Payment method</h4>
             <CheckboxGroup>
               {["Credit Card", "Debit Card", "Cash", "PayPal"].map((method) => (
                 <label key={method}>
@@ -113,8 +175,8 @@ export default function Filter ({ currentFilters, onApplyFilter, onClose }) {
             </CheckboxGroup>
           </FilterSection>
           <ButtonContainer>
-            <Button variant="secondary" startIcon="refresh" onClick={handleClearAll}>Clear All</Button>
-            <Button variant="primary" onClick={handleApplyFilter}>Apply Filter</Button>
+            <Button $variant="secondary" startIcon="refresh" onClick={handleClearAll}>Clear All</Button>
+            <Button $variant="primary" onClick={handleApplyFilter}>Apply Filter</Button>
           </ButtonContainer>
         </FilterContainer>
     </Overlay>

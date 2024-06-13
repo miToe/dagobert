@@ -35,8 +35,8 @@ export const StyledCheckbox = styled.div `
 
 export const CheckboxGroup = styled.div `
     display: flex;
-    flex-wrap: wrap; /* Enable wrapping */
-    justify-content: space-between; /* Evenly distribute items */
+    flex-wrap: wrap; 
+    justify-content: space-between; 
     align-items: center;
 
     label {

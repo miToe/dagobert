@@ -1,7 +1,7 @@
 import {icons} from "@/src/assets/Icons.js"
 
-const getColorByVariant = (variant) => {
-  switch (variant) {
+const getColorByVariant = ($variant) => {
+  switch ($variant) {
     case 'primary':
       return 'var(--neutrals-white)';
     case 'secondary':
@@ -11,8 +11,8 @@ const getColorByVariant = (variant) => {
   }
 };
 
-export default function IconsForButtons({iconName, variant, size = 24}) {
-    const iconColor = getColorByVariant(variant);
+export default function IconsForButtons({iconName, $variant, size = 24}) {
+    const iconColor = getColorByVariant($variant);
 
   return (
     <>

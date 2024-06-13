@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import transactionsData from "@/src/data/transactions.json";
-import "@/src/styles/global.css";
 import { uid } from "uid";
 import Alert from "@/src/components/Alert";
 import useLocalStorageState from "use-local-storage-state";
-import "@/src/styles/ui-colors.css"
+import GlobalStyle from "@/src/styles/styles";
+import ThemeColors from "@/src/styles/theme";
 
 export default function App({ Component, pageProps}) {
   const [transactions, setTransactions] = useLocalStorageState("transactions", {
@@ -46,14 +46,22 @@ export default function App({ Component, pageProps}) {
     setMode("default");
   handleAlert("Transaction successfully deleted!");}
 
+  function handleApplyFilter(filteredData) {
+    setTransactions(filteredData);
+  }
+
   return (
     <>
+      <GlobalStyle/>
+      <ThemeColors/>
       <Component
         {...pageProps}
-        onDelete={handleDelete}
         initialData={transactions}
-        mode={mode}
+        currentFilters={{}}
+        onApplyFilter={handleApplyFilter}
+        onDelete={handleDelete}
         onAddTransaction={handleAddTransaction}
+        mode={mode}
         onMode={handleMode}
         onAlert={handleAlert}
       />

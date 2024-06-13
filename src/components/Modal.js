@@ -7,8 +7,8 @@ export default function Modal({ message, onConfirm, onCancel, id, hint }) {
       <hr />
       <h2>{message}</h2>
       <p>{hint}</p>
-      <Button variant="secondary" onClick={() => onCancel("default")}>Cancel</Button>
-      <Button variant="primary" onClick={() => onConfirm(id)}>Confirm</Button>
+      <Button $variant="secondary" onClick={() => onCancel("default")}>Cancel</Button>
+      <Button $variant="primary" onClick={() => onConfirm(id)}>Confirm</Button>
       <hr />
       <br />
     </>

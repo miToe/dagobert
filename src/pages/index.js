@@ -2,11 +2,12 @@ import Link from "next/link";
 import { ListWrapper, StyledList, StyledTitle } from "@/src/components/styles/List";
 import { StyledListItem } from "@/src/components/StyledListItem";
 
-export default function TransactionList({ initialData }) {
+export default function TransactionList({ transactions }) {
   // Sort transactions by date in descending order
-  const sortedTransactions = initialData.sort(
+  const sortedTransactions = transactions.slice().sort(
     (a, b) => new Date(b.date) - new Date(a.date),
   );
+
 
   return (
     <ListWrapper>

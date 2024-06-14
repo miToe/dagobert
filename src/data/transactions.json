@@ -2,27 +2,27 @@
   {
     "id": "1",
     "date": "2024-05-01",
-    "amount": -50.00,
+    "amount": 50.00,
     "currency": "USD",
     "category": "Groceries",
     "description": "Weekly grocery shopping",
-    "paymentMethod": "Credit Card",
+    "paymentMethod": "Credit card",
     "transactionType": "Expense"
   },
   {
     "id": "2",
     "date": "2024-05-02",
-    "amount": -25.00,
+    "amount": 25.00,
     "currency": "USD",
     "category": "Transport",
     "description": "Gas for car",
-    "paymentMethod": "Debit Card",
+    "paymentMethod": "Debit card",
     "transactionType": "Expense"
   },
   {
     "id": "3",
     "date": "2024-05-05",
-    "amount": -15.00,
+    "amount": 15.00,
     "currency": "USD",
     "category": "Restaurant",
     "description": "Lunch at a cafe",
@@ -32,31 +32,31 @@
   {
     "id": "4",
     "date": "2024-05-08",
-    "amount": -50.00,
+    "amount": 50.00,
     "currency": "USD",
     "category": "Clothing",
     "description": "New shoes",
-    "paymentMethod": "Credit Card",
+    "paymentMethod": "Credit card",
     "transactionType": "Expense"
   },
   {
     "id": "5",
     "date": "2024-05-09",
-    "amount": -60.00,
+    "amount": 60.00,
     "currency": "USD",
     "category": "Groceries",
     "description": "Bi-weekly grocery shopping",
-    "paymentMethod": "Debit Card",
+    "paymentMethod": "Debit card",
     "transactionType": "Expense"
   },
   {
     "id": "6",
     "date": "2024-05-10",
-    "amount": -20.00,
+    "amount": 20.00,
     "currency": "USD",
     "category": "Transport",
     "description": "Public transportation pass",
-    "paymentMethod": "Credit Card",
+    "paymentMethod": "Credit card",
     "transactionType": "Expense"
   }
 ]

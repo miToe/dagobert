@@ -7,29 +7,24 @@ import Alert from "@/src/components/Alert";
 import useLocalStorageState from "use-local-storage-state";
 import "@/src/styles/ui-colors.css"
 
-export default function App({ Component, pageProps}) {
-  const [transactions, setTransactions] = useLocalStorageState("transactions", {
-    defaultValue: transactionsData,
-  });
-  const [mode, setMode] = useState("default");
+export default function App({ Component, pageProps }) {
   const router = useRouter();
-  const [alert, setAlert] = useState({
-    isOpen: false,
-    alertMessage: "",
-  });
+  const [transactions, setTransactions] = useLocalStorageState("transactions", { defaultValue: transactionsData });
+  const [alert, setAlert] = useState({ isOpen: false, alertMessage: "" });
 
+  //-------------Alert logic-------------
   function handleAlert(alertMessage) {
-    setAlert({ isOpen: true, alertMessage});
+    setAlert({ isOpen: true, alertMessage });
   }
 
   function handleAlertClose() {
     setAlert({ isOpen: false, message: "" });
   }
 
-  function handleMode(mode) {
-    setMode(mode);
-  }
+  //-------------------------------------
 
+
+  //-------------Transaction form logic-------------
   function handleAddTransaction(data) {
     const newTransaction = {
       id: uid(),
@@ -39,22 +34,30 @@ export default function App({ Component, pageProps}) {
     setTransactions([newTransaction, ...transactions]);
   }
 
+  function handleEditTransaction(id, updatedTransaction) {
+    setTransactions(
+      transactions.map((transaction) =>
+        transaction.id === id ? { ...transaction, ...updatedTransaction } : transaction),
+    );
+    handleAlert("Transaction successfully updated!");
+  }
+
   function handleDelete(id) {
-    const updatedData = transactions.filter((item) => item.id !== id);
-    setTransactions(updatedData);
+    setTransactions(transactions.filter((transaction) => transaction.id !== id));
     router.push("/");
-    setMode("default");
-  handleAlert("Transaction successfully deleted!");}
+    handleAlert("Transaction successfully deleted!");
+  }
+
+  //------------------------------------------------
 
   return (
     <>
       <Component
         {...pageProps}
         onDelete={handleDelete}
-        initialData={transactions}
-        mode={mode}
+        transactions={transactions}
         onAddTransaction={handleAddTransaction}
-        onMode={handleMode}
+        onEditTransaction={handleEditTransaction}
         onAlert={handleAlert}
       />
       <Alert

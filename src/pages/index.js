@@ -19,7 +19,7 @@ export default function TransactionList({ transactions }) {
           </li>
         ))}
       </StyledList>
-      <Link href="/transactions/TransactionForm">Add</Link>
+      <Link href="/transactions/create">Add</Link>
     </ListWrapper>
   );
 }

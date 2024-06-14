@@ -1,12 +1,12 @@
 import { createGlobalStyle } from "styled-components";
-import { Inter } from "next/font/google";
+import { Outfit } from "next/font/google";
 
-export const interFont = Inter({
+export const outfitFont = Outfit({
   weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-outfit",
 });
-console.log("interFont", interFont);
+console.log("outfitFont", outfitFont);
 
 const GlobalStyle = createGlobalStyle`
     * {
@@ -18,7 +18,8 @@ const GlobalStyle = createGlobalStyle`
     :root {
         --max-width: 100%;
         --border-radius: 12px;
-        --font-inter: "Inter";
+        --border-radius-small: 6px;
+        --font-outfit: "Outfit";
         --h1-font-size: 2em;
         --h2-font-size: 1.75em;
         --h3-font-size: 1.5em;
@@ -26,7 +27,7 @@ const GlobalStyle = createGlobalStyle`
     }
 
     body {
-        font-family: ${interFont.style.fontFamily};
+        font-family: ${outfitFont.style.fontFamily};
         color: var(--neutrals-dark-gray)
     }
 

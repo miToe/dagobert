@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const ButtonStyled = styled.button`
   font-size: 16px;
   padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: var(--border-radius-small);
   border: none;
   display: flex;
   align-items: center;

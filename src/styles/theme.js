@@ -1,6 +1,5 @@
 import { createGlobalStyle } from "styled-components";
 
-
 const ThemeColors = createGlobalStyle`
     :root{
         --neutrals-white: #FFFFFF;

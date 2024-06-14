@@ -18,6 +18,10 @@ const ButtonStyled = styled.button`
     background-color: var(--primary-500);
     color: var(--neutrals-white);
 
+    svg{
+      fill:var(--neutrals-white);
+    }
+
     &:hover {
       background-color: var(--primary-700);
     }

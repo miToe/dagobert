@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const DateFilterGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px; /* Adjust gap as needed */
+  gap: 16px; 
 `;
 
 export const DateInputLabel = styled.label`
@@ -27,27 +27,26 @@ export const DateInput = styled.input`
     font-family: 'Inter', sans-serif; 
 `;
 
+export const CalendarWrapper = styled.div`
+  position: relative;
+  display: inline-block;
+  width: 24px; /* Adjust width of the calendar icon wrapper */
+  height: 24px; /* Adjust height of the calendar icon wrapper */
 
-// export const CalendarWrapper = styled.div`
-//   position: relative;
-//   display: inline-block;
-//   width: 20px; /* Adjust width of the calendar icon wrapper */
-//   height: 20px; /* Adjust height of the calendar icon wrapper */
-//
-//   input[type="date"]::-webkit-calendar-picker-indicator {
-//     position: absolute;
-//     top: 0;
-//     left: 0;
-//     width: 100%;
-//     height: 100%;
-//     opacity: 0;
-//     cursor: pointer;
-//   }
-//
-//   /* Style the calendar icon */
-//   &:before {
-//     content: '\1F4C5'; /* Unicode for calendar icon */
-//     font-size: 16px;
-//     color: var(--primary-500); /* Set the color of the calendar icon */
-//   }
-// `;
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  /* Style the calendar icon */
+  &:before {
+    content: '\1F4C5'; /* Unicode for calendar icon */
+    font-size: 16px;
+    color: var(--primary-500); /* Set the color of the calendar icon */
+  }
+`;

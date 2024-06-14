@@ -17,7 +17,7 @@ export const FilterContainer = styled.div`
     display: flex;
     flex-direction: column;
     background-color: white;
-    padding: 20px;
+    padding: 25px;
     border-radius: 12px;
     width: 40%;
 `;
@@ -29,7 +29,7 @@ export const FilterSection = styled.div`
 export const ButtonContainer = styled.div`
     display: flex;
     justify-content: space-between;
-    margin-top: 20px;
+    margin-top: 35px;
 `;
 
 

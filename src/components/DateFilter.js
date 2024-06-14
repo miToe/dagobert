@@ -1,4 +1,4 @@
-import {DateFilterGrid, DateInputLabel, DateInput} from "@/src/components/styles/DateFilteredStyled"
+import {DateFilterGrid, DateInputLabel, DateInput, CalendarWrapper} from "@/src/components/styles/DateFilteredStyled"
 
 export default function DateFilter({ dateFrom, dateUntil, onDateChange }) {
   return (
@@ -7,19 +7,23 @@ export default function DateFilter({ dateFrom, dateUntil, onDateChange }) {
       <DateFilterGrid>
         <div>
         <DateInputLabel>From:</DateInputLabel>
+          <CalendarWrapper>
         <DateInput
           type="date"
           value={dateFrom}
           onChange={(event) => onDateChange("dateFrom", event.target.value)}
         />
+          </CalendarWrapper>
         </div>
         <div>
         <DateInputLabel>To:</DateInputLabel>
+        <CalendarWrapper>
         <DateInput
           type="date"
           value={dateUntil}
           onChange={(event) => onDateChange("dateUntil", event.target.value)}
         />
+      </CalendarWrapper>
     </div>
       </DateFilterGrid>
     </div>

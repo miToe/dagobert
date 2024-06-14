@@ -36,11 +36,6 @@ export default function Dropdown({
     };
   }, [isOpen]);
 
-  function handleClick(option) {
-    setSelectedOption(option);
-    onOptionClick(name, option);
-  }
-
   const toggleDropdown = useCallback((event) => {
     event.preventDefault();
     setIsOpen((prev) => !prev);

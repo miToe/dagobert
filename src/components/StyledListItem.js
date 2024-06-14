@@ -9,18 +9,8 @@ import {
 } from "@/src/components/styles/List";
 import { CategoryIcon } from "@/src/components/CategoryIcon";
 
-// Utility function to get currency symbol
-function getCurrencySymbol(currencyCode) {
-  const symbols = {
-    USD: "$",
-    EUR: "€",
-    GBP: "£",
-    JPY: "¥",
-  };
-  return symbols[currencyCode] || currencyCode;
-}
-
-export function StyledListItem({ transaction }) {
+export function StyledListItem({ transaction, onCurrencySymbol }) {
+  const displayAmount = transaction.amount.toFixed(2);
 
   return (
     <StyledLink href={`/transactions/${transaction.id}`}>
@@ -39,8 +29,7 @@ export function StyledListItem({ transaction }) {
       </LeftBlock>
       <RightBlock>
         <StyledAmount>
-          {transaction.amount.toFixed(2)}{" "}
-          {getCurrencySymbol(transaction.currency)}
+          {transaction.transactionType === "Expense" ? "-" : ""}{displayAmount} {onCurrencySymbol(transaction.currency)}
         </StyledAmount>
       </RightBlock>
     </StyledLink>

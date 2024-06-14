@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ListWrapper, StyledList, StyledTitle } from "@/src/components/styles/List";
 import { StyledListItem } from "@/src/components/StyledListItem";
 
-export default function TransactionList({ transactions }) {
+export default function TransactionList({ transactions, onCurrencySymbol }) {
   // Sort transactions by date in descending order
   const sortedTransactions = transactions.slice().sort(
     (a, b) => new Date(b.date) - new Date(a.date),
@@ -15,7 +15,7 @@ export default function TransactionList({ transactions }) {
       <StyledList>
         {sortedTransactions.map((transaction) => (
           <li key={transaction.id}>
-            <StyledListItem transaction={transaction} />
+            <StyledListItem transaction={transaction} onCurrencySymbol={onCurrencySymbol} />
           </li>
         ))}
       </StyledList>

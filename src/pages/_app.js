@@ -5,7 +5,7 @@ import "@/src/styles/global.css";
 import { uid } from "uid";
 import Alert from "@/src/components/Alert";
 import useLocalStorageState from "use-local-storage-state";
-import "@/src/styles/ui-colors.css"
+import "@/src/styles/ui-colors.css";
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
@@ -23,6 +23,16 @@ export default function App({ Component, pageProps }) {
 
   //-------------------------------------
 
+// Utility function to get currency symbol
+  function getCurrencySymbol(currencyCode) {
+    const symbols = {
+      USD: "$",
+      EUR: "€",
+      GBP: "£",
+      JPY: "¥",
+    };
+    return symbols[currencyCode] || currencyCode;
+  }
 
   //-------------Transaction form logic-------------
   function handleAddTransaction(data) {
@@ -59,6 +69,7 @@ export default function App({ Component, pageProps }) {
         onAddTransaction={handleAddTransaction}
         onEditTransaction={handleEditTransaction}
         onAlert={handleAlert}
+        onCurrencySymbol={getCurrencySymbol}
       />
       <Alert
         isOpen={alert.isOpen}

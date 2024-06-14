@@ -145,6 +145,7 @@ export default function Form({
       </select>
       <br />{" "}
       <Input
+        initialData={initialData}
         label="Description:"
         name="description"
         placeholder="Enter your description here..."

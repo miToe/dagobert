@@ -22,6 +22,7 @@ export default function Dropdown({
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(defaultSelected || "");
+  const [focusedIndex, setFocusedIndex] = useState(-1);
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -36,10 +37,23 @@ export default function Dropdown({
     };
   }, [isOpen]);
 
-  const toggleDropdown = useCallback((event) => {
-    event.preventDefault();
-    setIsOpen((prev) => !prev);
-  }, []);
+  useEffect(() => {
+    if (isOpen && focusedIndex >= 0) {
+      const optionElement = document.getElementById(`option-${focusedIndex}`);
+      optionElement?.focus();
+    }
+  }, [focusedIndex, isOpen]);
+
+  const toggleDropdown = useCallback(
+    (event) => {
+      event.preventDefault();
+      setIsOpen((prev) => !prev);
+      if (!isOpen) {
+        setFocusedIndex(0);
+      }
+    },
+    [isOpen]
+  );
 
   const handleOptionClick = useCallback(
     (option) => {
@@ -58,9 +72,7 @@ export default function Dropdown({
       ) {
         event.preventDefault();
         setIsOpen(true);
-        setTimeout(() => {
-          document.querySelector('[role="option"]')?.focus();
-        }, 0);
+        setFocusedIndex(0);
       } else if (event.key === "Escape") {
         setIsOpen(false);
       }
@@ -70,31 +82,29 @@ export default function Dropdown({
 
   const handleMenuKeyDown = useCallback(
     (event) => {
-      const currentIndex = options.findIndex(
-        (option) => option === event.target.innerText
-      );
+      const currentIndex = focusedIndex;
       if (event.key === "ArrowDown" || event.key === "ArrowUp") {
         event.preventDefault();
         const offset = event.key === "ArrowDown" ? 1 : -1;
         const nextIndex =
           (currentIndex + offset + options.length) % options.length;
-        document.getElementById(`option-${nextIndex}`)?.focus();
+        setFocusedIndex(nextIndex);
       } else if (event.key === "Tab") {
         event.preventDefault();
         const nextIndex = (currentIndex + 1) % options.length;
         if (nextIndex === 0) {
           setIsOpen(false);
         } else {
-          document.getElementById(`option-${nextIndex}`)?.focus();
+          setFocusedIndex(nextIndex);
         }
       } else if (event.key === "Escape") {
         setIsOpen(false);
       } else if (["Enter", " "].includes(event.key)) {
         event.preventDefault();
-        handleOptionClick(event.target.innerText);
+        handleOptionClick(options[currentIndex]);
       }
     },
-    [options, handleOptionClick]
+    [focusedIndex, options, handleOptionClick]
   );
 
   return (

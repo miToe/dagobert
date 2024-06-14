@@ -14,7 +14,6 @@ export const DropdownLabel = styled.label`
 `;
 
 export const IconWrapper = styled.span`
-  display: inline-block;
   display: flex;
   justify-content: center;
   align-items: center;

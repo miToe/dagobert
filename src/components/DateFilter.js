@@ -1,4 +1,4 @@
-import {DateFilterGrid, DateInputLabel, DateInput, CalendarWrapper} from "@/src/components/styles/DateFiltered"
+import {DateFilterGrid, DateInputLabel, DateInput, CalendarWrapper} from "@/src/components/styles/DateFilterStyled"
 
 export default function DateFilter({ dateFrom, dateUntil, onDateChange }) {
   return (

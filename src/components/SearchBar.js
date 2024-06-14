@@ -25,14 +25,6 @@ function encrypt(text) {
     .join("");
 }
 
-function decrypt(text) {
-  const offset = 3;
-  return text
-    .split("")
-    .map((char) => String.fromCharCode(char.charCodeAt(0) - offset))
-    .join("");
-}
-
 const encryptedSecret = "gdjrehuw";
 
 export default function SearchBar({ data, onSearchResults }) {

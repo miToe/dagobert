@@ -1,15 +1,15 @@
 * {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
 :root {
-  --max-width: 100%;
-  --border-radius: 12px;
-  --font-inter: "Inter";
+    --max-width: 100%;
+    --border-radius: 12px;
+    --font-outfit: "Outfit";
 }
 
 body {
-  font-family: var(--font-inter), sans-serif;
+    font-family: var(--font-outfit), sans-serif;
 }

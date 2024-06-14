@@ -1,7 +1,7 @@
-import { Inter } from "next/font/google";
+import { Outfit } from "next/font/google";
 
-export const interFont = Inter({
+export const outfitFont = Outfit({
   weight: ["400", "600", "800", "900"],
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-outfit",
 });

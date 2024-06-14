@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { ListWrapper, StyledList, StyledTitle } from "@/src/components/styles/List";
+import { StyledListItem } from "@/src/components/StyledListItem";
 
 export default function TransactionList({ transactions }) {
   // Sort transactions by date in descending order
@@ -8,26 +10,16 @@ export default function TransactionList({ transactions }) {
 
 
   return (
-    <div>
-      <h1>Transactions</h1>
+    <ListWrapper>
+      <StyledTitle>Transactions</StyledTitle>
+      <StyledList>
+        {sortedTransactions.map((transaction) => (
+          <li key={transaction.id}>
+            <StyledListItem transaction={transaction} />
+          </li>
+        ))}
+      </StyledList>
       <Link href="/transactions/create">Add</Link>
-      <ul>
-        {sortedTransactions.map((transaction) => {
-          const displayAmount = `${transaction.transactionType === "Expense" ? "-" : ""}${transaction.amount.toFixed(2)}`;
-
-          return (
-            <li key={transaction.id}>
-              <Link href={`/transactions/${transaction.id}`}>
-                <h3>{transaction.category}</h3>
-                <div>{transaction.date}</div>
-                <div>
-                  {displayAmount} {transaction.currency}
-                </div>
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
+    </ListWrapper>
   );
 }

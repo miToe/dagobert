@@ -21,56 +21,16 @@
   },
   {
     "id": "3",
-    "date": "2024-05-03",
-    "amount": 100.00,
-    "currency": "USD",
-    "category": "Entertainment",
-    "description": "Concert tickets",
-    "paymentMethod": "Credit card",
-    "transactionType": "Expense"
-  },
-  {
-    "id": "4",
-    "date": "2024-05-04",
-    "amount": 200.00,
-    "currency": "USD",
-    "category": "Entertainment",
-    "description": "Cinema ticket",
-    "paymentMethod": "Apple Pay",
-    "transactionType": "Expense"
-  },
-  {
-    "id": "5",
     "date": "2024-05-05",
     "amount": 15.00,
     "currency": "USD",
-    "category": "Clothing",
-    "description": "New clothes",
+    "category": "Restaurant",
+    "description": "Lunch at a cafe",
     "paymentMethod": "Cash",
     "transactionType": "Expense"
   },
   {
-    "id": "6",
-    "date": "2024-05-06",
-    "amount": 75.00,
-    "currency": "USD",
-    "category": "Utilities",
-    "description": "Electricity bill",
-    "paymentMethod": "Debit card",
-    "transactionType": "Expense"
-  },
-  {
-    "id": "7",
-    "date": "2024-05-07",
-    "amount": 30.00,
-    "currency": "USD",
-    "category": "Healthcare",
-    "description": "Doctor's appointment",
-    "paymentMethod": "Credit card",
-    "transactionType": "Expense"
-  },
-  {
-    "id": "8",
+    "id": "4",
     "date": "2024-05-08",
     "amount": 50.00,
     "currency": "USD",
@@ -80,7 +40,7 @@
     "transactionType": "Expense"
   },
   {
-    "id": "9",
+    "id": "5",
     "date": "2024-05-09",
     "amount": 60.00,
     "currency": "USD",
@@ -90,7 +50,7 @@
     "transactionType": "Expense"
   },
   {
-    "id": "10",
+    "id": "6",
     "date": "2024-05-10",
     "amount": 20.00,
     "currency": "USD",

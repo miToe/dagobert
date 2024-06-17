@@ -7,6 +7,7 @@ import { useState } from "react";
 export default function TransactionDetails({
                                              transactions,
                                              onDelete,
+                                             onCurrencySymbol,
                                            }) {
   const router = useRouter();
   const { id } = router.query;
@@ -56,7 +57,7 @@ export default function TransactionDetails({
             <b>Amount: </b>
           </span>
           <span>
-            {transaction.transactionType === "Expense" ? "-" : ""}{displayAmount} {transaction.currency}
+            {transaction.transactionType === "Expense" ? "-" : ""}{displayAmount} {onCurrencySymbol(transaction.currency)}
           </span>
         </li>
         <li>

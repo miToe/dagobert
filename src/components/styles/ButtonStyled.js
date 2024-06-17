@@ -29,17 +29,6 @@ export const ButtonStyled = styled.button`
       background-color: var(--primary-100);
     }
   `}
-
-  ${(props) => props.$variant === 'iconOnly' && `
-    background: none;
-    border: none;
-    padding: 0;
-    color: inherit; // or any color you prefer
-
-    &:hover {
-      color: var(--primary-700); // or any hover effect you prefer
-    }
-  `}
 `;
 
 export const IconWrapper = styled.span`

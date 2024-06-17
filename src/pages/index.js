@@ -31,8 +31,8 @@ export default function TransactionList({ initialData}) {
         (filters.transactionType.length === 0 || filters.transactionType.includes(transaction.transactionType)) &&
         (filters.category.length === 0 || filters.category.includes(transaction.category)) &&
         (filters.paymentMethod.length === 0 || filters.paymentMethod.includes(transaction.paymentMethod)) &&
-        (filters.dateFrom === '' || new Date(transaction.date) >= new Date(filters.dateFrom)) &&
-        (filters.dateUntil === '' || new Date(transaction.date) <= new Date(filters.dateUntil))
+        (!filters.dateFrom || new Date(transaction.date) >= new Date(filters.dateFrom)) &&
+        (!filters.dateUntil || new Date(transaction.date) <= new Date(filters.dateUntil))
       );
     });
     setFilteredTransactions(filtered);
@@ -48,7 +48,7 @@ export default function TransactionList({ initialData}) {
       <h1>Transactions</h1>
       <div>
         <Link href="/transactions/TransactionForm">Add</Link>
-        <Button $variant="primary" startIcon="filter" onClick={handleOpenFilter}>Filter</Button>
+        <Button $variant="primary" startIcon="filter" onClick={handleOpenFilter}/>
       </div>
       <ul>
         {filteredTransactions.map((transaction) => (
@@ -71,7 +71,7 @@ export default function TransactionList({ initialData}) {
           onClose={handleCloseFilter}
         />
       )}
-      {!isFilterVisible && !filteredTransactions.length && ( // Show FilterErrorPage if no transactions are filtered
+      {!isFilterVisible && !filteredTransactions.length && (
         <FilterErrorPage/>
       )}
     </div>

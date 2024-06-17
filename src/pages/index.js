@@ -5,12 +5,6 @@ import SearchBar from "@/src/components/SearchBar";
 import transactionsData from "@/src/data/transactions.json";
 import SVGIcon from "@/src/components/SVGIcon";
 import { OhNoContainer } from "@/src/components/styles/OhNo";
-import {
-  ListWrapper,
-  StyledList,
-  StyledTitle,
-} from "@/src/components/styles/List";
-import { StyledListItem } from "@/src/components/StyledListItem";
 
 export default function TransactionList({ transactions }) {
   const [filteredTransactions, setFilteredTransactions] =
@@ -28,7 +22,7 @@ export default function TransactionList({ transactions }) {
         data={transactionsData}
         onSearchResults={setFilteredTransactions}
       />
-      <Link href="/transactions/TransactionForm">Add</Link>
+      <Link href="/transactions/create">Add</Link>
       {sortedTransactions.length > 0 ? (
         <ul>
           {sortedTransactions.map((transaction) => (

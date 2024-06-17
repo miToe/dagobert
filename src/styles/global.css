@@ -7,9 +7,12 @@
 :root {
     --max-width: 100%;
     --border-radius: 12px;
-    --font-outfit: "Outfit";
+    --border-radius-small: 6px;
+  --font-outfit: "Outfit";
 }
 
 body {
     font-family: var(--font-outfit), sans-serif;
+  color: var(--neutrals-dark-gray);
+  height: 100vh;
 }

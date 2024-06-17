@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import SVGIcon from "@/src/components/SVGIcon";
 
 import {
@@ -33,56 +33,59 @@ export default function SearchBar({ data, onSearchResults }) {
   const [showEasterEgg, setShowEasterEgg] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedSuggestion, setSelectedSuggestion] = useState(null);
+  const [highlightedIndex, setHighlightedIndex] = useState(-1);
 
   useEffect(() => {
     if (query.trim() === "") {
-      onSearchResults(data);
       setSuggestions([]);
       setShowEasterEgg(false);
       setIsOpen(false);
+      setHighlightedIndex(-1);
+      onSearchResults(data);
       return;
     }
 
-    // Check if the query matches the encrypted Easter Egg value
     if (encrypt(query.trim().toLowerCase()) === encryptedSecret) {
       setShowEasterEgg(true);
       setSuggestions([]);
-      onSearchResults([]);
       setIsOpen(false);
+      setHighlightedIndex(-1);
 
-      // Set a timeout to hide the Easter egg after 3 seconds
       const timer = setTimeout(() => {
         setShowEasterEgg(false);
       }, 3000);
 
-      // Cleanup the timer on component unmount or when Easter egg is hidden
       return () => clearTimeout(timer);
     } else {
       setShowEasterEgg(false);
     }
 
-    // Filter results based on the query
     const results = data.filter(function (item) {
       const values = Object.values(item).join(" ").toLowerCase();
       return values.includes(query.trim().toLowerCase());
     });
-    onSearchResults(results);
 
-    setSuggestions(results.slice(0, 5));
-    setIsOpen(results.length > 0);
-  }, [query]); // Only depend on query
+    const uniqueResults = Array.from(new Set(results.map((a) => a.id))).map(
+      (id) => results.find((a) => a.id === id)
+    );
 
-  // Clear the search input and reset the state
-  function handleClear() {
+    setSuggestions(uniqueResults.slice(0, 5));
+    setIsOpen(uniqueResults.length > 0);
+    setHighlightedIndex(-1);
+    onSearchResults(uniqueResults);
+  }, [query, data, onSearchResults]);
+
+  const handleClear = useCallback(() => {
     setQuery("");
     onSearchResults(data);
     setSuggestions([]);
     setShowEasterEgg(false);
     setIsOpen(false);
-  }
+    setSelectedSuggestion(null);
+    setHighlightedIndex(-1);
+  }, [data, onSearchResults]);
 
-  // Highlight the matching parts of the text in the suggestions
-  function highlightMatch(text, query) {
+  const highlightMatch = (text, query) => {
     if (typeof text !== "string") return text;
     const parts = text.split(new RegExp(`(${query})`, "gi"));
     return (
@@ -96,32 +99,65 @@ export default function SearchBar({ data, onSearchResults }) {
         )}
       </span>
     );
-  }
+  };
 
-  // Handle the click event on a suggestion
-  function handleSuggestionClick(suggestion) {
-    setQuery(suggestion.description);
-    setSelectedSuggestion(suggestion);
-    setSuggestions([]);
-    setIsOpen(false);
-    onSearchResults([suggestion]);
-  }
+  const handleSuggestionClick = useCallback(
+    (suggestion) => {
+      setQuery(suggestion.description);
+      setSelectedSuggestion(suggestion);
+      setSuggestions([]);
+      setIsOpen(false);
+      onSearchResults([suggestion]);
+    },
+    [onSearchResults]
+  );
 
-  // Handle focus event on the input
-  function handleInputFocus() {
+  const handleInputFocus = () => {
     if (query.trim() !== "" && suggestions.length > 0) {
       setIsOpen(true);
     }
-  }
+  };
 
-  // Handle blur event on the input
-  function handleInputBlur(event) {
+  const handleInputBlur = (event) => {
     const relatedTarget = event.relatedTarget;
     if (relatedTarget && relatedTarget.classList.contains("suggestion-item")) {
       return;
     }
     setIsOpen(false);
-  }
+  };
+
+  const handleKeyDown = useCallback(
+    (event) => {
+      switch (event.key) {
+        case "ArrowDown":
+          event.preventDefault();
+          setHighlightedIndex((prevIndex) =>
+            prevIndex === suggestions.length - 1 ? 0 : prevIndex + 1
+          );
+          break;
+        case "ArrowUp":
+          event.preventDefault();
+          setHighlightedIndex((prevIndex) =>
+            prevIndex === 0 ? suggestions.length - 1 : prevIndex - 1
+          );
+          break;
+        case "Enter":
+          event.preventDefault();
+          if (highlightedIndex >= 0 && highlightedIndex < suggestions.length) {
+            handleSuggestionClick(suggestions[highlightedIndex]);
+          }
+          break;
+        case "Tab":
+          if (highlightedIndex === suggestions.length - 1) {
+            setIsOpen(false);
+          }
+          break;
+        default:
+          break;
+      }
+    },
+    [highlightedIndex, suggestions, handleSuggestionClick]
+  );
 
   return (
     <SearchBarContainer>
@@ -136,6 +172,7 @@ export default function SearchBar({ data, onSearchResults }) {
         aria-expanded={isOpen ? "true" : "false"}
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
+        onKeyDown={handleKeyDown}
       />
       {query && (
         <ClearButton onClick={handleClear}>
@@ -157,9 +194,12 @@ export default function SearchBar({ data, onSearchResults }) {
             {suggestions.map((suggestion, index) => (
               <SuggestionItem
                 key={index}
-                onClick={() => handleSuggestionClick(suggestion)}
+                onMouseDown={() => handleSuggestionClick(suggestion)}
                 className="suggestion-item"
                 aria-selected={selectedSuggestion === suggestion}
+                style={{
+                  backgroundColor: index === highlightedIndex ? "#bde4ff" : "",
+                }}
               >
                 {highlightMatch(suggestion.description, query)} - $
                 {suggestion.amount}

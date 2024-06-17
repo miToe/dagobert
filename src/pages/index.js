@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import Link from "next/link";
 import {
   ListWrapper,
@@ -14,11 +14,10 @@ export default function TransactionList({ transactions, onCurrencySymbol }) {
   const [filteredTransactions, setFilteredTransactions] =
     useState(transactions);
 
-  const handleSearchResults = (results) => {
+  const handleSearchResults = useCallback((results) => {
     setFilteredTransactions(results);
-  };
+  }, []);
 
-  // Sort transactions by date in descending order
   const sortedTransactions = filteredTransactions
     .slice()
     .sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -27,7 +26,7 @@ export default function TransactionList({ transactions, onCurrencySymbol }) {
     <ListWrapper>
       <StyledTitle>Transactions</StyledTitle>
       <SearchBar data={transactions} onSearchResults={handleSearchResults} />
-      {sortedTransactions.length > 0 ? (
+      {filteredTransactions.length > 0 ? (
         <StyledList>
           {sortedTransactions.map((transaction) => (
             <li key={transaction.id}>

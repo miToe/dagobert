@@ -5,7 +5,7 @@ import {
   CalendarWrapper,
   InputWrapper,
   DateIconWrapper,
-} from "@/src/components/styles/DateFilteredStyled";
+} from "@/src/components/styles/DateFilterStyled";
 
 import SVGIcon from "@/src/components/SVGIcon";
 import { useRef, useEffect } from "react";

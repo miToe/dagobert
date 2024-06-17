@@ -17,10 +17,8 @@ export default function TransactionList({ transactions }) {
     useState(transactionsData);
 
   // Sort transactions by date in descending order
-  const sortedTransactions = transactions.slice().sort(
+  const sortedTransactions = filteredTransactions.sort(
     (a, b) => new Date(b.date) - new Date(a.date)
-    // const sortedTransactions = filteredTransactions.sort(
-    //   (a, b) => new Date(b.date) - new Date(a.date)
   );
 
   return (

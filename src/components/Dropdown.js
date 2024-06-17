@@ -22,12 +22,17 @@ export default function Dropdown({
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(defaultSelected || "");
-  const [focusedIndex, setFocusedIndex] = useState(-1);
+  const [focusedIndex, setFocusedIndex] = useState(
+    options.findIndex((option) => option === defaultSelected)
+  );
 
   useEffect(() => {
     function handleClickOutside(event) {
       if (isOpen && !event.target.closest(".dropdown-container")) {
         setIsOpen(false);
+        setFocusedIndex(
+          options.findIndex((option) => option === selectedOption)
+        );
       }
     }
 
@@ -35,7 +40,7 @@ export default function Dropdown({
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [isOpen]);
+  }, [isOpen, selectedOption, options]);
 
   useEffect(() => {
     if (isOpen && focusedIndex >= 0) {
@@ -49,16 +54,21 @@ export default function Dropdown({
       event.preventDefault();
       setIsOpen((prev) => !prev);
       if (!isOpen) {
-        setFocusedIndex(0);
+        setFocusedIndex(
+          options.findIndex((option) => option === selectedOption)
+        );
+      } else {
+        setFocusedIndex(-1); // Reset focus when closing the dropdown
       }
     },
-    [isOpen]
+    [isOpen, selectedOption, options]
   );
 
   const handleOptionClick = useCallback(
-    (option) => {
+    (option, index) => {
       setSelectedOption(option);
       setIsOpen(false);
+      setFocusedIndex(index); // Set focus to the selected option
       onOptionClick(option);
     },
     [onOptionClick]
@@ -72,12 +82,15 @@ export default function Dropdown({
       ) {
         event.preventDefault();
         setIsOpen(true);
-        setFocusedIndex(0);
+        setFocusedIndex(
+          options.findIndex((option) => option === selectedOption)
+        );
       } else if (event.key === "Escape") {
         setIsOpen(false);
+        setFocusedIndex(-1);
       }
     },
-    [isOpen]
+    [isOpen, selectedOption, options]
   );
 
   const handleMenuKeyDown = useCallback(
@@ -94,14 +107,16 @@ export default function Dropdown({
         const nextIndex = (currentIndex + 1) % options.length;
         if (nextIndex === 0) {
           setIsOpen(false);
+          setFocusedIndex(-1);
         } else {
           setFocusedIndex(nextIndex);
         }
       } else if (event.key === "Escape") {
         setIsOpen(false);
+        setFocusedIndex(-1);
       } else if (["Enter", " "].includes(event.key)) {
         event.preventDefault();
-        handleOptionClick(options[currentIndex]);
+        handleOptionClick(options[currentIndex], currentIndex);
       }
     },
     [focusedIndex, options, handleOptionClick]
@@ -138,7 +153,7 @@ export default function Dropdown({
               role="option"
               tabIndex={0}
               aria-selected={selectedOption === option}
-              onClick={() => handleOptionClick(option)}
+              onClick={() => handleOptionClick(option, index)}
             >
               {option}
             </DropdownItem>

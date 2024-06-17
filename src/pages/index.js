@@ -8,9 +8,9 @@ import {
 import { StyledListItem } from "@/src/components/StyledListItem";
 import SearchBar from "@/src/components/SearchBar";
 
-export default function TransactionList({ transactions }) {
-  const [filteredTransactions, setFilteredTransactions] =
-    useState(transactions);
+
+export default function TransactionList({ transactions, onCurrencySymbol }) {
+  const [filteredTransactions, setFilteredTransactions] = useState(transactions);
 
   const handleSearchResults = (results) => {
     setFilteredTransactions(results);
@@ -28,7 +28,7 @@ export default function TransactionList({ transactions }) {
       <StyledList>
         {sortedTransactions.map((transaction) => (
           <li key={transaction.id}>
-            <StyledListItem transaction={transaction} />
+            <StyledListItem transaction={transaction} onCurrencySymbol={onCurrencySymbol} />
           </li>
         ))}
       </StyledList>

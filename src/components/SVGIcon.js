@@ -6,13 +6,11 @@ const getColorByVariant = ($variant) => {
       return "var(--neutrals-white)";
     case "secondary":
       return "var(--primary-500)";
-    default:
-      return "var(--neutrals-dark-gray)";
   }
 };
 
-export default function SVGIcon({ iconName, $variant, size = 24 }) {
-  const iconColor = getColorByVariant($variant);
+export default function SVGIcon({ iconName, $variant, size = 24, color }) {
+  const iconColor = color || getColorByVariant($variant);
 
   return (
     <>

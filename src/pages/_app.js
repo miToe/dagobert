@@ -7,29 +7,34 @@ import useLocalStorageState from "use-local-storage-state";
 import GlobalStyle from "@/src/styles/styles";
 import ThemeColors from "@/src/styles/theme";
 
-export default function App({ Component, pageProps}) {
-  const [transactions, setTransactions] = useLocalStorageState("transactions", {
-    defaultValue: transactionsData,
-  });
-  const [mode, setMode] = useState("default");
+export default function App({ Component, pageProps }) {
   const router = useRouter();
-  const [alert, setAlert] = useState({
-    isOpen: false,
-    alertMessage: "",
-  });
+  const [transactions, setTransactions] = useLocalStorageState("transactions", { defaultValue: transactionsData });
+  const [alert, setAlert] = useState({ isOpen: false, alertMessage: "" });
 
+  //-------------Alert logic-------------
   function handleAlert(alertMessage) {
-    setAlert({ isOpen: true, alertMessage});
+    setAlert({ isOpen: true, alertMessage });
   }
 
   function handleAlertClose() {
     setAlert({ isOpen: false, message: "" });
   }
 
-  function handleMode(mode) {
-    setMode(mode);
+  //-------------------------------------
+
+// Utility function to get currency symbol
+  function getCurrencySymbol(currencyCode) {
+    const symbols = {
+      USD: "$",
+      EUR: "€",
+      GBP: "£",
+      JPY: "¥",
+    };
+    return symbols[currencyCode] || currencyCode;
   }
 
+  //-------------Transaction form logic-------------
   function handleAddTransaction(data) {
     const newTransaction = {
       id: uid(),
@@ -39,12 +44,21 @@ export default function App({ Component, pageProps}) {
     setTransactions([newTransaction, ...transactions]);
   }
 
+  function handleEditTransaction(id, updatedTransaction) {
+    setTransactions(
+      transactions.map((transaction) =>
+        transaction.id === id ? { ...transaction, ...updatedTransaction } : transaction),
+    );
+    handleAlert("Transaction successfully updated!");
+  }
+
   function handleDelete(id) {
-    const updatedData = transactions.filter((item) => item.id !== id);
-    setTransactions(updatedData);
+    setTransactions(transactions.filter((transaction) => transaction.id !== id));
     router.push("/");
-    setMode("default");
-  handleAlert("Transaction successfully deleted!");}
+    handleAlert("Transaction successfully deleted!");
+  }
+
+  //------------------------------------------------
 
   function handleApplyFilter(filteredData) {
     setTransactions(filteredData);
@@ -60,10 +74,11 @@ export default function App({ Component, pageProps}) {
         currentFilters={{}}
         onApplyFilter={handleApplyFilter}
         onDelete={handleDelete}
+        transactions={transactions}
         onAddTransaction={handleAddTransaction}
-        mode={mode}
-        onMode={handleMode}
+        onEditTransaction={handleEditTransaction}
         onAlert={handleAlert}
+        onCurrencySymbol={getCurrencySymbol}
       />
       <Alert
         isOpen={alert.isOpen}

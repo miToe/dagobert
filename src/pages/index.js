@@ -1,10 +1,12 @@
 import Link from "next/link";
+import { ListWrapper, StyledList, StyledTitle } from "@/src/components/styles/List";
+import { StyledListItem } from "@/src/components/StyledListItem";
 import { useState } from "react";
 import Filter from "@/src/components/Filter";
-import Button from "@/src/components/Button"
+import Button from "@/src/components/Button";
 import FilterErrorPage from "../components/FilterErrorPage";
 
-export default function TransactionList({ initialData}) {
+export default function TransactionList({ initialData, onCurrencySymbol }) {
   const [isFilterVisible, setIsFilterVisible] = useState(false);
   const [filteredTransactions, setFilteredTransactions] = useState(initialData);
   const [currentFilters, setCurrentFilters] = useState({
@@ -41,29 +43,21 @@ export default function TransactionList({ initialData}) {
 
   // Sort transactions by date in descending order
   const sortedTransactions = filteredTransactions.sort(
-    (a, b) => new Date(b.date) - new Date(a.date)
+    (a, b) => new Date(b.date) - new Date(a.date),
   );
 
+
   return (
-    <div>
-      <h1>Transactions</h1>
-      <div>
-        <Link href="/transactions/TransactionForm">Add</Link>
-        <Button $variant="primary" startIcon="filter" onClick={handleOpenFilter}/>
-      </div>
-      <ul>
-        {filteredTransactions.map((transaction) => (
+    <ListWrapper>
+      <StyledTitle>Transactions</StyledTitle>
+      <Button $variant="primary" startIcon="filter" onClick={handleOpenFilter} />
+      <StyledList>
+        {sortedTransactions.map((transaction) => (
           <li key={transaction.id}>
-            <Link href={`/transactions/${transaction.id}`}>
-              <h3>{transaction.category}</h3>
-              <div>{transaction.date}</div>
-              <div>
-                {transaction.amount.toFixed(2)} {transaction.currency}
-              </div>
-            </Link>
+            <StyledListItem transaction={transaction} onCurrencySymbol={onCurrencySymbol} />
           </li>
         ))}
-      </ul>
+      </StyledList>
       {isFilterVisible && (
         <Filter
           initialData={initialData}
@@ -73,8 +67,9 @@ export default function TransactionList({ initialData}) {
         />
       )}
       {!isFilterVisible && !filteredTransactions.length && (
-        <FilterErrorPage/>
+        <FilterErrorPage />
       )}
-    </div>
+      <Link href="/transactions/create">Add</Link>
+    </ListWrapper>
   );
 }

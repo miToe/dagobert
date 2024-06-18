@@ -1,41 +1,44 @@
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Modal from "@/src/components/Modal";
-import ChevronLeft from "@/src/assets/icons/chevron_left.svg";
-import Button from "@/src/components/Button";
+import { useState } from "react";
 
 
 export default function TransactionDetails({
-                                             initialData,
+                                             transactions,
                                              onDelete,
-                                             mode,
-                                             onMode,
+                                             onCurrencySymbol,
                                            }) {
   const router = useRouter();
   const { id } = router.query;
+  const [modal, setModal] = useState(false);
 
   // Find transaction by its ID
-  const transaction = initialData.find((transaction) => transaction.id === id);
+  const transaction = transactions.find((transaction) => transaction.id === id);
 
   if (!transaction) {
     return <p>Transaction not found</p>;
   }
 
+  const displayAmount = transaction.amount.toFixed(2);
+
   return (
     <>
       <div>
-        <Link href={"/"}>
-          <ChevronLeft /> Back
-        </Link>
+        <Link href={"/"}>Back</Link>
         <h1>{transaction.category}</h1>
-        <Button startIcon="delete" onClick={() => onMode("delete")}/>
+        <button onClick={() => {
+          router.push(`/transactions/edit/${transaction.id}`);
+        }}>Edit
+        </button>
+        <button onClick={() => setModal(true)}>Delete</button>
       </div>
-      {mode === "delete" && (
+      {modal && (
         <Modal
           message="Are you sure you want to delete this entry?"
           hint="This will delete this entry permanently and cannot be undone."
           onConfirm={onDelete}
-          onCancel={onMode}
+          onCancel={() => setModal(false)}
           id={id}
         />
       )}
@@ -54,7 +57,7 @@ export default function TransactionDetails({
             <b>Amount: </b>
           </span>
           <span>
-            {transaction.amount.toFixed(2)} {transaction.currency}
+            {transaction.transactionType === "Expense" ? "-" : ""}{displayAmount} {onCurrencySymbol(transaction.currency)}
           </span>
         </li>
         <li>

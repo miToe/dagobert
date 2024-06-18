@@ -28,7 +28,7 @@ const GlobalStyle = createGlobalStyle`
 
     body {
         font-family: ${outfitFont.style.fontFamily};
-        color: var(--neutrals-dark-gray)
+        color: var(--neutrals-dark-gray);
     }
 
     h1 {

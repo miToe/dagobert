@@ -58,7 +58,7 @@ export default function DateFilter({ dateFrom, dateUntil, onDateChange }) {
               onChange={(event) => onDateChange("dateFrom", event.target.value)}
             />
             <DateIconWrapper onClick={() => handleIconClick("dateFrom")}>
-              <SVGIcon iconName={"calendar"} />
+              <SVGIcon iconName={"calendar"} color="var(--primary-500)" />
             </DateIconWrapper>
           </InputWrapper>
         </CalendarWrapper>
@@ -75,7 +75,7 @@ export default function DateFilter({ dateFrom, dateUntil, onDateChange }) {
               }
             />
             <DateIconWrapper onClick={() => handleIconClick("dateUntil")}>
-              <SVGIcon iconName={"calendar"} />
+              <SVGIcon iconName={"calendar"} color="var(--primary-500)" />
             </DateIconWrapper>
           </InputWrapper>
         </CalendarWrapper>

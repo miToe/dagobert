@@ -3,8 +3,6 @@ import styled from "styled-components";
 export const SearchBarContainer = styled.div`
   position: relative;
   width: 100%;
-  max-width: 400px;
-  margin: 0 auto;
 
   &:hover input {
     outline: 1px solid var(--primary-500);
@@ -16,8 +14,8 @@ export const SearchIcon = styled.div`
   left: 10px;
   top: 50%;
   transform: translateY(-50%);
-  width: 16px;
-  height: 16px;
+  width: 24px;
+  height: 24px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25,6 +23,7 @@ export const SearchIcon = styled.div`
 
 export const SearchInput = styled.input`
   width: 100%;
+    height: 47px;
   padding: 8px;
   text-indent: 32px;
   border-radius: var(--border-radius-small);

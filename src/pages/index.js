@@ -1,9 +1,9 @@
 import { useCallback, useState } from "react";
 import Link from "next/link";
 import {
-  ListWrapper,
+  ListWrapper, SearchFilterWrapper,
   StyledList,
-  StyledTitle
+  StyledTitle,
 } from "@/src/components/styles/List";
 import { StyledListItem } from "@/src/components/StyledListItem";
 import SearchBar from "@/src/components/SearchBar";
@@ -25,31 +25,31 @@ export default function TransactionList({ transactions, onCurrencySymbol }) {
   const [filterValues, setFilterValues] = useState(initialFilterValues);
   const [showFilter, setShowFilter] = useState(false);
 
-  const handleSearchResults = (results) => {
+  const handleSearchResults = useCallback((results) => {
     setSearchResults(results);
-  };
+  }, []);
 
-  const handleFilterChange = (newFilterValues) => {
+  const handleFilterChange = useCallback((newFilterValues) => {
     setFilterValues(newFilterValues);
-  };
+  }, []);
 
-  const filteredItems = searchResults.filter((transaction) => {
-    const matchesFilter =
+  const filteredItems = searchResults.filter((transaction) => (
       (!filterValues.dateFrom || new Date(filterValues.dateFrom) <= new Date(transaction.date)) &&
       (!filterValues.dateUntil || new Date(transaction.date) <= new Date(filterValues.dateUntil)) &&
       (filterValues.transactionType.length === 0 || filterValues.transactionType.includes(transaction.transactionType)) &&
       (filterValues.category.length === 0 || filterValues.category.includes(transaction.category)) &&
-      (filterValues.paymentMethod.length === 0 || filterValues.paymentMethod.includes(transaction.paymentMethod));
-    return matchesFilter;
-  });
+      (filterValues.paymentMethod.length === 0 || filterValues.paymentMethod.includes(transaction.paymentMethod))
+  ));
 
   const sortedTransactions = filteredItems.slice().sort((a, b) => new Date(b.date) - new Date(a.date));
 
   return (
     <ListWrapper>
       <StyledTitle>Transactions</StyledTitle>
+      <SearchFilterWrapper>
       <SearchBar data={transactions} onSearchResults={handleSearchResults} />
       <Button $variant="primary" startIcon="filter" onClick={() => setShowFilter(true)} />
+      </SearchFilterWrapper>
       {showFilter && (
         <Filter
           filterValues={filterValues}

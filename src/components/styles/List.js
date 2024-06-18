@@ -72,3 +72,9 @@ export const StyledAmount = styled.span`
     font-size: 16px;
     font-weight: 400;
 `;
+
+export const SearchFilterWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem; 
+`;

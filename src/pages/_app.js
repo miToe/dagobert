@@ -28,8 +28,6 @@ export default function App({ Component, pageProps }) {
     const symbols = {
       USD: "$",
       EUR: "€",
-      GBP: "£",
-      JPY: "¥",
     };
     return symbols[currencyCode] || currencyCode;
   }
@@ -66,8 +64,8 @@ export default function App({ Component, pageProps }) {
 
   return (
     <>
-      <GlobalStyle/>
-      <ThemeColors/>
+      <GlobalStyle />
+      <ThemeColors />
       <Component
         {...pageProps}
         initialData={transactions}

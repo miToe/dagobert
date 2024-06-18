@@ -1,4 +1,8 @@
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import Dropdown from "@/src/components/Dropdown";
+import Button from "@/src/components/styles/Button";
+import options from "@/src/data/options.json"; // Import der JSON-Datei
 import Input from "@/src/components/Input.js";
 
 export default function Form({
@@ -20,19 +24,63 @@ export default function Form({
   const router = useRouter();
   const { id } = router.query;
 
+  // Konstanten aus der importierten JSON-Datei
+  const {
+    transactionTypeOptions,
+    currencyOptions,
+    categoryOptions,
+    paymentMethodOptions,
+  } = options;
+
+  const [dropdownError, setDropdownError] = useState("");
+  const [formValues, setFormValues] = useState(initialData);
+
+  function handleOptionClick(name, option) {
+    setDropdownError("");
+    setFormValues((prevFormValues) => ({ ...prevFormValues, [name]: option }));
+  }
+
+  function handleInputChange(event) {
+    const { name, value } = event.target;
+    setFormValues((prevFormValues) => ({ ...formValues, [name]: value }));
+  }
+
   function handleSubmit(event) {
     event.preventDefault();
-    const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData);
-    const parsedData = { ...data, amount: parseFloat(data.amount) };
-    onSubmitForm(parsedData);
+
+    if (!formValues.transactionType) {
+      setDropdownError("Field required");
+      return;
+    }
+
+    setDropdownError("");
+    if (formValues.transactionType === "Expense") {
+      formValues.amount = -Math.abs(parseFloat(formValues.amount));
+    } else {
+      formValues.amount = Math.abs(parseFloat(formValues.amount));
+    }
+    onSubmitForm(formValues);
+    router.push("/");
   }
 
   function handleAmountInput(event) {
     const value = event.target.value;
-    const regex = /^(?!-)\d+(\.\d{0,2})?$/; // Disallow certain characters & negative values
-    if (!regex.test(value)) {
-      event.target.value = value.slice(0, -1);
+
+    if (value.includes("-")) {
+      event.target.value = value.replace("-", "");
+    }
+    if (value.includes(".")) {
+      const [integerPart, decimalPart] = value.split(".");
+      if (decimalPart.length > 2) {
+        event.target.value = `${integerPart}.${decimalPart.substring(0, 2)}`;
+      }
+    }
+    handleInputChange(event);
+  }
+
+  function handleAmountKeyDown(event) {
+    if (event.key === "-") {
+      event.preventDefault();
     }
   }
 
@@ -40,116 +88,117 @@ export default function Form({
     <form onSubmit={handleSubmit}>
       <div>
         {addMode && (
-          <button
+          <Button
+            variant="secondary"
             type="button"
             onClick={() => {
               router.push("/");
             }}
           >
             Cancel
-          </button>
+          </Button>
         )}
         {editMode && (
-          <button
+          <Button
+            variant="secondary"
             type="button"
             onClick={() => {
               router.push(`/transactions/${id}`);
             }}
           >
             Cancel
-          </button>
+          </Button>
         )}
         <h2>{formTitle}</h2>
-        <button type="submit">{confirmButtonText}</button>
       </div>
-      <label htmlFor="transactionType">Transaction Type</label>
-      <br />
-      <select
-        id="transactionType"
+
+      <Dropdown
+        label="Transaction Type"
         name="transactionType"
-        defaultValue={initialData.transactionType}
-        required
-      >
-        <option value="">Select a transaction type</option>
-        <option value="Income">Income</option>
-        <option value="Expense">Expense</option>
-      </select>
-      <br />
-      <label htmlFor="amount">Amount</label>
-      <br />
-      <input
-        type="number"
-        id="amount"
-        name="amount"
-        placeholder="Set an amount (e.g.: 50.00)"
-        defaultValue={Math.abs(initialData.amount)}
-        step="0.01"
-        min="0" // Ensure the value cannot be below 0
-        onInput={handleAmountInput}
-        required
+        options={transactionTypeOptions}
+        buttonText="Select a transaction type"
+        onOptionClick={(option) => handleOptionClick("transactionType", option)}
+        required={true}
+        errorMessage={dropdownError}
+        defaultSelected={formValues.transactionType}
       />
-      <br />
-      <label htmlFor="currency">Currency</label>
-      <br />
-      <select
-        id="currency"
+
+      <div>
+        <label htmlFor="amount">Amount:</label>
+        <input
+          id="amount"
+          name="amount"
+          type="number"
+          step="0.01"
+          min="0"
+          value={formValues.amount}
+          onChange={handleAmountInput}
+          onKeyDown={handleAmountKeyDown}
+          placeholder="Enter amount (e.g.: 123.45)"
+          required
+        />
+      </div>
+
+      <Dropdown
+        label="Currency:"
         name="currency"
-        defaultValue={initialData.currency}
-        required
-      >
-        <option value="EUR">EUR</option>
-        <option value="USD">USD</option>
-      </select>
-      <br />
-      <label htmlFor="date">Date</label>
-      <br />
-      <input
-        type="date"
-        id="date"
-        name="date"
-        defaultValue={initialData.date}
-        required
+        options={currencyOptions}
+        buttonText={formValues.currency || "Select a currency"}
+        onOptionClick={(option) => handleOptionClick("currency", option)}
+        required={true}
+        errorMessage=""
+        defaultSelected={formValues.currency}
       />
-      <br />
-      <label htmlFor="category">Category</label>
-      <br />
-      <select
-        id="category"
+
+      <Dropdown
+        label="Category:"
         name="category"
-        defaultValue={initialData.category}
-        required
-      >
-        <option value="">Select category</option>
-        <option value="Groceries">Groceries</option>
-        <option value="Transport">Transport</option>
-        <option value="Clothing">Clothing</option>
-        <option value="Entertainment">Entertainment</option>
-        <option value="Utilities">Utilities</option>
-        <option value="Healthcare">Healthcare</option>
-      </select>
-      <br />
-      <label htmlFor="paymentMethod">Payment Method</label>
-      <br />
-      <select
-        id="paymentMethod"
-        name="paymentMethod"
-        defaultValue={initialData.paymentMethod}
-        required
-      >
-        <option value="">Select payment method</option>
-        <option value="Cash">Cash</option>
-        <option value="Debit card">Debit card</option>
-        <option value="Credit card">Credit card</option>
-        <option value="PayPal">PayPal</option>
-        <option value="Apple Pay">Apple Pay</option>
-      </select>
-      <br />{" "}
-      <Input
-        initialData={initialData}
-        label="Description:"
-        name="description"
-        placeholder="Enter your description here..."
+        options={categoryOptions}
+        buttonText={formValues.category || "Select a category"}
+        onOptionClick={(option) => handleOptionClick("category", option)}
+        required={true}
+        errorMessage=""
+        defaultSelected={formValues.category}
       />
+
+      <div>
+        <label htmlFor="date">Date:</label>
+        <input
+          id="date"
+          name="date"
+          type="date"
+          value={formValues.date}
+          onChange={handleInputChange}
+          required
+        />
+      </div>
+
+      <div>
+        <label htmlFor="description">Description:</label>
+        <textarea
+          id="description"
+          name="description"
+          rows="5"
+          cols="30"
+          value={formValues.description}
+          onChange={handleInputChange}
+          placeholder="Enter description (optional)"
+        />
+      </div>
+
+      <Dropdown
+        label="Payment Method:"
+        name="paymentMethod"
+        options={paymentMethodOptions}
+        buttonText={formValues.paymentMethod || "Select Payment Method"}
+        onOptionClick={(option) => handleOptionClick("paymentMethod", option)}
+        required={true}
+        errorMessage=""
+        defaultSelected={formValues.paymentMethod}
+      />
+      <Button variant="primary" endIcon="add" type="submit">
+        {confirmButtonText}
+      </Button>
     </form>
   );
 }

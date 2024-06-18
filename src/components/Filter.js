@@ -1,12 +1,6 @@
-import { useState, useEffect, useRef } from "react";
-import { useRouter } from "next/router";
+import { useEffect, useRef, useState } from "react";
 import Button from "@/src/components/Button";
-import {
-  Overlay,
-  FilterContainer,
-  FilterSection,
-  ButtonContainer,
-} from "@/src/components/styles/FilterStyled";
+import { ButtonContainer, FilterContainer, FilterSection, Overlay } from "@/src/components/styles/FilterStyled";
 import Checkbox from "@/src/components/Checkbox";
 import { CheckboxGroup } from "@/src/components/styles/CheckboxStyled";
 import DateFilter from "@/src/components/DateFilter";
@@ -22,7 +16,6 @@ export default function Filter({ initialData, currentFilters, onApplyFilter, onC
   });
   const [filterSuccess, setFilterSuccess] = useState(true);
   const filterRef = useRef(null);
-  const router = useRouter();
 
   useEffect(() => {
     setSelectedFilters({
@@ -84,7 +77,6 @@ export default function Filter({ initialData, currentFilters, onApplyFilter, onC
       setFilterSuccess(true);
     } else {
       setFilterSuccess(false);
-      router.push("/filter-error");
     }
   };
 

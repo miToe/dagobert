@@ -23,7 +23,9 @@ export default function Dropdown({
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(defaultSelected || "");
   const [focusedIndex, setFocusedIndex] = useState(
-    options.findIndex((option) => option === defaultSelected)
+    defaultSelected
+      ? options.findIndex((option) => option === defaultSelected)
+      : -1
   );
 
   useEffect(() => {
@@ -37,8 +39,10 @@ export default function Dropdown({
     }
 
     document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
     };
   }, [isOpen, selectedOption, options]);
 
@@ -55,8 +59,10 @@ export default function Dropdown({
       setIsOpen((prev) => !prev);
       if (!isOpen) {
         setFocusedIndex(
-          options.findIndex((option) => option === selectedOption)
-        );
+          options.findIndex((option) => option === selectedOption) >= 0
+            ? options.findIndex((option) => option === selectedOption)
+            : 0
+        ); // Focus on the selected option or the first option when opening
       } else {
         setFocusedIndex(-1); // Reset focus when closing the dropdown
       }
@@ -76,21 +82,20 @@ export default function Dropdown({
 
   const handleKeyDown = useCallback(
     (event) => {
-      if (
-        ["Enter", " ", "ArrowDown"].includes(event.key) ||
-        (event.key === "Tab" && !isOpen)
-      ) {
+      if (["Enter", " ", "ArrowDown"].includes(event.key)) {
         event.preventDefault();
         setIsOpen(true);
         setFocusedIndex(
-          options.findIndex((option) => option === selectedOption)
-        );
+          options.findIndex((option) => option === selectedOption) >= 0
+            ? options.findIndex((option) => option === selectedOption)
+            : 0
+        ); // Focus on the selected option or the first option when opening
       } else if (event.key === "Escape") {
         setIsOpen(false);
         setFocusedIndex(-1);
       }
     },
-    [isOpen, selectedOption, options]
+    [selectedOption, options]
   );
 
   const handleMenuKeyDown = useCallback(
@@ -102,14 +107,17 @@ export default function Dropdown({
         const nextIndex =
           (currentIndex + offset + options.length) % options.length;
         setFocusedIndex(nextIndex);
+        const optionElement = document.getElementById(`option-${nextIndex}`);
+        optionElement?.focus();
       } else if (event.key === "Tab") {
         event.preventDefault();
-        const nextIndex = (currentIndex + 1) % options.length;
-        if (nextIndex === 0) {
+        const nextIndex = currentIndex + 1;
+        if (nextIndex < options.length) {
+          setFocusedIndex(nextIndex);
+        } else {
           setIsOpen(false);
           setFocusedIndex(-1);
-        } else {
-          setFocusedIndex(nextIndex);
+          document.getElementById(name)?.focus();
         }
       } else if (event.key === "Escape") {
         setIsOpen(false);
@@ -119,7 +127,7 @@ export default function Dropdown({
         handleOptionClick(options[currentIndex], currentIndex);
       }
     },
-    [focusedIndex, options, handleOptionClick]
+    [focusedIndex, options, handleOptionClick, name]
   );
 
   return (
@@ -134,6 +142,7 @@ export default function Dropdown({
       <DropdownButton
         id={name}
         onClick={toggleDropdown}
+        onTouchStart={toggleDropdown}
         onKeyDown={handleKeyDown}
         aria-expanded={isOpen}
         aria-haspopup="listbox"
@@ -152,8 +161,9 @@ export default function Dropdown({
               id={`option-${index}`}
               role="option"
               tabIndex={0}
-              aria-selected={selectedOption === option}
+              aria-selected={selectedOption === option ? "true" : "false"}
               onClick={() => handleOptionClick(option, index)}
+              onTouchStart={() => handleOptionClick(option, index)}
             >
               {option}
             </DropdownItem>

@@ -11,7 +11,6 @@ const getColorByVariant = ($variant) => {
 
 export default function SVGIcon({ iconName, $variant, size = 24, color }) {
   const iconColor = color || getColorByVariant($variant);
-
   return (
     <>
       <svg

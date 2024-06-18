@@ -1,0 +1,6 @@
+{
+    "transactionTypeOptions": ["Expense", "Income"],
+    "currencyOptions": ["EUR", "USD"],
+    "categoryOptions": ["Entertainment", "Food", "Shopping", "Transport"],
+    "paymentMethodOptions": ["Credit Card", "Debit Card", "Cash", "PayPal"]
+  }

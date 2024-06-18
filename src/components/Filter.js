@@ -1,31 +1,22 @@
-import { useEffect, useRef, useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Button from "@/src/components/Button";
-import { ButtonContainer, FilterContainer, FilterSection, Overlay } from "@/src/components/styles/FilterStyled";
+import {
+  Overlay,
+  FilterContainer,
+  FilterSection,
+  ButtonContainer,
+} from "@/src/components/styles/FilterStyled";
 import Checkbox from "@/src/components/Checkbox";
 import { CheckboxGroup } from "@/src/components/styles/CheckboxStyled";
 import DateFilter from "@/src/components/DateFilter";
 
-export default function Filter({ initialData, currentFilters, onApplyFilter, onClose }) {
-  const [selectedFilters, setSelectedFilters] = useState({
-    dateFrom: "",
-    dateUntil: "",
-    transactionType: [],
-    category: [],
-    paymentMethod: [],
-
-  });
-  const [filterSuccess, setFilterSuccess] = useState(true);
+export default function Filter({ filterValues, onFilterChange, onClose }) {
+  const [selectedFilters, setSelectedFilters] = useState(filterValues);
   const filterRef = useRef(null);
 
   useEffect(() => {
-    setSelectedFilters({
-      transactionType: currentFilters.transactionType || [],
-      category: currentFilters.category || [],
-      paymentMethod: currentFilters.paymentMethod || [],
-      dateFrom: currentFilters.dateFrom || "",
-      dateUntil: currentFilters.dateUntil || "",
-    });
-  }, [currentFilters]);
+    setSelectedFilters(filterValues);
+  }, [filterValues]);
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -57,38 +48,21 @@ export default function Filter({ initialData, currentFilters, onApplyFilter, onC
   };
 
   const handleApplyFilter = () => {
-    const { transactionType, category, paymentMethod, dateFrom, dateUntil } = selectedFilters;
-
-    const filteredData = initialData.filter((transaction) => {
-      const transactionDate = new Date(transaction.date);
-      const isDateInRange = (!dateFrom || new Date(dateFrom) <= transactionDate) &&
-        (!dateUntil || transactionDate <= new Date(dateUntil));
-
-      return (
-        isDateInRange &&
-        (transactionType.length === 0 || transactionType.includes(transaction.transactionType)) &&
-        (category.length === 0 || category.includes(transaction.category)) &&
-        (paymentMethod.length === 0 || paymentMethod.includes(transaction.paymentMethod))
-      );
-    });
-    if (filteredData.length > 0) {
-      onApplyFilter(selectedFilters);
-      onClose();
-      setFilterSuccess(true);
-    } else {
-      setFilterSuccess(false);
-    }
+    onFilterChange(selectedFilters);
+    onClose();
   };
 
   const handleClearAll = () => {
-    setSelectedFilters({
+    const clearedFilters = {
       transactionType: [],
       category: [],
       paymentMethod: [],
       dateFrom: "",
       dateUntil: "",
-    });
-    setFilterSuccess(true);
+    };
+    setSelectedFilters(clearedFilters);
+    onFilterChange(clearedFilters);
+    onClose();
   };
 
   return (

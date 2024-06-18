@@ -81,9 +81,9 @@ export default function Filter({ initialData, currentFilters, onApplyFilter, onC
     if (filteredData.length > 0) {
       onApplyFilter(selectedFilters);
       onClose();
-      setFilterSuccess(true); // Filter success
+      setFilterSuccess(true);
     } else {
-      setFilterSuccess(false); // Filter failure
+      setFilterSuccess(false);
       router.push("/filter-error");
     }
   };

@@ -11,8 +11,8 @@ export default function TransactionList({ initialData}) {
     transactionType: [],
     category: [],
     paymentMethod: [],
-    dateFrom: [],
-    dateUntil: [],
+    dateFrom: "",
+    dateUntil: "",
   });
 
   const handleOpenFilter = () => {
@@ -31,11 +31,12 @@ export default function TransactionList({ initialData}) {
         (filters.transactionType.length === 0 || filters.transactionType.includes(transaction.transactionType)) &&
         (filters.category.length === 0 || filters.category.includes(transaction.category)) &&
         (filters.paymentMethod.length === 0 || filters.paymentMethod.includes(transaction.paymentMethod)) &&
-        (!filters.dateFrom || new Date(transaction.date) >= new Date(filters.dateFrom)) &&
-        (!filters.dateUntil || new Date(transaction.date) <= new Date(filters.dateUntil))
+        (filters.dateFrom === "" || new Date(transaction.date) >= new Date(filters.dateFrom)) &&
+        (filters.dateUntil === "" || new Date(transaction.date) <= new Date(filters.dateUntil))
       );
     });
     setFilteredTransactions(filtered);
+    setIsFilterVisible(false);
   };
 
   // Sort transactions by date in descending order

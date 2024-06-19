@@ -3,6 +3,16 @@ import { useRouter } from "next/router";
 import Dropdown from "@/src/components/Dropdown";
 import Button from "@/src/components/Button";
 import options from "@/src/data/options.json";
+import AmountInput from "@/src/components/AmountInput";
+import Input from "@/src/components/Input";
+import {
+  DateInputLabel,
+  DateInput,
+  InputWrapper,
+  DateIconWrapper,
+} from "@/src/components/styles/DateFilterStyled";
+import SVGIcon from "@/src/components/SVGIcon";
+import { useRef, useEffect } from "react";
 
 export default function Form({
                                onSubmitForm,
@@ -30,6 +40,7 @@ export default function Form({
   } = options;
   const [formValues, setFormValues] = useState(initialData);
   const [errors, setErrors] = useState({});
+  const dateRef = useRef(null);
   const handleOptionClick = (name, option) => {
     setErrors((prev) => ({ ...prev, [name]: "" }));
     setFormValues((prev) => ({ ...prev, [name]: option }));
@@ -60,6 +71,29 @@ export default function Form({
     }
     setFormValues((prev) => ({ ...prev, amount: value }));
   };
+
+  const handleDateChange = (event) => {
+    setFormValues((prev) => ({ ...prev, date: event.target.value }));
+  };
+
+  const handleIconClick = () => {
+    dateRef.current.focus();
+    dateRef.current.showPicker();
+  };
+
+  const handleOutsideClick = (event) => {
+    if (dateRef.current && !dateRef.current.contains(event.target)) {
+      dateRef.current.blur();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
+
   return (
     <form onSubmit={handleSubmit}>
       <div>
@@ -97,21 +131,18 @@ export default function Form({
         errorMessage={errors.transactionType}
         defaultSelected={formValues.transactionType}
       />
-      <div>
-        <label htmlFor="amount">Amount:</label>
-        <input
-          id="amount"
-          name="amount"
-          type="number"
-          step="0.01"
-          min="0"
-          value={formValues.amount}
-          onChange={handleAmountInput}
-          onKeyDown={(e) => e.key === "-" && e.preventDefault()}
-          placeholder="Enter amount (e.g.: 123.45)"
-          required
-        />
-      </div>
+      <AmountInput
+        id="amount"
+        name="amount"
+        type="number"
+        step="0.01"
+        min="0"
+        value={formValues.amount}
+        onChange={handleAmountInput}
+        onKeyDown={(e) => e.key === "-" && e.preventDefault()}
+        placeholder="0,00"
+        required
+      />
       <Dropdown
         label="Currency"
         name="currency"
@@ -132,29 +163,26 @@ export default function Form({
         errorMessage={errors.category}
         defaultSelected={formValues.category}
       />
-      <div>
-        <label htmlFor="date">Date:</label>
-        <input
+      <DateInputLabel>Date:</DateInputLabel>
+      <InputWrapper>
+        <DateInput
           id="date"
-          name="date"
+          ref={dateRef}
           type="date"
           value={formValues.date}
-          onChange={handleInputChange}
+          onChange={handleDateChange}
           required
         />
-      </div>
-      <div>
-        <label htmlFor="description">Description:</label>
-        <textarea
-          id="description"
-          name="description"
-          rows="5"
-          cols="30"
-          value={formValues.description}
-          onChange={handleInputChange}
-          placeholder="Enter description (optional)"
-        />
-      </div>
+        <DateIconWrapper onClick={handleIconClick}>
+          <SVGIcon iconName={"calendar"} color="var(--primary-500)" />
+        </DateIconWrapper>
+      </InputWrapper>
+      <Input
+        label="Description"
+        name="description"
+        placeholder="Enter description (optional)"
+        intialData={formValues}
+      />
       <Dropdown
         label="Payment Method"
         name="paymentMethod"

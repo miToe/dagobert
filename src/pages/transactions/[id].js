@@ -70,7 +70,11 @@ export default function TransactionDetails({
         </StyledDetailAmount>
         <StyledDetailItem>
           <StyledCategoryTitle>Date</StyledCategoryTitle>
-          <span>{transaction.date}</span>
+          <span>{new Date(transaction.date).toLocaleDateString("en-GB", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+          }).split("/").join(".")}</span>
         </StyledDetailItem>
         <StyledDetailItem>
           <StyledCategoryTitle>Category</StyledCategoryTitle>

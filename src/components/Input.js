@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Label, Textarea } from "/src/components/styles/InputField.js";
+import { Label, Textarea } from "/src/components/styles/StyledInputField.js";
 
 export default function Input({ label, name, placeholder, initialData }) {
   const [isFilled, setIsFilled] = useState(false);

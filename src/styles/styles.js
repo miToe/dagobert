@@ -17,6 +17,7 @@ const GlobalStyle = createGlobalStyle`
 
     :root {
         --max-width: 100%;
+        --border-radius-big: 16px;
         --border-radius: 12px;
         --border-radius-small: 6px;
         --font-outfit: "Outfit";
@@ -29,26 +30,28 @@ const GlobalStyle = createGlobalStyle`
     body {
         font-family: ${outfitFont.style.fontFamily};
         color: var(--neutrals-dark-gray);
+
+        > div {
+            width: 80%;
+            margin: 0 auto;
+        }
     }
 
     h1 {
-        padding-top: 16px;
         font-weight: 700; /*bold*/
     }
-    
+
     h2 {
-        padding-top: 16px;
         font-weight: 600; /*semibold*/
     }
 
     h3 {
-        padding-top: 16px;
         font-weight: 600; /*semibold*/
     }
 
     h4 {
         font-weight: 500; /*medium*/
     }
-`
+`;
 
 export default GlobalStyle;

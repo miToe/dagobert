@@ -6,6 +6,8 @@ const getColorByVariant = ($variant) => {
       return "var(--neutrals-white)";
     case "secondary":
       return "var(--primary-500)";
+    default:
+      return "var(--neutrals-dark-gray)";
   }
 };
 

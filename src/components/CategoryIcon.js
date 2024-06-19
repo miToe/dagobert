@@ -1,4 +1,4 @@
-import { IconWrapper } from "@/src/components/styles/List";
+import { IconWrapper } from "@/src/components/styles/StyledList";
 import { categories } from "@/src/data/categories";
 import SVGIcon from "@/src/components/SVGIcon";
 

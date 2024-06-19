@@ -10,7 +10,7 @@ export const Overlay = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    z-index: 1;
 `;
 
 export const FilterContainer = styled.div`
@@ -20,8 +20,7 @@ export const FilterContainer = styled.div`
     background-color: white;
     padding: 25px;
     border-radius: 12px;
-    width: 40%;
-    z-index: 1010;
+    width: 80%;
 `;
 
 export const FilterSection = styled.div`

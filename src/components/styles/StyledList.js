@@ -4,15 +4,15 @@ import Link from "next/link";
 export const ListWrapper = styled.div`
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 1.5rem;
     color: #667080;
-    max-width: 60%;
-    margin: 2rem auto 0 auto;
+    width: 100%;
 `;
-
 export const StyledTitle = styled.h1`
     font-size: 24px;
     font-weight: 600;
+    margin-top: 30px;
 `;
 
 export const StyledList = styled.ul`
@@ -74,7 +74,7 @@ export const StyledAmount = styled.span`
 `;
 
 export const SearchFilterWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1rem; 
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 `;

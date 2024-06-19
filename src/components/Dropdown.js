@@ -1,31 +1,31 @@
-import { useState, useEffect, useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import SVGIcon from "@/src/components/SVGIcon";
 import {
-  DropdownContainer,
-  DropdownLabel,
   DropdownButton,
-  DropdownMenu,
+  DropdownContainer,
   DropdownItem,
+  DropdownLabel,
+  DropdownMenu,
   ErrorMessage,
   IconWrapper,
-} from "@/src/components/styles/Dropdown";
+} from "@/src/components/styles/StyledDropdown";
 
 export default function Dropdown({
-  label,
-  name,
-  options,
-  buttonText,
-  onOptionClick,
-  required,
-  errorMessage,
-  defaultSelected,
-}) {
+                                   label,
+                                   name,
+                                   options,
+                                   buttonText,
+                                   onOptionClick,
+                                   required,
+                                   errorMessage,
+                                   defaultSelected,
+                                 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(defaultSelected || "");
   const [focusedIndex, setFocusedIndex] = useState(
     defaultSelected
       ? options.findIndex((option) => option === defaultSelected)
-      : -1
+      : -1,
   );
 
   useEffect(() => {
@@ -33,7 +33,7 @@ export default function Dropdown({
       if (isOpen && !event.target.closest(".dropdown-container")) {
         setIsOpen(false);
         setFocusedIndex(
-          options.findIndex((option) => option === selectedOption)
+          options.findIndex((option) => option === selectedOption),
         );
       }
     }
@@ -61,13 +61,13 @@ export default function Dropdown({
         setFocusedIndex(
           options.findIndex((option) => option === selectedOption) >= 0
             ? options.findIndex((option) => option === selectedOption)
-            : 0
+            : 0,
         ); // Focus on the selected option or the first option when opening
       } else {
         setFocusedIndex(-1); // Reset focus when closing the dropdown
       }
     },
-    [isOpen, selectedOption, options]
+    [isOpen, selectedOption, options],
   );
 
   const handleOptionClick = useCallback(
@@ -77,7 +77,7 @@ export default function Dropdown({
       setFocusedIndex(index); // Set focus to the selected option
       onOptionClick(option);
     },
-    [onOptionClick]
+    [onOptionClick],
   );
 
   const handleKeyDown = useCallback(
@@ -88,14 +88,14 @@ export default function Dropdown({
         setFocusedIndex(
           options.findIndex((option) => option === selectedOption) >= 0
             ? options.findIndex((option) => option === selectedOption)
-            : 0
+            : 0,
         ); // Focus on the selected option or the first option when opening
       } else if (event.key === "Escape") {
         setIsOpen(false);
         setFocusedIndex(-1);
       }
     },
-    [selectedOption, options]
+    [selectedOption, options],
   );
 
   const handleMenuKeyDown = useCallback(
@@ -127,7 +127,7 @@ export default function Dropdown({
         handleOptionClick(options[currentIndex], currentIndex);
       }
     },
-    [focusedIndex, options, handleOptionClick, name]
+    [focusedIndex, options, handleOptionClick, name],
   );
 
   return (

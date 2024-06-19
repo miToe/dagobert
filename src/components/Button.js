@@ -1,9 +1,9 @@
-import SVGIcon from "@/src/components/SVGIcon.js"
-import { ButtonStyled, IconWrapper } from "@/src/components/styles/ButtonStyled";
+import SVGIcon from "@/src/components/SVGIcon.js";
+import { IconWrapper, StyledButton } from "@/src/components/styles/StyledButton";
 
-export default function Button ({$variant = 'primary', startIcon, endIcon, children, onClick, ...props }) {
+export default function Button({ $variant = "primary", startIcon, endIcon, children, onClick, ...props }) {
   return (
-    <ButtonStyled $variant={$variant} onClick={onClick} {...props}>
+    <StyledButton $variant={$variant} onClick={onClick} {...props}>
       {startIcon && (
         <IconWrapper start="true">
           <SVGIcon iconName={startIcon} $variant={$variant} />
@@ -15,7 +15,7 @@ export default function Button ({$variant = 'primary', startIcon, endIcon, child
           <SVGIcon iconName={endIcon} $variant={$variant} />
         </IconWrapper>
       )}
-    </ButtonStyled>
+    </StyledButton>
   );
 };
 

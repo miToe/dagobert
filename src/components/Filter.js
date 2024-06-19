@@ -1,13 +1,8 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Button from "@/src/components/Button";
-import {
-  Overlay,
-  FilterContainer,
-  FilterSection,
-  ButtonContainer,
-} from "@/src/components/styles/FilterStyled";
+import { ButtonContainer, FilterContainer, FilterSection, Overlay } from "@/src/components/styles/StyledFilter";
 import Checkbox from "@/src/components/Checkbox";
-import { CheckboxGroup } from "@/src/components/styles/CheckboxStyled";
+import { CheckboxGroup } from "@/src/components/styles/StyledCheckbox";
 import DateFilter from "@/src/components/DateFilter";
 
 export default function Filter({ filterValues, onFilterChange, onClose }) {

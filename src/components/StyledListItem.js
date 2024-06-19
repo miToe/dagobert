@@ -6,7 +6,7 @@ import {
   StyledCategory,
   StyledDate,
   StyledLink,
-} from "@/src/components/styles/List";
+} from "@/src/components/styles/StyledList";
 import { CategoryIcon } from "@/src/components/CategoryIcon";
 
 export function StyledListItem({ transaction, onCurrencySymbol }) {

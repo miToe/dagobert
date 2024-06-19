@@ -66,6 +66,12 @@ export default function App({ Component, pageProps }) {
     <>
       <GlobalStyle />
       <ThemeColors />
+      <Alert
+        isOpen={alert.isOpen}
+        message={alert.alertMessage}
+        onAlertClose={handleAlertClose}
+        duration={2000}
+      />
       <Component
         {...pageProps}
         initialData={transactions}
@@ -78,12 +84,7 @@ export default function App({ Component, pageProps }) {
         onAlert={handleAlert}
         onCurrencySymbol={getCurrencySymbol}
       />
-      <Alert
-        isOpen={alert.isOpen}
-        message={alert.alertMessage}
-        onAlertClose={handleAlertClose}
-        duration={3000}
-      />
+
     </>
   );
 }

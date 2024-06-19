@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import Modal from "@/src/components/Modal";
 import { useState } from "react";
+import Button from "/src/components/Button"
 
 
 export default function TransactionDetails({
@@ -27,11 +28,11 @@ export default function TransactionDetails({
       <div>
         <Link href={"/"}>Back</Link>
         <h1>{transaction.category}</h1>
-        <button onClick={() => {
+        <Button $variant="primary" onClick={() => {
           router.push(`/transactions/edit/${transaction.id}`);
         }}>Edit
-        </button>
-        <button onClick={() => setModal(true)}>Delete</button>
+        </Button>
+        <Button $variant="secondary" onClick={() => setModal(true)}>Delete</Button>
       </div>
       {modal && (
         <Modal

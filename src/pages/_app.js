@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import transactionsData from "@/src/data/transactions.json";
-import "@/src/styles/global.css";
 import { uid } from "uid";
 import Alert from "@/src/components/Alert";
 import useLocalStorageState from "use-local-storage-state";
-import "@/src/styles/ui-colors.css";
+import GlobalStyle from "@/src/styles/styles";
+import ThemeColors from "@/src/styles/theme";
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
@@ -28,8 +28,6 @@ export default function App({ Component, pageProps }) {
     const symbols = {
       USD: "$",
       EUR: "€",
-      GBP: "£",
-      JPY: "¥",
     };
     return symbols[currencyCode] || currencyCode;
   }
@@ -60,10 +58,19 @@ export default function App({ Component, pageProps }) {
 
   //------------------------------------------------
 
+  function handleApplyFilter(filteredData) {
+    setTransactions(filteredData);
+  }
+
   return (
     <>
+      <GlobalStyle />
+      <ThemeColors />
       <Component
         {...pageProps}
+        initialData={transactions}
+        currentFilters={{}}
+        onApplyFilter={handleApplyFilter}
         onDelete={handleDelete}
         transactions={transactions}
         onAddTransaction={handleAddTransaction}

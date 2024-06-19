@@ -13,7 +13,7 @@ export function CategoryIcon({ category }) {
     <IconWrapper $backgroundColor={categoryData.background}>
       <SVGIcon
         iconName={categoryData.title}
-        iconColor={categoryData.color}
+        color={categoryData.color}
       />
     </IconWrapper>
   );

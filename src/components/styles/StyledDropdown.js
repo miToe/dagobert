@@ -66,6 +66,27 @@ export const DropdownMenu = styled.div`
     overflow-y: auto;
     border: 1px solid var(--primary-500);
     border-radius: 0 0 var(--border-radius-small) var(--border-radius-small);
+
+    /* Custom scrollbar styles */
+
+    &::-webkit-scrollbar {
+        width: 12px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: var(--neutrals-light-gray);
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--primary-500);
+        border-radius: 10px;
+        border: 3px solid var(--neutrals-light-gray);
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background-color: var(--primary-700);
+    }
 `;
 
 export const DropdownItem = styled.div`

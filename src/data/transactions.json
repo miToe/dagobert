@@ -1,6 +1,6 @@
 [
   {
-    "id": "1",
+    "id": "97u455fs8agd2bo",
     "date": "2024-05-01",
     "amount": 50.00,
     "currency": "USD",
@@ -10,53 +10,273 @@
     "transactionType": "Expense"
   },
   {
-    "id": "2",
+    "id": "48j2l9da4gd78nq",
     "date": "2024-05-02",
-    "amount": 25.00,
+    "amount": 2500.00,
     "currency": "USD",
-    "category": "Transport",
-    "description": "Gas for car",
-    "paymentMethod": "Debit card",
+    "category": "Salary",
+    "description": "Monthly salary",
+    "paymentMethod": "Bank transfer",
+    "transactionType": "Income"
+  },
+  {
+    "id": "58k3m1ph9gb23xy",
+    "date": "2024-05-03",
+    "amount": 75.00,
+    "currency": "USD",
+    "category": "Restaurant",
+    "description": "Dinner with friends",
+    "paymentMethod": "Credit card",
     "transactionType": "Expense"
   },
   {
-    "id": "3",
-    "date": "2024-05-05",
-    "amount": 15.00,
+    "id": "66p4j7nm4hf32zw",
+    "date": "2024-05-04",
+    "amount": 30.00,
     "currency": "USD",
-    "category": "Restaurant",
-    "description": "Lunch at a cafe",
+    "category": "Transport",
+    "description": "Taxi fare",
     "paymentMethod": "Cash",
     "transactionType": "Expense"
   },
   {
-    "id": "4",
-    "date": "2024-05-08",
-    "amount": 50.00,
+    "id": "77q5k8op5jh45ax",
+    "date": "2024-05-05",
+    "amount": 100.00,
     "currency": "USD",
-    "category": "Shopping",
-    "description": "New shoes",
-    "paymentMethod": "Credit card",
+    "category": "Entertainment",
+    "description": "Concert tickets",
+    "paymentMethod": "PayPal",
     "transactionType": "Expense"
   },
   {
-    "id": "5",
-    "date": "2024-05-09",
-    "amount": 60.00,
+    "id": "88r6l9qp6ki56by",
+    "date": "2024-05-06",
+    "amount": 500.00,
     "currency": "USD",
-    "category": "Groceries",
-    "description": "Bi-weekly grocery shopping",
+    "category": "Rent",
+    "description": "Monthly rent",
+    "paymentMethod": "Direct debit",
+    "transactionType": "Expense"
+  },
+  {
+    "id": "99s7m0rq7lj67cz",
+    "date": "2024-05-07",
+    "amount": 120.00,
+    "currency": "USD",
+    "category": "Health",
+    "description": "Medical check-up",
     "paymentMethod": "Debit card",
     "transactionType": "Expense"
   },
   {
-    "id": "6",
+    "id": "10t8n1sr8mk78dx",
+    "date": "2024-05-08",
+    "amount": 40.00,
+    "currency": "USD",
+    "category": "Travel",
+    "description": "Bus ticket",
+    "paymentMethod": "Apple Pay",
+    "transactionType": "Expense"
+  },
+  {
+    "id": "11u9o2ts9nl89ey",
+    "date": "2024-05-09",
+    "amount": 200.00,
+    "currency": "USD",
+    "category": "Shopping",
+    "description": "Clothing purchase",
+    "paymentMethod": "Credit card",
+    "transactionType": "Expense"
+  },
+  {
+    "id": "12v0p3ut0om90fz",
     "date": "2024-05-10",
+    "amount": 150.00,
+    "currency": "USD",
+    "category": "Savings",
+    "description": "Monthly savings",
+    "paymentMethod": "Bank transfer",
+    "transactionType": "Expense"
+  },
+  {
+    "id": "13w1q4vu1pn01ga",
+    "date": "2024-05-11",
+    "amount": 50.00,
+    "currency": "USD",
+    "category": "Sidehustle",
+    "description": "Freelance work",
+    "paymentMethod": "PayPal",
+    "transactionType": "Income"
+  },
+  {
+    "id": "14x2r5wv2qo12hb",
+    "date": "2024-05-12",
+    "amount": 500.00,
+    "currency": "USD",
+    "category": "Property",
+    "description": "Property maintenance",
+    "paymentMethod": "Direct debit",
+    "transactionType": "Expense"
+  },
+  {
+    "id": "15y3s6xw3rp23ic",
+    "date": "2024-05-13",
+    "amount": 25.00,
+    "currency": "USD",
+    "category": "Transport",
+    "description": "Gasoline",
+    "paymentMethod": "Credit card",
+    "transactionType": "Expense"
+  },
+  {
+    "id": "16z4t7yx4sq34jd",
+    "date": "2024-05-14",
+    "amount": 60.00,
+    "currency": "USD",
+    "category": "Entertainment",
+    "description": "Movie tickets",
+    "paymentMethod": "Apple Pay",
+    "transactionType": "Expense"
+  },
+  {
+    "id": "17a5u8zy5tr45ke",
+    "date": "2024-05-15",
+    "amount": 700.00,
+    "currency": "USD",
+    "category": "Salary",
+    "description": "Part-time job",
+    "paymentMethod": "Bank transfer",
+    "transactionType": "Income"
+  },
+  {
+    "id": "18b6v9a06us56lf",
+    "date": "2024-05-16",
+    "amount": 85.00,
+    "currency": "USD",
+    "category": "Restaurant",
+    "description": "Lunch with family",
+    "paymentMethod": "Debit card",
+    "transactionType": "Expense"
+  },
+  {
+    "id": "19c7w0b17vt67mg",
+    "date": "2024-05-17",
+    "amount": 40.00,
+    "currency": "USD",
+    "category": "Groceries",
+    "description": "Grocery shopping",
+    "paymentMethod": "Credit card",
+    "transactionType": "Expense"
+  },
+  {
+    "id": "20d8x1c28wu78nh",
+    "date": "2024-05-18",
+    "amount": 100.00,
+    "currency": "USD",
+    "category": "Health",
+    "description": "Gym membership",
+    "paymentMethod": "Direct debit",
+    "transactionType": "Expense"
+  },
+  {
+    "id": "21e9y2d39xv89oi",
+    "date": "2024-05-19",
+    "amount": 30.00,
+    "currency": "USD",
+    "category": "Travel",
+    "description": "Train ticket",
+    "paymentMethod": "Apple Pay",
+    "transactionType": "Expense"
+  },
+  {
+    "id": "22f0z3e40yw90pj",
+    "date": "2024-05-20",
+    "amount": 150.00,
+    "currency": "USD",
+    "category": "Shopping",
+    "description": "Electronics purchase",
+    "paymentMethod": "Credit card",
+    "transactionType": "Expense"
+  },
+  {
+    "id": "23g1a4f51zx01qk",
+    "date": "2024-05-21",
+    "amount": 75.00,
+    "currency": "USD",
+    "category": "Savings",
+    "description": "Savings deposit",
+    "paymentMethod": "Bank transfer",
+    "transactionType": "Expense"
+  },
+  {
+    "id": "24h2b5g62ay12rl",
+    "date": "2024-05-22",
+    "amount": 300.00,
+    "currency": "USD",
+    "category": "Sidehustle",
+    "description": "Consulting fee",
+    "paymentMethod": "PayPal",
+    "transactionType": "Income"
+  },
+  {
+    "id": "25i3c6h73bz23sm",
+    "date": "2024-05-23",
+    "amount": 50.00,
+    "currency": "USD",
+    "category": "Property",
+    "description": "Home repair",
+    "paymentMethod": "Direct debit",
+    "transactionType": "Expense"
+  },
+  {
+    "id": "26j4d7i84ca34tn",
+    "date": "2024-05-24",
     "amount": 20.00,
     "currency": "USD",
     "category": "Transport",
-    "description": "Public transportation pass",
+    "description": "Public transport",
+    "paymentMethod": "Cash",
+    "transactionType": "Expense"
+  },
+  {
+    "id": "27k5e8j95db45uo",
+    "date": "2024-05-25",
+    "amount": 60.00,
+    "currency": "USD",
+    "category": "Entertainment",
+    "description": "Theater tickets",
+    "paymentMethod": "Apple Pay",
+    "transactionType": "Expense"
+  },
+  {
+    "id": "28l6f9k06ec56vp",
+    "date": "2024-05-26",
+    "amount": 900.00,
+    "currency": "USD",
+    "category": "Salary",
+    "description": "Bonus payment",
+    "paymentMethod": "Bank transfer",
+    "transactionType": "Income"
+  },
+  {
+    "id": "29m7g0l17fd67wq",
+    "date": "2024-05-27",
+    "amount": 70.00,
+    "currency": "USD",
+    "category": "Restaurant",
+    "description": "Dinner with colleagues",
     "paymentMethod": "Credit card",
+    "transactionType": "Expense"
+  },
+  {
+    "id": "30n8h1m28ge78xr",
+    "date": "2024-05-28",
+    "amount": 50.00,
+    "currency": "USD",
+    "category": "Groceries",
+    "description": "Weekly groceries",
+    "paymentMethod": "Debit card",
     "transactionType": "Expense"
   }
 ]

@@ -75,7 +75,6 @@ export const DropdownMenu = styled.div`
 
     &::-webkit-scrollbar-track {
         background: var(--neutrals-light-gray);
-        border-radius: 10px;
     }
 
     &::-webkit-scrollbar-thumb {

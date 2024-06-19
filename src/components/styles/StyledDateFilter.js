@@ -23,6 +23,7 @@ export const DateInput = styled.input`
     border-radius: var(--border-radius-small);
     text-transform: uppercase;
     font-family: "Outfit", sans-serif;
+    font-size: 16px;
     background: none;
 
     &::-webkit-calendar-picker-indicator {
@@ -46,7 +47,6 @@ export const CalendarWrapper = styled.div`
 export const InputWrapper = styled.div`
   position: relative;
   display: inline-block;
-  padding: 5px;
   width: 100%;
 `;
 

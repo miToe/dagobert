@@ -29,7 +29,7 @@ export const DropdownButton = styled.button`
     align-items: center;
     width: 100%;
     text-align: left;
-    border: 1px solid var(--neutrals-dark-gray);
+    border: 1px solid var(--neutrals-mid-gray);
     border-radius: var(--border-radius-small);
 
     &:hover {

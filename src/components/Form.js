@@ -4,13 +4,13 @@ import Dropdown from "@/src/components/Dropdown";
 import Button from "@/src/components/Button";
 import options from "@/src/data/options.json";
 import AmountInput from "@/src/components/AmountInput";
-import Input from "@/src/components/Input";
+import InputField from "@/src/components/InputField";
 import {
   DateInputLabel,
   DateInput,
   InputWrapper,
   DateIconWrapper,
-} from "@/src/components/styles/DateFilterStyled";
+} from "@/src/components/styles/StyledDateFilter";
 import SVGIcon from "@/src/components/SVGIcon";
 import { useRef, useEffect } from "react";
 
@@ -177,7 +177,7 @@ export default function Form({
           <SVGIcon iconName={"calendar"} color="var(--primary-500)" />
         </DateIconWrapper>
       </InputWrapper>
-      <Input
+      <InputField
         label="Description"
         name="description"
         placeholder="Enter description (optional)"

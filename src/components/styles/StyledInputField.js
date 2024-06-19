@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+export const TextAreaWrapper = styled.div`
+display: flex;
+flex-direction: column;
+`;
+
 export const Label = styled.label`
   color: var(--neutrals-dark-gray);
   margin-bottom: 10px;

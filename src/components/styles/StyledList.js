@@ -74,6 +74,8 @@ export const StyledAmount = styled.span`
 `;
 
 export const SearchFilterWrapper = styled.div`
+    position: sticky;
+    top: 0;
     display: flex;
     align-items: center;
     gap: 1rem;

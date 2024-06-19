@@ -6,7 +6,7 @@ import SearchBar from "@/src/components/SearchBar";
 import { OhNoContainer } from "@/src/components/styles/StyledOhNo";
 import SVGIcon from "../components/SVGIcon";
 import Filter from "@/src/components/Filter";
-import Button from "@/src/components/Button";
+import { FilterButton } from "@/src/components/FilterButton";
 
 const initialFilterValues = {
   dateFrom: "",
@@ -44,7 +44,7 @@ export default function TransactionList({ transactions, onCurrencySymbol }) {
       <StyledTitle>Transactions</StyledTitle>
       <SearchFilterWrapper>
         <SearchBar data={transactions} onSearchResults={handleSearchResults} />
-        <Button $variant="primary" startIcon="filter" onClick={() => setShowFilter(true)} />
+        <FilterButton iconName="filter" onClick={() => setShowFilter(true)} />
       </SearchFilterWrapper>
       {showFilter && (
         <Filter

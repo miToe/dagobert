@@ -1,9 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import Dropdown from "@/src/components/Dropdown";
-import Button from "@/src/components/styles/Button";
-import options from "@/src/data/options.json"; // Import der JSON-Datei
-import Input from "@/src/components/Input.js";
+import Button from "@/src/components/Button";
+import options from "@/src/data/options.json";
 
 export default function Form({
   onSubmitForm,
@@ -89,7 +88,7 @@ export default function Form({
       <div>
         {addMode && (
           <Button
-            variant="secondary"
+            $variant="secondary"
             type="button"
             onClick={() => {
               router.push("/");
@@ -100,7 +99,7 @@ export default function Form({
         )}
         {editMode && (
           <Button
-            variant="secondary"
+            $variant="secondary"
             type="button"
             onClick={() => {
               router.push(`/transactions/${id}`);
@@ -196,7 +195,7 @@ export default function Form({
         errorMessage=""
         defaultSelected={formValues.paymentMethod}
       />
-      <Button variant="primary" endIcon="add" type="submit">
+      <Button $variant="primary" endIcon="add" type="submit">
         {confirmButtonText}
       </Button>
     </form>

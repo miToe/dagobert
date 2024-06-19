@@ -10,7 +10,6 @@ export const DropdownLabel = styled.label`
   display: block;
   margin-bottom: 8px;
   font-size: 14px;
-  color: #333;
 `;
 
 export const IconWrapper = styled.span`
@@ -32,6 +31,7 @@ export const DropdownButton = styled.button`
   text-align: left;
   border: 1px solid var(--neutrals-dark-gray);
   border-radius: var(--border-radius-small);
+    
   &:hover {
     border-color: var(--primary-500);
   }
@@ -50,14 +50,14 @@ export const DropdownButton = styled.button`
   }
 
   &.has-error {
-    border: 2px solid red;
+    border: 2px solid var(--feedback-error);
   }
 `;
 
 export const DropdownMenu = styled.div`
   display: block;
   position: absolute;
-  background-color: #f9f9f9;
+  background-color: var(--neutrals-white);
   min-width: 100%;
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
@@ -67,11 +67,12 @@ export const DropdownMenu = styled.div`
 `;
 
 export const DropdownItem = styled.div`
-  color: black;
+  color: var(--primary-dark-gray);
   padding: 12px 16px;
   text-decoration: none;
   display: block;
   cursor: pointer;
+    
   &:hover {
     background-color: var(--primary-100);
   }
@@ -86,7 +87,7 @@ export const DropdownItem = styled.div`
 `;
 
 export const ErrorMessage = styled.div`
-  color: red;
+  color: var(--feedback-error);
   font-size: 12px;
   margin-top: 8px;
 `;

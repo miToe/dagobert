@@ -1,14 +1,14 @@
 import {
-  DateFilterGrid,
-  DateInputLabel,
-  DateInput,
   CalendarWrapper,
-  InputWrapper,
+  DateFilterGrid,
   DateIconWrapper,
-} from "@/src/components/styles/DateFilterStyled";
+  DateInput,
+  DateInputLabel,
+  InputWrapper,
+} from "@/src/components/styles/StyledDateFilter";
 
 import SVGIcon from "@/src/components/SVGIcon";
-import { useRef, useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 export default function DateFilter({ dateFrom, dateUntil, onDateChange }) {
   const dateFromRef = useRef(null);

@@ -1,13 +1,9 @@
 import { useCallback, useState } from "react";
 import Link from "next/link";
-import {
-  ListWrapper, SearchFilterWrapper,
-  StyledList,
-  StyledTitle,
-} from "@/src/components/styles/List";
+import { ListWrapper, SearchFilterWrapper, StyledList, StyledTitle } from "@/src/components/styles/StyledList";
 import { StyledListItem } from "@/src/components/StyledListItem";
 import SearchBar from "@/src/components/SearchBar";
-import { OhNoContainer } from "@/src/components/styles/OhNo";
+import { OhNoContainer } from "@/src/components/styles/StyledOhNo";
 import SVGIcon from "../components/SVGIcon";
 import Filter from "@/src/components/Filter";
 import Button from "@/src/components/Button";
@@ -34,11 +30,11 @@ export default function TransactionList({ transactions, onCurrencySymbol }) {
   }, []);
 
   const filteredItems = searchResults.filter((transaction) => (
-      (!filterValues.dateFrom || new Date(filterValues.dateFrom) <= new Date(transaction.date)) &&
-      (!filterValues.dateUntil || new Date(transaction.date) <= new Date(filterValues.dateUntil)) &&
-      (filterValues.transactionType.length === 0 || filterValues.transactionType.includes(transaction.transactionType)) &&
-      (filterValues.category.length === 0 || filterValues.category.includes(transaction.category)) &&
-      (filterValues.paymentMethod.length === 0 || filterValues.paymentMethod.includes(transaction.paymentMethod))
+    (!filterValues.dateFrom || new Date(filterValues.dateFrom) <= new Date(transaction.date)) &&
+    (!filterValues.dateUntil || new Date(transaction.date) <= new Date(filterValues.dateUntil)) &&
+    (filterValues.transactionType.length === 0 || filterValues.transactionType.includes(transaction.transactionType)) &&
+    (filterValues.category.length === 0 || filterValues.category.includes(transaction.category)) &&
+    (filterValues.paymentMethod.length === 0 || filterValues.paymentMethod.includes(transaction.paymentMethod))
   ));
 
   const sortedTransactions = filteredItems.slice().sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -47,8 +43,8 @@ export default function TransactionList({ transactions, onCurrencySymbol }) {
     <ListWrapper>
       <StyledTitle>Transactions</StyledTitle>
       <SearchFilterWrapper>
-      <SearchBar data={transactions} onSearchResults={handleSearchResults} />
-      <Button $variant="primary" startIcon="filter" onClick={() => setShowFilter(true)} />
+        <SearchBar data={transactions} onSearchResults={handleSearchResults} />
+        <Button $variant="primary" startIcon="filter" onClick={() => setShowFilter(true)} />
       </SearchFilterWrapper>
       {showFilter && (
         <Filter

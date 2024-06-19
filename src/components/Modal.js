@@ -1,16 +1,17 @@
 import Button from "@/src/components/Button";
+import { ButtonGroup, ModalBox, ModalHint, ModalMessage, ModalWrapper } from "@/src/components/styles/StyledModal";
 
 export default function Modal({ message, onConfirm, onCancel, id, hint }) {
   return (
-    <>
-      <br />
-      <hr />
-      <h2>{message}</h2>
-      <p>{hint}</p>
-      <Button $variant="secondary" onClick={() => onCancel("default")}>Cancel</Button>
-      <Button $variant="primary" onClick={() => onConfirm(id)}>Confirm</Button>
-      <hr />
-      <br />
-    </>
+    <ModalWrapper>
+      <ModalBox>
+        <ModalMessage>{message}</ModalMessage>
+        <ModalHint>{hint}</ModalHint>
+        <ButtonGroup>
+          <Button onClick={() => onCancel("default")}>Cancel</Button>
+          <Button onClick={() => onConfirm(id)}>Confirm</Button>
+        </ButtonGroup>
+      </ModalBox>
+    </ModalWrapper>
   );
 }

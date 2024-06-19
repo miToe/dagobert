@@ -9,7 +9,7 @@ const spin = keyframes`
 		}
 `;
 
-export const EasterEgg = styled.div`
+export const StyledEasterEgg = styled.div`
   background: #ffde00;
   width: 10em;
   height: 10em;

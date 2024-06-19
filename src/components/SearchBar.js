@@ -1,19 +1,15 @@
-import { useState, useEffect, useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import SVGIcon from "@/src/components/SVGIcon";
 import {
+  ClearButton,
+  Highlight,
   SearchBarContainer,
   SearchIcon,
   SearchInput,
-  ClearButton,
-  SuggestionsList,
   SuggestionItem,
-  Highlight,
-} from "@/src/components/styles/SearchBar";
-import {
-  EasterEgg,
-  EasterHeads,
-  EasterTails,
-} from "@/src/components/styles/EasterEgg";
+  SuggestionsList,
+} from "@/src/components/styles/StyledSearchBar";
+import { EasterHeads, EasterTails, StyledEasterEgg } from "@/src/components/styles/StyledEasterEgg";
 
 function encrypt(text) {
   const offset = 3;
@@ -25,7 +21,7 @@ function encrypt(text) {
 
 const encryptedSecret = "gdjrehuw";
 
-export default function SearchBar ({ searchValue, data, onSearchResults }) {
+export default function SearchBar({ searchValue, data, onSearchResults }) {
   const [query, setQuery] = useState(searchValue || "");
   const [suggestions, setSuggestions] = useState([]);
   const [showEasterEgg, setShowEasterEgg] = useState(false);
@@ -62,7 +58,7 @@ export default function SearchBar ({ searchValue, data, onSearchResults }) {
     const uniqueResults = results.filter((value, index, self) =>
         index === self.findIndex(t => (
           t.id === value.id
-        ))
+        )),
     );
 
     setSuggestions(uniqueResults.slice(0, 5));
@@ -122,13 +118,13 @@ export default function SearchBar ({ searchValue, data, onSearchResults }) {
       case "ArrowDown":
         event.preventDefault();
         setHighlightedIndex(prevIndex =>
-          prevIndex === suggestions.length - 1 ? 0 : prevIndex + 1
+          prevIndex === suggestions.length - 1 ? 0 : prevIndex + 1,
         );
         break;
       case "ArrowUp":
         event.preventDefault();
         setHighlightedIndex(prevIndex =>
-          prevIndex === 0 ? suggestions.length - 1 : prevIndex - 1
+          prevIndex === 0 ? suggestions.length - 1 : prevIndex - 1,
         );
         break;
       case "Enter":
@@ -155,7 +151,7 @@ export default function SearchBar ({ searchValue, data, onSearchResults }) {
             <Highlight key={index}>{part}</Highlight>
           ) : (
             part
-          )
+          ),
         )}
       </span>
     );
@@ -186,10 +182,10 @@ export default function SearchBar ({ searchValue, data, onSearchResults }) {
         </ClearButton>
       )}
       {showEasterEgg ? (
-        <EasterEgg>
+        <StyledEasterEgg>
           <EasterTails />
           <EasterHeads />
-        </EasterEgg>
+        </StyledEasterEgg>
       ) : (
         isOpen && (
           <SuggestionsList>

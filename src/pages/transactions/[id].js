@@ -1,8 +1,22 @@
 import { useRouter } from "next/router";
-import Link from "next/link";
 import Modal from "@/src/components/Modal";
 import { useState } from "react";
-import Button from "/src/components/Button"
+import {
+  BacklinkWrapper,
+  DetailViewWrapper,
+  GroupedIcons,
+  Headline,
+  StyledAmount,
+  StyledCategoryTitle,
+  StyledDetailAmount,
+  StyledDetailDescription,
+  StyledDetailItem,
+  StyledLink,
+  StyledList,
+  StyledTitle,
+} from "@/src/components/styles/StyledDetailView";
+import SVGIcon from "@/src/components/SVGIcon";
+import { LinkedIcon } from "@/src/components/LinkedIcon";
 
 
 export default function TransactionDetails({
@@ -24,16 +38,20 @@ export default function TransactionDetails({
   const displayAmount = transaction.amount.toFixed(2);
 
   return (
-    <>
-      <div>
-        <Link href={"/"}>Back</Link>
-        <h1>{transaction.category}</h1>
-        <Button $variant="primary" onClick={() => {
-          router.push(`/transactions/edit/${transaction.id}`);
-        }}>Edit
-        </Button>
-        <Button $variant="secondary" onClick={() => setModal(true)}>Delete</Button>
-      </div>
+    <DetailViewWrapper>
+      <Headline>
+        <BacklinkWrapper>
+          <SVGIcon iconName="chevron_left" />
+          <StyledLink href={"/"}>Back</StyledLink>
+        </BacklinkWrapper>
+        <StyledTitle>{transaction.category}</StyledTitle>
+        <GroupedIcons>
+          <LinkedIcon iconName="edit" onClick={() => {
+            router.push(`/transactions/edit/${transaction.id}`);
+          }} />
+          <LinkedIcon iconName="delete" onClick={() => setModal(true)} />
+        </GroupedIcons>
+      </Headline>
       {modal && (
         <Modal
           message="Are you sure you want to delete this entry?"
@@ -43,49 +61,30 @@ export default function TransactionDetails({
           id={id}
         />
       )}
-
-      <ul>
-        <li>
-          <span>
-            <b>Transaction Type: </b>
-          </span>
-          <span>
-            {transaction.transactionType}
-          </span>
-        </li>
-        <li>
-          <span>
-            <b>Amount: </b>
-          </span>
-          <span>
+      <StyledList>
+        <StyledDetailAmount>
+          <StyledCategoryTitle>Amount</StyledCategoryTitle>
+          <StyledAmount>
             {transaction.transactionType === "Expense" ? "-" : ""}{displayAmount} {onCurrencySymbol(transaction.currency)}
-          </span>
-        </li>
-        <li>
-          <span>
-            <b>Date: </b>
-          </span>
+          </StyledAmount>
+        </StyledDetailAmount>
+        <StyledDetailItem>
+          <StyledCategoryTitle>Date</StyledCategoryTitle>
           <span>{transaction.date}</span>
-        </li>
-        <li>
-          <span>
-            <b>Category: </b>
-          </span>
+        </StyledDetailItem>
+        <StyledDetailItem>
+          <StyledCategoryTitle>Category</StyledCategoryTitle>
           <span>{transaction.category}</span>
-        </li>
-        <li>
-          <span>
-            <b>Payment Method: </b>
-          </span>
+        </StyledDetailItem>
+        <StyledDetailItem>
+          <StyledCategoryTitle>Payment Method</StyledCategoryTitle>
           <span>{transaction.paymentMethod}</span>
-        </li>
-        <li>
-          <span>
-            <b>Description: </b>
-          </span>
+        </StyledDetailItem>
+        <StyledDetailDescription>
+          <StyledCategoryTitle>Description</StyledCategoryTitle>
           <span>{transaction.description}</span>
-        </li>
-      </ul>
-    </>
+        </StyledDetailDescription>
+      </StyledList>
+    </DetailViewWrapper>
   );
 }

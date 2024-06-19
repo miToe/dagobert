@@ -1,7 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 
 const ThemeColors = createGlobalStyle`
-    :root{
+    :root {
         --neutrals-white: #FFFFFF;
         --neutrals-light-gray: #EEF1f4;
         --neutrals-mid-gray: #bac0ca;
@@ -33,6 +33,18 @@ const ThemeColors = createGlobalStyle`
         --secondary-900: #980359;
         --secondary-950: #5E0031;
 
+        --highlight-50: #EDFDFE;
+        --highlight-100: #D1F9FC;
+        --highlight-200: #A8F2F9;
+        --highlight-300: #6CE6F4;
+        --highlight-400: #29D0E7;
+        --highlight-500: #0DB3CD;
+        --highlight-600: #0E94B2;
+        --highlight-700: #12738C;
+        --highlight-800: #185D72;
+        --highlight-900: #194E60;
+        --highlight-950: #0A3342;
+
         --tertiary-50: #FEFDE8;
         --tertiary-100: #FFFCC2;
         --tertiary-200: #FFF788;
@@ -50,57 +62,7 @@ const ThemeColors = createGlobalStyle`
         --feedback-error: #fc1358;
 
     }
-    :root[data-theme="dark"] {
 
-        --neutrals-50: #0a0d0f;
-        --neutrals-100: #141b1f;
-        --neutrals-400: #526a7a;
-        --neutrals-500: #668599;
-        --neutrals-700: #a3b6c2;
-        --neutrals-950: #f0f3f5;
-
-        --primary-50: #00111a;
-        --primary-100: #002333;
-        --primary-200: #004666;
-        --primary-300: #006999;
-        --primary-400: #008bcc;
-        --primary-500: #00aeff;
-        --primary-600: #33beff;
-        --primary-700: #66cfff;
-        --primary-800: #99dfff;
-        --primary-900: #ccefff;
-        --primary-950: #e5f7ff;
-
-        --secondary-50: #1a0012;
-        --secondary-100: #330024;
-        --secondary-200: #660047;
-        --secondary-300: #99006b;
-        --secondary-400: #cc008f;
-        --secondary-500: #ff00b2;
-        --secondary-600: #ff33c2;
-        --secondary-700: #ff66d1;
-        --secondary-800: #ff99e0;
-        --secondary-900: #ffccf0;
-        --secondary-950: #ffe5f7;
-
-        --accent-50: #191500;
-        --accent-100: #332a00;
-        --accent-200: #655501;
-        --accent-300: #987f01;
-        --accent-400: #cba901;
-        --accent-500: #fed401;
-        --accent-600: #fedc34;
-        --accent-700: #fee567;
-        --accent-800: #feee9a;
-        --accent-900: #fff6cc;
-        --accent-950: #fffbe6;
-
-        --feedback-success: #04BF2D;
-        --feedback-warning: #ffcd1b;
-        --feedback-error: #fc1358;
-
-    }
-
-`
+`;
 
 export default ThemeColors;

@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-export const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
+export const HiddenCheckbox = styled.input.attrs({ type: "checkbox" })`
   border: 0;
   clip: rect(0 0 0 0);
   clippath: inset(50%);
@@ -19,21 +19,21 @@ export const Icon = styled.svg`
     stroke-width: 2px;
     `;
 
-export const CheckboxStyled = styled.div ` 
+export const StyledCheckbox = styled.div` 
     display: inline-block;
     width: 20px;
     height: 20px;
     margin-right: 10px;
-    background: ${props => (props.checked ? 'var(--primary-500)' : 'white')};
+    background: ${props => (props.checked ? "var(--primary-500)" : "white")};
     border: 1px solid var(--primary-200);
     border-radius: 4px;
 
     ${Icon} {
-        visibility: ${props => (props.checked ? 'visible' : 'hidden')};
+        visibility: ${props => (props.checked ? "visible" : "hidden")};
     }
 `;
 
-export const CheckboxGroup = styled.div `
+export const CheckboxGroup = styled.div`
     display: flex;
     flex-wrap: wrap; 
     justify-content: space-between; 

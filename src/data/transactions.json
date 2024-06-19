@@ -34,7 +34,7 @@
     "date": "2024-05-08",
     "amount": 50.00,
     "currency": "USD",
-    "category": "Clothing",
+    "category": "Shopping",
     "description": "New shoes",
     "paymentMethod": "Credit card",
     "transactionType": "Expense"

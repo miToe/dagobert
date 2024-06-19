@@ -1,6 +1,34 @@
 {
-    "transactionTypeOptions": ["Expense", "Income"],
-    "currencyOptions": ["EUR", "USD"],
-    "categoryOptions": ["Entertainment", "Food", "Shopping", "Transport"],
-    "paymentMethodOptions": ["Credit Card", "Debit Card", "Cash", "PayPal"]
-  }
+  "transactionTypeOptions": [
+    "Expense",
+    "Income"
+  ],
+  "currencyOptions": [
+    "EUR",
+    "USD"
+  ],
+  "categoryOptions": [
+    "Dividends",
+    "Entertainment",
+    "Groceries",
+    "Health",
+    "Property",
+    "Rent",
+    "Restaurant",
+    "Salary",
+    "Savings",
+    "Shopping",
+    "Sidehustle",
+    "Transport",
+    "Travel"
+  ],
+  "paymentMethodOptions": [
+    "Apple Pay",
+    "Bank transfer",
+    "Cash",
+    "Credit card",
+    "Debit card",
+    "Direct debit",
+    "PayPal"
+  ]
+}

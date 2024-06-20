@@ -137,11 +137,11 @@ export default function Charts({ transactions, onUpdateBalances }) {
             <SummarySection>
               <Balance>
                 <span>Income</span>
-                <span> {income.toFixed(2)}€</span>
+                <span>+ {income.toFixed(2)}€</span>
               </Balance>
               <Balance>
                 <span>Expenses</span>
-                <span>{expenses.toFixed(2)}€</span>
+                <span>- {expenses.toFixed(2)}€</span>
               </Balance>
             </SummarySection>
             <ResponsiveContainer width="100%" height={300}>

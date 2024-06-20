@@ -10,7 +10,6 @@ export const ChartSection = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin-bottom: 1rem;
 
   > div {
     padding: 20px;
@@ -42,6 +41,7 @@ export const SummarySection = styled.div`
   width: 100%;
   gap: 10px;
 `;
+
 export const Balance = styled.div`
   font-size: 16px;
   border-radius: var(--border-radius-small);
@@ -59,22 +59,22 @@ export const Balance = styled.div`
     display: block;
 
     &:last-child {
-      font-weight: bold;
+      font-weight: 500;
       text-align: right;
-      font-size: 18px;
+      font-size: 22px;
     }
   }
 `;
 
 export const CategoryName = styled.text`
   font-size: 14px;
-  font-weight: bold;
+  font-weight: 500;
   fill: var(--neutrals-dark-gray);
 `;
 
 export const ValueText = styled.text`
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 16px;
+  font-weight: 600;
   fill: var(--neutrals-dark-gray);
 `;
 

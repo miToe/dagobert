@@ -31,10 +31,11 @@ export const SearchInput = styled.input`
   border-radius: var(--border-radius-small);
   background: var(--neutrals-light-gray);
   border: none;
+  font-size: 16px;
 
   &::placeholder,
   &::-webkit-input-placeholder {
-    color: var(--neutrals-mid-gray);
+    color: var(--neutrals-gray);
   }
 
   &:focus {

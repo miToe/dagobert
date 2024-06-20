@@ -2,7 +2,9 @@ import styled from "styled-components";
 import { GreyBox } from "@/src/components/styles/StyledGreyBox";
 
 export const TotalBalance = styled(GreyBox)`
-  span {
+    border-radius: 16px;
+
+    span {
     display: block;
     margin: 10px;
 

@@ -14,7 +14,7 @@ export const ChartSection = styled.div`
 
   > div {
     padding: 20px;
-    border-radius: var(--border-radius-large);
+    border-radius: 16px;
     margin-bottom: 20px;
     background: var(--primary-50);
     width: 100%;
@@ -36,7 +36,9 @@ export const BalanceSection = styled.div`
 
 export const SummarySection = styled.div`
   display: flex;
+  justify-content: space-between;
   margin-top: 20px;
+  margin-bottom: 40px;
   width: 100%;
   gap: 10px;
 `;

@@ -133,23 +133,35 @@ export default function Charts({ transactions, onUpdateBalances }) {
       {isClient && (
         <ChartSection>
           <div>
-            <h3>Expenses</h3>
+            <h3>Overview</h3>
+            <SummarySection>
+              <Balance>
+                <span>Income</span>
+                <span> {income.toFixed(2)}€</span>
+              </Balance>
+              <Balance>
+                <span>Expenses</span>
+                <span>{expenses.toFixed(2)}€</span>
+              </Balance>
+            </SummarySection>
             <ResponsiveContainer width="100%" height={300}>
               <LineChart data={chartData}>
                 <Line
                   type="monotone"
                   dataKey="income"
-                  stroke="#8884d8"
+                  stroke="var(--primary-600)"
+                  strokeWidth={3}
                   dot={false}
                 />
                 <Line
                   type="monotone"
                   dataKey="expense"
-                  stroke="#82ca9d"
+                  strokeWidth={3}
+                  stroke="var(--secondary-600)"
                   dot={false}
                 />
                 <Tooltip />
-                <CartesianGrid stroke="#ccc" vertical={false} />
+                <CartesianGrid stroke="var(--neutrals-mid-gray)" vertical={false} />
                 <XAxis dataKey="week" axisLine={false} tickLine={false} />
                 <YAxis
                   domain={[0, maxValue]}
@@ -158,16 +170,6 @@ export default function Charts({ transactions, onUpdateBalances }) {
                 />
               </LineChart>
             </ResponsiveContainer>
-            <SummarySection>
-              <Balance>
-                <span>Gesamteinnahmen:</span>
-                <span> {income.toFixed(2)}€</span>
-              </Balance>
-              <Balance>
-                <span>Gesamtausgaben:</span>
-                <span>{expenses.toFixed(2)}€</span>
-              </Balance>
-            </SummarySection>
           </div>
           <div>
             <h3>Categories</h3>

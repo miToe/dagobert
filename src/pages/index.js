@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { calculateBalancesAndData } from "@/src/utils/utils";
 import Charts from "@/src/components/Charts";
-import { ListWrapper, SearchFilterWrapper, StyledList, StyledTitle } from "@/src/components/styles/StyledList";
+import { Headline, ListWrapper, SearchFilterWrapper, StyledList, StyledTitle } from "@/src/components/styles/StyledList";
 import { StyledListItem } from "@/src/components/StyledListItem";
 import SearchBar from "@/src/components/SearchBar";
 import { OhNoContainer } from "@/src/components/styles/StyledOhNo";
@@ -65,7 +65,7 @@ export default function TransactionList({ transactions, onCurrencySymbol }) {
       <h1>Hey there!</h1>
       <TotalBalance>
         <div>
-          <span>Total Balance:</span>
+          <span>Total Balance</span>
           <span>{totalBalance.toFixed(2)}€</span>
         </div>
         <AddLinkWrapper>
@@ -79,11 +79,13 @@ export default function TransactionList({ transactions, onCurrencySymbol }) {
         transactions={transactions}
         onUpdateBalances={handleUpdateBalances}
       />
-      <StyledTitle>Transactions</StyledTitle>
-      <SearchFilterWrapper>
-        <SearchBar data={transactions} onSearchResults={handleSearchResults} />
-        <FilterButton iconName="filter" onClick={() => setShowFilter(true)} />
-      </SearchFilterWrapper>
+      <Headline>
+        <StyledTitle>Transactions</StyledTitle>
+        <SearchFilterWrapper>
+          <SearchBar data={transactions} onSearchResults={handleSearchResults} />
+          <FilterButton iconName="filter" onClick={() => setShowFilter(true)} />
+        </SearchFilterWrapper>
+      </Headline>
       {showFilter && (
         <Filter
           filterValues={filterValues}

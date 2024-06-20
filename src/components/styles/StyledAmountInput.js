@@ -1,18 +1,18 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const AmountWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 98px;
-    background-color: var(--neutrals-light-gray);
-    border-radius: var(--border-radius-big);    
-    padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 98px;
+  background-color: var(--neutrals-light-gray);
+  border-radius: var(--border-radius-big);
+  padding: 1rem;
 `;
 
 export const AmountLabel = styled.label`
-    font-weight: 400;
-    font-size: 14px;
+  font-weight: 400;
+  font-size: 14px;
 `;
 
 export const AmountInputField = styled.input`
@@ -22,19 +22,28 @@ export const AmountInputField = styled.input`
   text-align: right;
   border: none;
   background-color: var(--neutrals-light-gray);
-  font-family: 'Outfit', sans-serif;
+  font-family: "Outfit", sans-serif;
 
-    &::placeholder {
-      color: var(--neutrals-gray);
+  &::placeholder {
+    color: var(--neutrals-gray);
   }
 
   &:not(:placeholder-shown) {
-      color: var(--neutrals-dark-gray);
+    color: var(--neutrals-dark-gray);
+  }
+
+  &.has-error {
+    border: none;
+    color: red;
+
+    &::placeholder {
+      color: red; /* Setzen Sie hier die gewünschte Farbe */
+    }
   }
 `;
 
 export const ErrorMessage = styled.div`
-    color: var(--feedback-error);
-    font-size: 12px;
-    margin-top: 8px;
+  color: var(--feedback-error);
+  font-size: 12px;
+  margin-top: 8px;
 `;

@@ -1,13 +1,15 @@
 import {
-  CalendarWrapper, DateContainer,
+  CalendarWrapper,
+  DateContainer,
   DateIconWrapper,
   DateInput,
-  DateInputLabel
+  DateInputLabel,
+  ErrorMessage,
 } from "@/src/components/styles/StyledDate";
 import SVGIcon from "@/src/components/SVGIcon";
 import { useEffect, useRef } from "react";
 
-export default function Date({ date, onDateChange}) {
+export default function Date({ date, onDateChange, errorMessage }) {
   const dateRef = useRef(null);
 
   const handleIconClick = () => {
@@ -36,18 +38,20 @@ export default function Date({ date, onDateChange}) {
   return (
     <DateContainer>
       <DateInputLabel>Date</DateInputLabel>
-        <CalendarWrapper>
-            <DateInput
-              id="date"
-              ref={dateRef}
-              type="date"
-              value={date}
-              onChange={handleChange}
-              />
-            <DateIconWrapper onClick={handleIconClick}>
-              <SVGIcon iconName={"calendar"} color="var(--primary-500)" />
-            </DateIconWrapper>
-        </CalendarWrapper>
+      <CalendarWrapper>
+        <DateInput
+          id="date"
+          ref={dateRef}
+          type="date"
+          value={date}
+          onChange={handleChange}
+          className={errorMessage ? "has-error" : ""}
+        />
+        <DateIconWrapper onClick={handleIconClick}>
+          <SVGIcon iconName={"calendar"} color="var(--primary-500)" />
+        </DateIconWrapper>
+      </CalendarWrapper>
+      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
     </DateContainer>
   );
 }

@@ -1,5 +1,8 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
+import { ListItem } from "@/src/components/ListItem";
+import { calculateBalancesAndData } from "@/src/utils/utils";
+import Charts from "@/src/components/Charts";
 import {
   Headline,
   ListWrapper,
@@ -7,10 +10,11 @@ import {
   StyledList,
   StyledTitle,
 } from "@/src/components/styles/StyledList";
-import { ListItem } from "@/src/components/ListItem";
 import SearchBar from "@/src/components/SearchBar";
 import { OhNoContainer } from "@/src/components/styles/StyledOhNo";
-import SVGIcon from "../components/SVGIcon";
+import SVGIcon from "@/src/components/SVGIcon";
+import { TotalBalance } from "../components/styles/TotalBalance";
+import { AddLinkWrapper } from "@/src/components/styles/StyledAddLink";
 import Filter from "@/src/components/Filter";
 import { FilterButton } from "@/src/components/FilterButton";
 
@@ -23,6 +27,22 @@ const initialFilterValues = {
 };
 
 export default function TransactionList({ transactions, onCurrencySymbol }) {
+  const [income, setIncome] = useState(0);
+  const [expenses, setExpenses] = useState(0);
+
+  const handleUpdateBalances = useCallback((newIncome, newExpenses) => {
+    setIncome(newIncome);
+    setExpenses(newExpenses);
+  }, []);
+
+  const totalBalance = income - expenses;
+
+  useEffect(() => {
+    const { totalIncome, totalExpenses } =
+      calculateBalancesAndData(transactions);
+    handleUpdateBalances(totalIncome, totalExpenses);
+  }, [transactions, handleUpdateBalances]);
+
   const [searchResults, setSearchResults] = useState(transactions);
   const [filterValues, setFilterValues] = useState(initialFilterValues);
   const [showFilter, setShowFilter] = useState(false);
@@ -47,6 +67,23 @@ export default function TransactionList({ transactions, onCurrencySymbol }) {
 
   return (
     <ListWrapper>
+      <h1>Hey there!</h1>
+      <TotalBalance>
+        <div>
+          <span>Total Balance</span>
+          <span>{totalBalance.toFixed(2)}€</span>
+        </div>
+        <AddLinkWrapper>
+          <Link href="/transactions/create">
+            Add Transaction{" "}
+            <SVGIcon iconName="add" color="var(--neutrals-white)" />
+          </Link>
+        </AddLinkWrapper>
+      </TotalBalance>
+      <Charts
+        transactions={transactions}
+        onUpdateBalances={handleUpdateBalances}
+      />
       <Headline>
         <StyledTitle>Transactions</StyledTitle>
         <SearchFilterWrapper>
@@ -87,7 +124,6 @@ export default function TransactionList({ transactions, onCurrencySymbol }) {
           </span>
         </OhNoContainer>
       )}
-      <Link href="/transactions/create">Add</Link>
     </ListWrapper>
   );
 }

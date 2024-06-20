@@ -17,6 +17,7 @@ import { TotalBalance } from "../components/styles/TotalBalance";
 import { AddLinkWrapper } from "@/src/components/styles/StyledAddLink";
 import Filter from "@/src/components/Filter";
 import { FilterButton } from "@/src/components/FilterButton";
+import BackToTop from "@/src/components/BackToTop"; // Adjust the import according to your project structure
 
 const initialFilterValues = {
   dateFrom: "",
@@ -124,6 +125,7 @@ export default function TransactionList({ transactions, onCurrencySymbol }) {
           </span>
         </OhNoContainer>
       )}
+      <BackToTop />
     </ListWrapper>
   );
 }

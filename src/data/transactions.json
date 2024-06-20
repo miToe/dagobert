@@ -2,7 +2,7 @@
   {
     "id": "97u455fs8agd2bo",
     "date": "2024-05-01",
-    "amount": 50.00,
+    "amount": 50.0,
     "currency": "USD",
     "category": "Groceries",
     "description": "Weekly grocery shopping",

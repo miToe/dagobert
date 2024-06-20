@@ -9,13 +9,18 @@ import {
   SuggestionItem,
   SuggestionsList,
 } from "@/src/components/styles/StyledSearchBar";
-import { EasterHeads, EasterTails, StyledEasterEgg } from "@/src/components/styles/StyledEasterEgg";
+import {
+  EasterEggWrapper,
+  EasterHeads,
+  EasterTails,
+  StyledEasterEgg,
+} from "@/src/components/styles/StyledEasterEgg";
 
 function encrypt(text) {
   const offset = 3;
   return text
     .split("")
-    .map(char => String.fromCharCode(char.charCodeAt(0) + offset))
+    .map((char) => String.fromCharCode(char.charCodeAt(0) + offset))
     .join("");
 }
 
@@ -50,15 +55,13 @@ export default function SearchBar({ searchValue, data, onSearchResults }) {
       return;
     }
 
-    const results = data.filter(item => {
+    const results = data.filter((item) => {
       const values = Object.values(item).join(" ").toLowerCase();
       return values.includes(trimmedQuery);
     });
 
-    const uniqueResults = results.filter((value, index, self) =>
-        index === self.findIndex(t => (
-          t.id === value.id
-        )),
+    const uniqueResults = results.filter(
+      (value, index, self) => index === self.findIndex((t) => t.id === value.id)
     );
 
     setSuggestions(uniqueResults.slice(0, 5));
@@ -91,13 +94,16 @@ export default function SearchBar({ searchValue, data, onSearchResults }) {
     setQuery(value);
   }, []);
 
-  const handleSuggestionClick = useCallback((suggestion) => {
-    setQuery(suggestion.description);
-    setSelectedSuggestion(suggestion);
-    setSuggestions([]);
-    setIsOpen(false);
-    onSearchResults([suggestion]);
-  }, [onSearchResults]);
+  const handleSuggestionClick = useCallback(
+    (suggestion) => {
+      setQuery(suggestion.description);
+      setSelectedSuggestion(suggestion);
+      setSuggestions([]);
+      setIsOpen(false);
+      onSearchResults([suggestion]);
+    },
+    [onSearchResults]
+  );
 
   const handleInputFocus = () => {
     if (query && suggestions.length > 0) {
@@ -113,33 +119,36 @@ export default function SearchBar({ searchValue, data, onSearchResults }) {
     setIsOpen(false);
   };
 
-  const handleKeyDown = useCallback((event) => {
-    switch (event.key) {
-      case "ArrowDown":
-        event.preventDefault();
-        setHighlightedIndex(prevIndex =>
-          prevIndex === suggestions.length - 1 ? 0 : prevIndex + 1,
-        );
-        break;
-      case "ArrowUp":
-        event.preventDefault();
-        setHighlightedIndex(prevIndex =>
-          prevIndex === 0 ? suggestions.length - 1 : prevIndex - 1,
-        );
-        break;
-      case "Enter":
-        event.preventDefault();
-        if (highlightedIndex >= 0 && highlightedIndex < suggestions.length) {
-          handleSuggestionClick(suggestions[highlightedIndex]);
-        }
-        break;
-      case "Tab":
-        setIsOpen(false);
-        break;
-      default:
-        break;
-    }
-  }, [suggestions, highlightedIndex, handleSuggestionClick]);
+  const handleKeyDown = useCallback(
+    (event) => {
+      switch (event.key) {
+        case "ArrowDown":
+          event.preventDefault();
+          setHighlightedIndex((prevIndex) =>
+            prevIndex === suggestions.length - 1 ? 0 : prevIndex + 1
+          );
+          break;
+        case "ArrowUp":
+          event.preventDefault();
+          setHighlightedIndex((prevIndex) =>
+            prevIndex === 0 ? suggestions.length - 1 : prevIndex - 1
+          );
+          break;
+        case "Enter":
+          event.preventDefault();
+          if (highlightedIndex >= 0 && highlightedIndex < suggestions.length) {
+            handleSuggestionClick(suggestions[highlightedIndex]);
+          }
+          break;
+        case "Tab":
+          setIsOpen(false);
+          break;
+        default:
+          break;
+      }
+    },
+    [suggestions, highlightedIndex, handleSuggestionClick]
+  );
 
   const highlightMatch = (text, query) => {
     if (typeof text !== "string") return text;
@@ -151,7 +160,7 @@ export default function SearchBar({ searchValue, data, onSearchResults }) {
             <Highlight key={index}>{part}</Highlight>
           ) : (
             part
-          ),
+          )
         )}
       </span>
     );
@@ -182,10 +191,12 @@ export default function SearchBar({ searchValue, data, onSearchResults }) {
         </ClearButton>
       )}
       {showEasterEgg ? (
-        <StyledEasterEgg>
-          <EasterTails />
-          <EasterHeads />
-        </StyledEasterEgg>
+        <EasterEggWrapper>
+          <StyledEasterEgg>
+            <EasterTails />
+            <EasterHeads />
+          </StyledEasterEgg>
+        </EasterEggWrapper>
       ) : (
         isOpen && (
           <SuggestionsList>
@@ -199,7 +210,8 @@ export default function SearchBar({ searchValue, data, onSearchResults }) {
                   backgroundColor: index === highlightedIndex ? "#bde4ff" : "",
                 }}
               >
-                {highlightMatch(suggestion.description, query)} {suggestion.amount}
+                {highlightMatch(suggestion.description, query)}{" "}
+                {suggestion.amount}
               </SuggestionItem>
             ))}
           </SuggestionsList>
@@ -207,4 +219,4 @@ export default function SearchBar({ searchValue, data, onSearchResults }) {
       )}
     </SearchBarContainer>
   );
-};
+}

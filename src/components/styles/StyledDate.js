@@ -1,15 +1,14 @@
 import styled from "styled-components";
 
-export const DateFilterGrid = styled.div`
+export const DateContainer = styled.div`
     display: block;
-    flex-wrap: wrap;
 `;
 
 export const DateInputLabel = styled.label`
     display: block;
+    margin-bottom: 8px;
     font-size: 14px;
     color: var(--neutrals-dark-gray);
-    margin-bottom: 10px;
 `;
 
 export const DateInput = styled.input`
@@ -39,14 +38,7 @@ export const DateInput = styled.input`
 export const CalendarWrapper = styled.div`
     position: relative;
     display: inline-block;
-    padding: 5px;
-    width: 50%;
-`;
-
-export const InputWrapper = styled.div`
-  position: relative;
-  display: inline-block;
-  width: 100%;
+    width: 100%;
 `;
 
 export const DateIconWrapper = styled.div`
@@ -55,4 +47,10 @@ export const DateIconWrapper = styled.div`
   top: 50%;
   transform: translate3d(-12px, -50%, 0);
   cursor: pointer;
+`;
+
+export const ErrorMessage = styled.div`
+    color: var(--feedback-error);
+    font-size: 12px;
+    margin-top: 8px;
 `;

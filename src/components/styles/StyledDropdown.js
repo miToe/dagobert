@@ -3,13 +3,13 @@ import styled from "styled-components";
 export const DropdownContainer = styled.div`
     position: relative;
     display: block;
-    margin-bottom: 20px;
 `;
 
 export const DropdownLabel = styled.label`
     display: block;
     margin-bottom: 8px;
     font-size: 14px;
+    font-weight: 400;
 `;
 
 export const IconWrapper = styled.span`
@@ -21,7 +21,8 @@ export const IconWrapper = styled.span`
 export const DropdownButton = styled.button`
     position: relative;
     background-color: var(--neutrals-white);
-    padding: 13px 12px;
+    height: 47px;
+    padding: 12px 12px;
     font-size: 16px;
     cursor: pointer;
     display: flex;
@@ -31,6 +32,7 @@ export const DropdownButton = styled.button`
     text-align: left;
     border: 1px solid var(--neutrals-mid-gray);
     border-radius: var(--border-radius-small);
+    color: var(--neutrals-dark-gray);
 
     &:hover {
         border-color: var(--primary-500);

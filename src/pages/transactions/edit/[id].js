@@ -17,6 +17,7 @@ export default function TransactionDetails({
 
   function handleEdit(updatedTransaction) {
     onEditTransaction(transaction.id, updatedTransaction);
+    console.log("updated", updatedTransaction);
     router.push(`/transactions/${transaction.id}`);
   }
 

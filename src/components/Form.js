@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Dropdown from "@/src/components/Dropdown";
 import options from "@/src/data/options.json";
@@ -6,32 +6,30 @@ import AmountInput from "@/src/components/AmountInput";
 import InputField from "@/src/components/InputField";
 import Date from "@/src/components/Date";
 import {
+  AmountError,
+  AmountInputWrapper,
   FormWrapper,
   Headline,
   StyledTitle,
 } from "@/src/components/styles/StyledForm";
 import { LinkedIcon } from "@/src/components/LinkedIcon";
-import {
-  validateInput,
-  applyErrorClass,
-  addErrorClassStyles,
-} from "@/src/utils/validation"; // Import der Validierungsfunktionen
+import { addErrorClassStyles, applyErrorClass, validateInput } from "@/src/utils/validation"; // Import der Validierungsfunktionen
 
 export default function Form({
-  onSubmitForm,
-  initialData = {
-    transactionType: "",
-    amount: "",
-    currency: "EUR",
-    date: "",
-    category: "",
-    paymentMethod: "",
-    description: "",
-  },
-  formTitle,
-  addMode,
-  editMode,
-}) {
+                               onSubmitForm,
+                               initialData = {
+                                 transactionType: "",
+                                 amount: "",
+                                 currency: "EUR",
+                                 date: "",
+                                 category: "",
+                                 paymentMethod: "",
+                                 description: "",
+                               },
+                               formTitle,
+                               addMode,
+                               editMode,
+                             }) {
   useEffect(() => {
     addErrorClassStyles();
   }, []);
@@ -54,7 +52,7 @@ export default function Form({
     setFormValues((prev) => ({ ...prev, [name]: option }));
     applyErrorClass(
       document.getElementsByName(name)[0],
-      validateInput(option, "required")
+      validateInput(option, "required"),
     );
   };
 
@@ -147,7 +145,8 @@ export default function Form({
           </LinkedIcon>
         )}
         <StyledTitle>{formTitle}</StyledTitle>
-        <LinkedIcon iconName="add" type="submit" />
+        {addMode && (<LinkedIcon iconName="add" type="submit" />)}
+        {editMode && (<LinkedIcon iconName="check" type="submit" />)}
       </Headline>
       <FormWrapper>
         <Dropdown
@@ -161,19 +160,21 @@ export default function Form({
           errorMessage={errors.transactionType}
           defaultSelected={formValues.transactionType}
         />
-        <AmountInput
-          id="amount"
-          name="amount"
-          type="number"
-          step="0.01"
-          min="0"
-          value={formValues.amount}
-          onChange={handleAmountInput}
-          onKeyDown={(e) => e.key === "-" && e.preventDefault()}
-          placeholder="0,00"
-          validate={validate}
-        />
-        {errors.amount && <div style={{ color: "red" }}>{errors.amount}</div>}
+        <AmountInputWrapper>
+          <AmountInput
+            id="amount"
+            name="amount"
+            type="number"
+            step="0.01"
+            min="0"
+            value={formValues.amount}
+            onChange={handleAmountInput}
+            onKeyDown={(e) => e.key === "-" && e.preventDefault()}
+            placeholder="0,00"
+            validate={validate}
+          />
+          {errors.amount && <AmountError>{errors.amount}</AmountError>}
+        </AmountInputWrapper>
         <Dropdown
           label="Currency"
           name="currency"
@@ -182,6 +183,20 @@ export default function Form({
           onOptionClick={(option) => handleOptionClick("currency", option)}
           errorMessage={errors.currency}
           defaultSelected={formValues.currency}
+        />
+        <Date
+          date={selectedDate}
+          onDateChange={handleDateChange}
+          errorMessage={errors.date}
+        />
+        <Dropdown
+          label="Payment Method"
+          name="paymentMethod"
+          options={paymentMethodOptions}
+          buttonText={formValues.paymentMethod || "Select Payment Method"}
+          onOptionClick={(option) => handleOptionClick("paymentMethod", option)}
+          errorMessage={errors.paymentMethod}
+          defaultSelected={formValues.paymentMethod}
         />
         <Dropdown
           label="Category"
@@ -192,11 +207,6 @@ export default function Form({
           errorMessage={errors.category}
           defaultSelected={formValues.category}
         />
-        <Date
-          date={selectedDate}
-          onDateChange={handleDateChange}
-          errorMessage={errors.date}
-        />
         <InputField
           label="Description"
           name="description"
@@ -204,15 +214,6 @@ export default function Form({
           value={formValues.description}
           onChange={handleInputChange}
           errorMessage={errors.description}
-        />
-        <Dropdown
-          label="Payment Method"
-          name="paymentMethod"
-          options={paymentMethodOptions}
-          buttonText={formValues.paymentMethod || "Select Payment Method"}
-          onOptionClick={(option) => handleOptionClick("paymentMethod", option)}
-          errorMessage={errors.paymentMethod}
-          defaultSelected={formValues.paymentMethod}
         />
       </FormWrapper>
     </form>

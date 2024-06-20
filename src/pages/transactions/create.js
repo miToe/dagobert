@@ -6,6 +6,7 @@ export default function Create({ onAddTransaction }) {
 
   function handleAddTransaction(data) {
     onAddTransaction(data);
+    console.log("add", data);
     router.push("/");
   }
 

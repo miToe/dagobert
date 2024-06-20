@@ -1,7 +1,13 @@
 import { useCallback, useState } from "react";
 import Link from "next/link";
-import { ListWrapper, SearchFilterWrapper, StyledList, StyledTitle } from "@/src/components/styles/StyledList";
-import { StyledListItem } from "@/src/components/StyledListItem";
+import {
+  Headline,
+  ListWrapper,
+  SearchFilterWrapper,
+  StyledList,
+  StyledTitle,
+} from "@/src/components/styles/StyledList";
+import { ListItem } from "@/src/components/ListItem";
 import SearchBar from "@/src/components/SearchBar";
 import { OhNoContainer } from "@/src/components/styles/StyledOhNo";
 import SVGIcon from "../components/SVGIcon";
@@ -41,11 +47,13 @@ export default function TransactionList({ transactions, onCurrencySymbol }) {
 
   return (
     <ListWrapper>
-      <StyledTitle>Transactions</StyledTitle>
-      <SearchFilterWrapper>
-        <SearchBar data={transactions} onSearchResults={handleSearchResults} />
-        <FilterButton iconName="filter" onClick={() => setShowFilter(true)} />
-      </SearchFilterWrapper>
+      <Headline>
+        <StyledTitle>Transactions</StyledTitle>
+        <SearchFilterWrapper>
+          <SearchBar data={transactions} onSearchResults={handleSearchResults} />
+          <FilterButton iconName="filter" onClick={() => setShowFilter(true)} />
+        </SearchFilterWrapper>
+      </Headline>
       {showFilter && (
         <Filter
           filterValues={filterValues}
@@ -57,7 +65,7 @@ export default function TransactionList({ transactions, onCurrencySymbol }) {
         <StyledList>
           {sortedTransactions.map((transaction) => (
             <li key={transaction.id}>
-              <StyledListItem
+              <ListItem
                 transaction={transaction}
                 onCurrencySymbol={onCurrencySymbol}
               />

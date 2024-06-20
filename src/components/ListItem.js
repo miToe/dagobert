@@ -9,7 +9,7 @@ import {
 } from "@/src/components/styles/StyledList";
 import { CategoryIcon } from "@/src/components/CategoryIcon";
 
-export function StyledListItem({ transaction, onCurrencySymbol }) {
+export function ListItem({ transaction, onCurrencySymbol }) {
   const displayAmount = transaction.amount.toFixed(2);
 
   return (

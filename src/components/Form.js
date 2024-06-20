@@ -25,7 +25,7 @@ export default function Form({
                              }) {
   const router = useRouter();
   const { id } = router.query;
-  const { transactionTypeOptions, currencyOptions, categoryOptions, paymentMethodOptions, dateOptions } = options;
+  const { transactionTypeOptions, currencyOptions, categoryOptions, paymentMethodOptions } = options;
   const [formValues, setFormValues] = useState(initialData);
   const [errors, setErrors] = useState({});
   const [selectedDate, setSelectedDate] = useState(initialData.date);
@@ -141,7 +141,6 @@ export default function Form({
         <Date
           date={selectedDate}
           onDateChange={handleDateChange}
-          options={dateOptions}
           required
         />
         <InputField

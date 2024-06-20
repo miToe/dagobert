@@ -2,7 +2,7 @@ import {
   CalendarWrapper, DateContainer,
   DateIconWrapper,
   DateInput,
-  DateInputLabel, ErrorMessage
+  DateInputLabel
 } from "@/src/components/styles/StyledDate";
 import SVGIcon from "@/src/components/SVGIcon";
 import { useEffect, useRef } from "react";

@@ -1,10 +1,9 @@
 export function validateInput(value, validationType) {
-  console.log("type", typeof value, "value", value);
   switch (validationType) {
     case "required":
       return value.trim() !== "";
-    //case "number":
-    // return !isNaN(value) && value.trim() !== "";
+    case "number":
+      return !isNaN(value);
     default:
       return true;
   }

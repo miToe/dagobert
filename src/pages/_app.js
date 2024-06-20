@@ -45,10 +45,18 @@ export default function App({ Component, pageProps }) {
   function handleEditTransaction(id, updatedTransaction) {
     setTransactions(
       transactions.map((transaction) =>
-        transaction.id === id ? { ...transaction, ...updatedTransaction } : transaction),
+        transaction.id === id
+          ? {
+            ...transaction,
+            ...updatedTransaction,
+            amount: updatedTransaction.amount !== undefined ? parseFloat(updatedTransaction.amount) : transaction.amount,
+          }
+          : transaction,
+      ),
     );
     handleAlert("Transaction successfully updated!");
   }
+
 
   function handleDelete(id) {
     setTransactions(transactions.filter((transaction) => transaction.id !== id));

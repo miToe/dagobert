@@ -1,8 +1,18 @@
-import { AmountWrapper, AmountLabel, AmountInputField } from "@/src/components/styles/StyledAmountInput";
+import { AmountInputField, AmountLabel, AmountWrapper } from "@/src/components/styles/StyledAmountInput";
 import { useEffect } from "react";
 import { validateInput } from "@/src/utils/validation";
 
-export default function AmountInput({ id, name, value, onChange, onKeyDown, placeholder, errorMessage, validate }) {
+export default function AmountInput({
+                                      id,
+                                      name,
+                                      value,
+                                      type,
+                                      onChange,
+                                      onKeyDown,
+                                      placeholder,
+                                      errorMessage,
+                                      validate,
+                                    }) {
 
   useEffect(() => {
     if (validate) {
@@ -21,9 +31,7 @@ export default function AmountInput({ id, name, value, onChange, onKeyDown, plac
       <AmountInputField
         id={id}
         name={name}
-        type="number"
-        step="0.01"
-        min="0"
+        type={type}
         value={value}
         onChange={onChange}
         onKeyDown={onKeyDown}

@@ -1,3 +1,5 @@
+// pages/_app.js
+
 import { useState } from "react";
 import { useRouter } from "next/router";
 import transactionsData from "@/src/data/transactions.json";
@@ -9,7 +11,9 @@ import ThemeColors from "@/src/styles/theme";
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
-  const [transactions, setTransactions] = useLocalStorageState("transactions", { defaultValue: transactionsData });
+  const [transactions, setTransactions] = useLocalStorageState("transactions", {
+    defaultValue: transactionsData,
+  });
   const [alert, setAlert] = useState({ isOpen: false, alertMessage: "" });
 
   //-------------Alert logic-------------
@@ -23,7 +27,7 @@ export default function App({ Component, pageProps }) {
 
   //-------------------------------------
 
-// Utility function to get currency symbol
+  // Utility function to get currency symbol
   function getCurrencySymbol(currencyCode) {
     const symbols = {
       USD: "$",
@@ -45,13 +49,18 @@ export default function App({ Component, pageProps }) {
   function handleEditTransaction(id, updatedTransaction) {
     setTransactions(
       transactions.map((transaction) =>
-        transaction.id === id ? { ...transaction, ...updatedTransaction } : transaction),
+        transaction.id === id
+          ? { ...transaction, ...updatedTransaction }
+          : transaction
+      )
     );
     handleAlert("Transaction successfully updated!");
   }
 
   function handleDelete(id) {
-    setTransactions(transactions.filter((transaction) => transaction.id !== id));
+    setTransactions(
+      transactions.filter((transaction) => transaction.id !== id)
+    );
     router.push("/");
     handleAlert("Transaction successfully deleted!");
   }

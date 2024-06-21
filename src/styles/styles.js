@@ -1,5 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import { Outfit } from "next/font/google";
+import media from "@/src/styles/breakpoints";
 
 export const outfitFont = Outfit({
   weight: ["400", "500", "600", "700"],
@@ -31,8 +32,13 @@ const GlobalStyle = createGlobalStyle`
         color: var(--neutrals-dark-gray);
 
         > div {
-            width: 80%;
+            width: 90%;
             margin: 0 auto;
+
+        ${media.md`
+            width: 80%;
+        `}
+
         }
     }
 

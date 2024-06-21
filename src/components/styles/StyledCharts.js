@@ -81,7 +81,9 @@ export const ValueText = styled.text`
 export const PieChartContainer = styled.div`
   display: flex;
   align-items: center;
+  justify-content:center;
   width: 100%;
+  flex-wrap:wrap;
 
   ${media.xl`
     flex-wrap:wrap;
@@ -98,13 +100,11 @@ export const LegendList = styled.ul`
   padding: 0;
   margin: 0;
   display: flex;
-  flex-direction: column;
-
+  width:100%;
+  flex-wrap: wrap;
+  
   ${media.xl`
     width: 100%;
-    display:flex;
-    flex-wrap: wrap;
-    flex-direction: row;
   `}
 `;
 
@@ -113,8 +113,10 @@ export const LegendItem = styled.li`
   align-items: center;
   cursor: pointer;
   padding-right: 5px;
+  width: 50%;
 
-  ${media.xl`
+
+  ${media.lg`
       width: calc(100% / 3);
   `}
 `;

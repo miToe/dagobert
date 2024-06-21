@@ -7,4 +7,4 @@ export function LinkedIcon({ onClick, iconName, ...props }) {
       <SVGIcon iconName={iconName} />
     </StyledIconButton>
   );
-};
+}

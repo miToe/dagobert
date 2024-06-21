@@ -8,6 +8,7 @@ export const ListWrapper = styled.div`
     gap: 1.5rem;
     color: #667080;
     width: 100%;
+    padding: 40px 0;
 `;
 
 export const Headline = styled.div`
@@ -107,3 +108,5 @@ export const SearchFilterWrapper = styled.div`
     gap: 1rem;
     width: 100%;
 `;
+
+

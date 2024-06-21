@@ -1,8 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Dropdown from "@/src/components/Dropdown";
-import Button from "@/src/components/Button";
 import options from "@/src/data/options.json";
+import AmountInput from "@/src/components/AmountInput";
+import InputField from "@/src/components/InputField";
+import Date from "@/src/components/Date";
+import {
+  AmountError,
+  AmountInputWrapper,
+  FormWrapper,
+  Headline,
+  StyledTitle,
+} from "@/src/components/styles/StyledForm";
+import { LinkedIcon } from "@/src/components/LinkedIcon";
+import { addErrorClassStyles, applyErrorClass, validateInput } from "@/src/utils/validation"; // Import der Validierungsfunktionen
 
 export default function Form({
                                onSubmitForm,
@@ -10,16 +21,19 @@ export default function Form({
                                  transactionType: "",
                                  amount: "",
                                  currency: "EUR",
-                                 date: new Date().toISOString().substring(0, 10),
+                                 date: "",
                                  category: "",
                                  paymentMethod: "",
                                  description: "",
                                },
                                formTitle,
-                               confirmButtonText,
                                addMode,
                                editMode,
                              }) {
+  useEffect(() => {
+    addErrorClassStyles();
+  }, []);
+
   const router = useRouter();
   const { id } = router.query;
   const {
@@ -30,19 +44,45 @@ export default function Form({
   } = options;
   const [formValues, setFormValues] = useState(initialData);
   const [errors, setErrors] = useState({});
+  const [selectedDate, setSelectedDate] = useState(initialData.date);
+  const [validate, setValidate] = useState(false);
+
   const handleOptionClick = (name, option) => {
     setErrors((prev) => ({ ...prev, [name]: "" }));
     setFormValues((prev) => ({ ...prev, [name]: option }));
+    applyErrorClass(
+      document.getElementsByName(name)[0],
+      validateInput(option, "required"),
+    );
   };
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormValues((prev) => ({ ...prev, [name]: value }));
+    const isValid = validateInput(value, "required");
+    applyErrorClass(event.target, isValid);
+    if (!isValid) {
+      setErrors((prev) => ({ ...prev, [name]: "Field required" }));
+    } else {
+      setErrors((prev) => ({ ...prev, [name]: "" }));
+    }
   };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const requiredFields = ["transactionType", "currency", "category", "paymentMethod"];
-    const newErrors = requiredFields.reduce((acc, field) => {
-      if (!formValues[field]) acc[field] = "Field required";
+    setValidate(true);
+    const requiredFields = [
+      { field: "transactionType", type: "required" },
+      { field: "amount", type: "number" },
+      { field: "currency", type: "required" },
+      { field: "date", type: "required" },
+      { field: "category", type: "required" },
+      { field: "paymentMethod", type: "required" },
+    ];
+    const newErrors = requiredFields.reduce((acc, { field, type }) => {
+      const isValid = validateInput(formValues[field], type);
+      applyErrorClass(document.getElementsByName(field)[0], isValid);
+      if (!isValid) acc[field] = "Field required";
       return acc;
     }, {});
     if (Object.keys(newErrors).length) {
@@ -52,6 +92,7 @@ export default function Form({
     onSubmitForm(formValues);
     router.push("/");
   };
+
   const handleAmountInput = (event) => {
     let value = event.target.value.replace("-", "");
     if (value.includes(".")) {
@@ -59,115 +100,122 @@ export default function Form({
       value = `${integer}.${decimal.slice(0, 2)}`;
     }
     setFormValues((prev) => ({ ...prev, amount: value }));
+    const isValid = validateInput(value, "number");
+    applyErrorClass(event.target, isValid);
+    if (!isValid) {
+      setErrors((prev) => ({ ...prev, amount: "Invalid amount" }));
+    } else {
+      setErrors((prev) => ({ ...prev, amount: "" }));
+    }
   };
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+    setFormValues((prev) => ({ ...prev, date }));
+    const isValid = validateInput(date, "required");
+    applyErrorClass(document.getElementById("date"), isValid);
+    if (!isValid) {
+      setErrors((prev) => ({ ...prev, date: "Field required" }));
+    } else {
+      setErrors((prev) => ({ ...prev, date: "" }));
+    }
+  };
+
   return (
     <form onSubmit={handleSubmit}>
-      <div>
+      <Headline>
         {addMode && (
-          <Button
-            $variant="secondary"
-            type="button"
+          <LinkedIcon
+            iconName="close"
             onClick={() => {
               router.push("/");
             }}
           >
             Cancel
-          </Button>
+          </LinkedIcon>
         )}
         {editMode && (
-          <Button
-            $variant="secondary"
-            type="button"
+          <LinkedIcon
+            iconName="close"
             onClick={() => {
               router.push(`/transactions/${id}`);
             }}
           >
             Cancel
-          </Button>
+          </LinkedIcon>
         )}
-        <h2>{formTitle}</h2>
-      </div>
-      <Dropdown
-        label="Transaction Type"
-        name="transactionType"
-        options={transactionTypeOptions}
-        buttonText="Select a transaction type"
-        onOptionClick={(option) => handleOptionClick("transactionType", option)}
-        required
-        errorMessage={errors.transactionType}
-        defaultSelected={formValues.transactionType}
-      />
-      <div>
-        <label htmlFor="amount">Amount:</label>
-        <input
-          id="amount"
-          name="amount"
-          type="number"
-          step="0.01"
-          min="0"
-          value={formValues.amount}
-          onChange={handleAmountInput}
-          onKeyDown={(e) => e.key === "-" && e.preventDefault()}
-          placeholder="Enter amount (e.g.: 123.45)"
-          required
+        <StyledTitle>{formTitle}</StyledTitle>
+        {addMode && (<LinkedIcon iconName="add" type="submit" />)}
+        {editMode && (<LinkedIcon iconName="check" type="submit" />)}
+      </Headline>
+      <FormWrapper>
+        <Dropdown
+          label="Transaction Type"
+          name="transactionType"
+          options={transactionTypeOptions}
+          buttonText="Select a transaction type"
+          onOptionClick={(option) =>
+            handleOptionClick("transactionType", option)
+          }
+          errorMessage={errors.transactionType}
+          defaultSelected={formValues.transactionType}
         />
-      </div>
-      <Dropdown
-        label="Currency"
-        name="currency"
-        options={currencyOptions}
-        buttonText={formValues.currency || "Select a currency"}
-        onOptionClick={(option) => handleOptionClick("currency", option)}
-        required
-        errorMessage={errors.currency}
-        defaultSelected={formValues.currency}
-      />
-      <Dropdown
-        label="Category"
-        name="category"
-        options={categoryOptions}
-        buttonText={formValues.category || "Select a category"}
-        onOptionClick={(option) => handleOptionClick("category", option)}
-        required
-        errorMessage={errors.category}
-        defaultSelected={formValues.category}
-      />
-      <div>
-        <label htmlFor="date">Date:</label>
-        <input
-          id="date"
-          name="date"
-          type="date"
-          value={formValues.date}
-          onChange={handleInputChange}
-          required
+        <AmountInputWrapper>
+          <AmountInput
+            id="amount"
+            name="amount"
+            type="number"
+            step="0.01"
+            min="0"
+            value={formValues.amount}
+            onChange={handleAmountInput}
+            onKeyDown={(e) => e.key === "-" && e.preventDefault()}
+            placeholder="0,00"
+            validate={validate}
+          />
+          {errors.amount && <AmountError>{errors.amount}</AmountError>}
+        </AmountInputWrapper>
+        <Dropdown
+          label="Currency"
+          name="currency"
+          options={currencyOptions}
+          buttonText={formValues.currency || "Select a currency"}
+          onOptionClick={(option) => handleOptionClick("currency", option)}
+          errorMessage={errors.currency}
+          defaultSelected={formValues.currency}
         />
-      </div>
-      <div>
-        <label htmlFor="description">Description:</label>
-        <textarea
-          id="description"
+        <Date
+          date={selectedDate}
+          onDateChange={handleDateChange}
+          errorMessage={errors.date}
+        />
+        <Dropdown
+          label="Payment Method"
+          name="paymentMethod"
+          options={paymentMethodOptions}
+          buttonText={formValues.paymentMethod || "Select Payment Method"}
+          onOptionClick={(option) => handleOptionClick("paymentMethod", option)}
+          errorMessage={errors.paymentMethod}
+          defaultSelected={formValues.paymentMethod}
+        />
+        <Dropdown
+          label="Category"
+          name="category"
+          options={categoryOptions}
+          buttonText={formValues.category || "Select a category"}
+          onOptionClick={(option) => handleOptionClick("category", option)}
+          errorMessage={errors.category}
+          defaultSelected={formValues.category}
+        />
+        <InputField
+          label="Description"
           name="description"
-          rows="5"
-          cols="30"
+          placeholder="Enter description (optional)"
           value={formValues.description}
           onChange={handleInputChange}
-          placeholder="Enter description (optional)"
+          errorMessage={errors.description}
         />
-      </div>
-      <Dropdown
-        label="Payment Method"
-        name="paymentMethod"
-        options={paymentMethodOptions}
-        buttonText={formValues.paymentMethod || "Select Payment Method"}
-        onOptionClick={(option) => handleOptionClick("paymentMethod", option)}
-        required
-        errorMessage={errors.paymentMethod}
-        defaultSelected={formValues.paymentMethod}
-      />
-      <Button $variant="primary" endIcon="add" type="submit">
-        {confirmButtonText}
-      </Button>
+      </FormWrapper>
     </form>
   );
 }

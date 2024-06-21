@@ -45,6 +45,8 @@ export const StyledList = styled.ul`
     gap: 1.5rem;
     list-style: none;
     width: 100%;
+    font-weight: 500;
+
 `;
 
 export const StyledDetailAmount = styled.li`
@@ -60,6 +62,7 @@ export const StyledDetailAmount = styled.li`
 
 export const StyledCategoryTitle = styled.span`
     font-weight: 400;
+    font-size: 14px;
 `;
 
 export const StyledAmount = styled.span`

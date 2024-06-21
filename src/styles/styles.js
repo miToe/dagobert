@@ -6,7 +6,6 @@ export const outfitFont = Outfit({
   subsets: ["latin"],
   variable: "--font-outfit",
 });
-console.log("outfitFont", outfitFont);
 
 const GlobalStyle = createGlobalStyle`
     * {

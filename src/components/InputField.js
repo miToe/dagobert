@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Label, Textarea } from "/src/components/styles/StyledInputField.js";
+import { Label, Textarea, TextAreaWrapper } from "/src/components/styles/StyledInputField.js";
 
-export default function Input({ label, name, placeholder, initialData }) {
+export default function InputField({ id, label, name, placeholder, value, onChange }) {
   const [isFilled, setIsFilled] = useState(false);
 
   function handleBlur(event) {
@@ -9,19 +9,19 @@ export default function Input({ label, name, placeholder, initialData }) {
   }
 
   return (
-    <>
+    <TextAreaWrapper>
       <Label htmlFor={name}>{label}</Label>
-
       <Textarea
         rows="5"
         cols="50"
-        id={name}
+        id={id}
         name={name}
+        value={value}
+        onChange={onChange}
         placeholder={placeholder}
         onBlur={handleBlur}
-        className={isFilled ? "filled" : ""} //className is used to apply different styles when the textarea is filled
-        defaultValue={initialData.description}
+        className={isFilled ? "filled" : ""}
       />
-    </>
+    </TextAreaWrapper>
   );
 }

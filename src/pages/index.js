@@ -1,13 +1,18 @@
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
+import { ListItem } from "@/src/components/ListItem";
 import { calculateBalancesAndData } from "@/src/utils/utils";
 import Charts from "@/src/components/Charts";
-import { Headline, ListWrapper, SearchFilterWrapper, StyledList, StyledTitle } from "@/src/components/styles/StyledList";
-import { StyledListItem } from "@/src/components/StyledListItem";
+import {
+  Headline,
+  ListWrapper,
+  SearchFilterWrapper,
+  StyledList,
+  StyledTitle,
+} from "@/src/components/styles/StyledList";
 import SearchBar from "@/src/components/SearchBar";
 import { OhNoContainer } from "@/src/components/styles/StyledOhNo";
 import SVGIcon from "@/src/components/SVGIcon";
-// import { GreyBox } from "@/src/components/styles/StyledGreyBox";
 import { TotalBalance } from "../components/styles/TotalBalance";
 import { AddLinkWrapper } from "@/src/components/styles/StyledAddLink";
 import Filter from "@/src/components/Filter";
@@ -97,7 +102,7 @@ export default function TransactionList({ transactions, onCurrencySymbol }) {
         <StyledList>
           {sortedTransactions.map((transaction) => (
             <li key={transaction.id}>
-              <StyledListItem
+              <ListItem
                 transaction={transaction}
                 onCurrencySymbol={onCurrencySymbol}
               />

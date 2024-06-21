@@ -17,6 +17,11 @@ export const ChartSection = styled.div`
     margin-bottom: 20px;
     background: var(--primary-50);
     width: 100%;
+
+    &:last-child{
+      margin-bottom:0;
+    }
+
   }
 
   ${media.xl`

@@ -147,14 +147,14 @@ export default function Charts({ transactions, onUpdateBalances }) {
             <ResponsiveContainer width="100%" height={100}>
               <LineChart data={chartData}>
                 <Line
-                  type="monotone"
+                  type="linear"
                   dataKey="income"
                   stroke="var(--primary-600)"
                   strokeWidth={3}
                   dot={false}
                 />
                 <Line
-                  type="monotone"
+                  type="linear"
                   dataKey="expense"
                   strokeWidth={3}
                   stroke="var(--secondary-600)"
@@ -162,7 +162,9 @@ export default function Charts({ transactions, onUpdateBalances }) {
                 />
                 <Tooltip />
                 <CartesianGrid
-                  stroke="var(--neutrals-mid-gray)" vertical={false} />
+                  stroke="var(--neutrals-mid-gray)"
+                  vertical={false}
+                />
                 <XAxis dataKey="week" axisLine={false} tickLine={false} />
                 <YAxis
                   domain={[0, maxValue]}

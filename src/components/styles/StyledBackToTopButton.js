@@ -6,7 +6,7 @@ export const BackToTopButton = styled.button`
     right: 40px;
     width: 50px;
     height: 50px;
-    background-color: var(--primary-200);
+    background-color: var(--secondary-300);
     color: var(--neutrals-white);
     border: none;
     border-radius: 50%;
@@ -19,6 +19,6 @@ export const BackToTopButton = styled.button`
     z-index: 1000;
 
     &:hover {
-        background-color: var(--primary-500);
+        background-color: var(--secondary-700);
     }
 `;

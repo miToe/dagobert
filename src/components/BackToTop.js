@@ -28,7 +28,7 @@ export default function BackToTop() {
   }, []);
 
   return (
-    <BackToTopButton onClick={scrollToTop} visible={isVisible}>
+    <BackToTopButton onClick={scrollToTop} $visible={isVisible}>
       <SVGIcon iconName="arrow_up" color="var(--neutrals-white)" size="24" />
     </BackToTopButton>
   );

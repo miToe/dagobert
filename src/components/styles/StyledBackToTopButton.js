@@ -15,7 +15,7 @@ export const BackToTopButton = styled.button`
     justify-content: center;
     cursor: pointer;
     transition: opacity 0.3s ease-in-out;
-    opacity: ${({ visible }) => (visible ? 1 : 0)};
+    opacity: ${({ $visible }) => ($visible ? 1 : 0)};
     z-index: 1000;
 
     &:hover {

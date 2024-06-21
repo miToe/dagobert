@@ -95,7 +95,19 @@ export default function Filter({ filterValues, onFilterChange, onClose }) {
         <FilterSection>
           <h4>Categories</h4>
           <CheckboxGroup>
-            {["Entertainment", "Food", "Shopping", "Transport"].map((category) => (
+            {["Dividends",
+              "Entertainment",
+              "Groceries",
+              "Health",
+              "Property",
+              "Rent",
+              "Restaurant",
+              "Salary",
+              "Savings",
+              "Shopping",
+              "Sidehustle",
+              "Transport",
+              "Travel"].map((category) => (
               <label key={category}>
                 <Checkbox
                   value={category}
@@ -110,7 +122,13 @@ export default function Filter({ filterValues, onFilterChange, onClose }) {
         <FilterSection>
           <h4>Payment method</h4>
           <CheckboxGroup>
-            {["Credit Card", "Debit Card", "Cash", "PayPal"].map((method) => (
+            {["Apple Pay",
+              "Bank transfer",
+              "Cash",
+              "Credit card",
+              "Debit card",
+              "Direct debit",
+              "PayPal"].map((method) => (
               <label key={method}>
                 <Checkbox
                   value={method}

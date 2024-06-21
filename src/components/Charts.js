@@ -144,24 +144,27 @@ export default function Charts({ transactions, onUpdateBalances }) {
                 <span>- {expenses.toFixed(2)}€</span>
               </Balance>
             </SummarySection>
-            <ResponsiveContainer width="100%" height={300}>
+            <ResponsiveContainer width="100%" height={100}>
               <LineChart data={chartData}>
                 <Line
-                  type="monotone"
+                  type="linear"
                   dataKey="income"
                   stroke="var(--primary-600)"
                   strokeWidth={3}
                   dot={false}
                 />
                 <Line
-                  type="monotone"
+                  type="linear"
                   dataKey="expense"
                   strokeWidth={3}
                   stroke="var(--secondary-600)"
                   dot={false}
                 />
                 <Tooltip />
-                <CartesianGrid stroke="var(--neutrals-mid-gray)" vertical={false} />
+                <CartesianGrid
+                  stroke="var(--neutrals-mid-gray)"
+                  vertical={false}
+                />
                 <XAxis dataKey="week" axisLine={false} tickLine={false} />
                 <YAxis
                   domain={[0, maxValue]}
@@ -180,7 +183,7 @@ export default function Charts({ transactions, onUpdateBalances }) {
                     data={pieData}
                     cx="50%"
                     cy="50%"
-                    innerRadius={65}
+                    innerRadius={45}
                     outerRadius="90%"
                     labelLine={false}
                     dataKey="value"

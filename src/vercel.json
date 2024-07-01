@@ -1,8 +1,0 @@
-{
-  "rewrites": [
-    {
-      "source": "/budget/:path*",
-      "destination": "https://dagobert-git-main-mitoes-projects.vercel.app/:path*"
-    }
-  ]
-}

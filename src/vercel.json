@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/budget/:path*",
+      "destination": "https://dagobert-lime.vercel.app/:path*"
+    }
+  ]
+}

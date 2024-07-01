@@ -2,7 +2,8 @@
   "rewrites": [
     {
       "source": "/budget/:path*",
-      "destination": "https://dagobert-lime.vercel.app/:path*"
+      "destination": "https://dagobert-git-main-mitoes-projects.vercel.app/:path*"
     }
   ]
 }
+g

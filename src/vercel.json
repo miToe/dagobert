@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/budget/:path*",
-      "destination": "https://dagobert-lime.vercel.app/:path*"
+      "destination": "https://dagobert-kw9td11ve-mitoes-projects.vercel.app/:path*"
     }
   ]
 }
